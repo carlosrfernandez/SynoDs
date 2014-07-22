@@ -52,9 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeMapper.cs" />
-    <Compile Include="DiskStationBase.cs" />
     <Compile Include="DownloadStation\DownloadManager.cs" />
-    <Compile Include="DownloadStation\DownloadStationOld.cs" />
     <Compile Include="DsClientBase.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
     <Compile Include="ParameterMapper.cs" />
