@@ -7,6 +7,11 @@ A C#, Asynchronous portable class library for the Synology DiskStation public AP
 The APIs:
 =========
 
-An initial implementation supporting the basic operations of the DownloadStation and FileStations is planned. 
+An initial implementation supporting the basic operations of the following APIs is planned:
 
-Further improvements and additional functionallities pending. 
+- DownloadStation: CRUD operation on TASKs using Async calls to the DS.
+- FileStation: CRUD operations on files and folders using Async calls to the DS.
+
+
+
+Further improvements and additional functionallities to be added as time will allow it...
