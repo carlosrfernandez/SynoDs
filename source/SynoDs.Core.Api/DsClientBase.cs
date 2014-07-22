@@ -100,7 +100,7 @@ namespace SynoDs.Core.Api
                 throw new Exception("Error while getting API Information. ");
             }
         }
-
+        
         public async Task<InfoResponse> GetApiInformation(string apiName)
         {
             var requestParams = new RequestParameters

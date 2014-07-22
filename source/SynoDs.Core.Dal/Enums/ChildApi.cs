@@ -7,7 +7,8 @@
         CreateFolder, 
         List,
         Rename,
-        CopyMoveStatusResponse, 
+        CopyMove,
+        StatusResponse, 
         Delete, 
         Task
     }
