@@ -145,20 +145,6 @@ namespace SynoDs.Core.Api
         protected async Task<T> PerformOperationWithFileAsync<T>(RequestParameters optionalParameters, Stream fileStream)
         {
             throw new NotImplementedException("This method is yet to be implemented.");
-            var request = PrepareRequest<T>(optionalParameters);
-            try
-            {
-                using (var requestClient = new HttpGetRequestClient(string.Format("{0}{1}", DsAddress, request), fileStream, "file", "file"))
-                {
-                    var jsonResult = await requestClient.SendRequestAsync();
-                    var result = JsonParser.FromJson<T>(jsonResult);
-                    return result;
-                }
-            }
-            catch
-            {
-                return default(T);
-            }
         }
 
         protected virtual RequestBase PrepareRequest<T>(RequestParameters optionalParameters)
