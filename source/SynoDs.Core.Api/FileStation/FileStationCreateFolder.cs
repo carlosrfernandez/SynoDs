@@ -6,6 +6,8 @@
     using Dal.Enums;
     using Dal.FileStation.CreateFolder;
     using Dal.HttpBase;
+    using Dal.FileStation.Rename;
+
     /// <summary>
     /// Contains the File and Folder related operations
     /// Like Create, Rename, CopyMove.
@@ -20,8 +22,8 @@
         /// <summary>
         /// Creates a folder with the given "name" in the given folderPath. See parameter descriptions:
         /// </summary>
-        /// <param name="folderPaths">One or more shared folder paths</param>
-        /// <param name="names">Name of the folder to create. The number of paths must be the same as the number of names in the name parameter. 
+        /// <param name="folderPathList">One or more shared folder paths</param>
+        /// <param name="nameList">Name of the folder to create. The number of paths must be the same as the number of names in the name parameter. 
         /// The first folder_path parameter corresponds to the first name parameter.
         /// </param>
         /// <param name="forceParent">If force_parent is "true," and folder_path does not exist, the folder_path will be created. Default value is "false".
@@ -29,16 +31,16 @@
         /// </param>
         /// <param name="additional"></param>
         /// <returns>The CreateFolderResponse (with information regarding the created folder)</returns>
-        public async Task<CreateFolderResponse> CreateFolderAsync(IList<string> folderPaths, IList<string> names, bool forceParent = false, 
+        public async Task<CreateFolderResponse> CreateFolderAsync(IList<string> folderPathList, IList<string> nameList, bool forceParent = false, 
             CreateFolderAdditionalValues[] additional = null)
         {
-            if (folderPaths.Count != names.Count)
+            if (folderPathList.Count != nameList.Count)
                 throw new ArgumentException("The number of folderPaths supplied, must be the same as the number of folders to create.");
 
             var requestParams = new RequestParameters
             {
-                {"folder_path", string.Join(",", folderPaths) },
-                {"name", string.Join(",", names)},
+                {"folder_path", string.Join(",", folderPathList) },
+                {"name", string.Join(",", nameList)},
                 {"force_parent", forceParent ? "true" : "false"}
             };
 
@@ -48,6 +50,25 @@
             }
 
             return await PerformOperationAsync<CreateFolderResponse>(requestParams);
+        }
+
+        public async Task<RenameResponse> RenameAsync(IList<string> pathList, IList<string> nameList, CreateFolderAdditionalValues[] additional = null)
+        {
+            if (pathList.Count != nameList.Count)
+                throw new ArgumentException("The number of path to the items to rename and the number of names have to be the same.");
+
+            var requestParams = new RequestParameters
+            {
+                {"path", string.Join(",", pathList)},
+                {"name", string.Join(",", nameList)}
+            };
+
+            if (additional != null && additional.Length > 0)
+            {
+                requestParams.Add("additional", string.Join(",", additional).ToLower());
+            }
+
+            return await PerformOperationAsync<RenameResponse>(requestParams);
         }
     }
 }

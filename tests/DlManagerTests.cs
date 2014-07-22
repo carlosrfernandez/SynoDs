@@ -33,7 +33,7 @@ namespace SynologyTests
                 TaskAdditionalInfoValues.File
             };
 
-            var joint = string.Join(",", varEnumList.ToArray()).ToLower();
+            var joint = string.Join(",", varEnumList).ToLower();
 
             Assert.AreEqual("detail,file", joint);
         }
