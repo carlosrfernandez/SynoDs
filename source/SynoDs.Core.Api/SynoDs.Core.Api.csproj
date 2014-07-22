@@ -54,6 +54,9 @@
     <Compile Include="AttributeMapper.cs" />
     <Compile Include="DownloadStation\DownloadManager.cs" />
     <Compile Include="DsClientBase.cs" />
+    <Compile Include="FileStation\FileStationInfo.cs" />
+    <Compile Include="FileStation\FileStationList.cs" />
+    <Compile Include="FileStation\FileStationCreateFolder.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
     <Compile Include="ParameterMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,7 +66,6 @@
     <Folder Include="DsException\" />
     <Folder Include="Errors\" />
     <Folder Include="Events\" />
-    <Folder Include="FileStation\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">
