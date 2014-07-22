@@ -144,6 +144,7 @@ namespace SynoDs.Core.Api
 
         protected async Task<T> PerformOperationWithFileAsync<T>(RequestParameters optionalParameters, Stream fileStream)
         {
+            throw new NotImplementedException("This method is yet to be implemented.");
             var request = PrepareRequest<T>(optionalParameters);
             try
             {
