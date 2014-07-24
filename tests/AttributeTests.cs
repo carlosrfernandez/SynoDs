@@ -20,9 +20,9 @@ namespace SynologyTests
         [TestMethod]
         public void TestMethodAttributeForBaseApi()
         {
-            var authMethodName = AttributeMapper.ReadMethodFromInstance<LoginResponse>();
+            var authMethodName = AttributeMapper.ReadMethodAttributeFromT<LoginResponse>();
 
-            var infoMethodName = AttributeMapper.ReadMethodFromInstance<InfoResponse>();
+            var infoMethodName = AttributeMapper.ReadMethodAttributeFromT<InfoResponse>();
 
             Assert.AreEqual("query", infoMethodName);
             Assert.AreEqual("login", authMethodName);
