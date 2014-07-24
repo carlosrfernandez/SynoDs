@@ -12,7 +12,6 @@
     /// </summary>
     public partial class FileStation
     {
-
         /// <summary>
         /// Enumerates the files in a given folder.
         /// </summary>
@@ -42,12 +41,16 @@
                 {"offset", offset.ToString()},
                 {"limit", limit.ToString()},
                 {"sort_by", sortBy.ToString().ToLower()},
-                {"sort_direction", sortDirection.ToString().ToLower()},
                 {"pattern", globPattern}, //test possible errors if this parameter is sent empty
                 {"filetype", fileType.ToString().ToLower()},
-                {"goto_path", gotoPath}
             };
 
+            if (!string.IsNullOrEmpty(globPattern))
+                requestParameters.Add("sort_direction", sortDirection.ToString().ToLower());
+            
+            if (!string.IsNullOrEmpty(gotoPath))
+                requestParameters.Add("goto_path", gotoPath);
+            
             if (additionalInfo!= null)
                 requestParameters.Add("additional", string.Join(",",additionalInfo).ToLower());
             

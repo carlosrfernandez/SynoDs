@@ -30,7 +30,7 @@
         /// </summary>
         /// <typeparam name="T">The object to read the API attribute from</typeparam>
         /// <returns>A tring with the API name</returns>
-        public static string ReadApiNameFromInstance<T>()
+        public static string ReadApiNameFromT<T>()
         {
             var info = typeof (T).GetTypeInfo();
             var attribute = info.GetCustomAttribute<Api>();

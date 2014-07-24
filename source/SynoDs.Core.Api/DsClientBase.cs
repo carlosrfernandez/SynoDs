@@ -27,7 +27,6 @@
         protected IJsonParser JsonParser { get; set; }
         protected string SessionName { get; set; }
 
-
         /// <summary>
         /// Checks the SessionId to see if it's set (means we're logged in).
         /// </summary>
@@ -212,7 +211,7 @@
         /// <returns>A Request object with the resulting string to use in the GET Request.</returns>
         protected virtual RequestBase PrepareRequest<T>(RequestParameters optionalParameters)
         {
-            var apiName = AttributeMapper.ReadApiNameFromInstance<T>();
+            var apiName = AttributeMapper.ReadApiNameFromT<T>();
             var apiMethod = AttributeMapper.ReadMethodAttributeFromT<T>();
             var request = new RequestBase {ApiName = apiName, Method = apiMethod};
 
