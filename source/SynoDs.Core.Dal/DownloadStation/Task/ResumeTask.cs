@@ -9,9 +9,4 @@ namespace SynoDs.Core.Dal.DownloadStation.Task
     {
 
     }
-
-    public class TestClass
-    {
-       
-    }
 }
