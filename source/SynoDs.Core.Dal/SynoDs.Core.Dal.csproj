@@ -83,6 +83,11 @@
     <Compile Include="DownloadStation\Task\TaskTransfer.cs" />
     <Compile Include="Enums\ChildApi.cs" />
     <Compile Include="Enums\CreateFolderAdditionalValues.cs" />
+    <Compile Include="Enums\FileInformationSortValues.cs" />
+    <Compile Include="Enums\FileStationAdditionalInfoValues.cs" />
+    <Compile Include="Enums\FileType.cs" />
+    <Compile Include="Enums\SharesAdditionalInfo.cs" />
+    <Compile Include="Enums\SortDirection.cs" />
     <Compile Include="Enums\TaskAdditionalInfoValues.cs" />
     <Compile Include="Enums\TaskStatus.cs" />
     <Compile Include="FileStation\CopyMove\CopyMoveStart.cs" />

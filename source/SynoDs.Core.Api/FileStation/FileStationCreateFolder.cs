@@ -36,7 +36,7 @@
         {
             if (folderPathList.Count != nameList.Count)
                 throw new ArgumentException("The number of folderPaths supplied, must be the same as the number of folders to create.");
-
+            
             var requestParams = new RequestParameters
             {
                 {"folder_path", string.Join(",", folderPathList) },
@@ -44,7 +44,7 @@
                 {"force_parent", forceParent ? "true" : "false"}
             };
 
-            if (additional != null && additional.Length >0)
+            if (additional != null && additional.Length > 0)
             {
                 requestParams.Add("additional", string.Join(",", additional).ToLower());
             }
