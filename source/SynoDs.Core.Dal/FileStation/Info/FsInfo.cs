@@ -11,12 +11,12 @@
         public string Hostname { get; set; }
 
         [DataMember(Name = "is_manager")]
-        bool IsManager { get; set; }
+        public bool IsManager { get; set; }
 
         [DataMember(Name = "support_virtual")]
-        string SupportVirtual { get; set; }
+        public string SupportVirtual { get; set; }
 
         [DataMember(Name = "support_sharing")]
-        bool SupportSharing { get; set; }
+        public bool SupportSharing { get; set; }
     }
 }
