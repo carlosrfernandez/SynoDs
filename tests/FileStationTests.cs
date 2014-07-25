@@ -15,11 +15,6 @@ namespace SynologyTests
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
-            Uri = new Uri("http://carlosrfa.synology.me:5000");
-            UserName = "dev";
-            Password = "d3v3l0p3r";
-            FolderToListContents = "/TVShows";
-
             if (string.IsNullOrEmpty(UserName))
                 throw new ArgumentException("Username is emtpy, tests can't run.");
 

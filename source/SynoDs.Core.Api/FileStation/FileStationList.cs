@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace SynoDs.Core.Api.FileStation
+﻿namespace SynoDs.Core.Api.FileStation
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
