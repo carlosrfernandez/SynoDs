@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Api.FileStation
+﻿using System.Net;
+
+namespace SynoDs.Core.Api.FileStation
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -37,7 +39,7 @@
         {
             var requestParameters = new RequestParameters
             {
-                {"folder_path", folderPath},
+                {"folder_path", WebUtility.UrlEncode(folderPath)},
                 {"offset", offset.ToString()},
                 {"limit", limit.ToString()},
                 {"sort_by", sortBy.ToString().ToLower()},
@@ -49,7 +51,7 @@
                 requestParameters.Add("sort_direction", sortDirection.ToString().ToLower());
             
             if (!string.IsNullOrEmpty(gotoPath))
-                requestParameters.Add("goto_path", gotoPath);
+                requestParameters.Add("goto_path", WebUtility.UrlEncode(gotoPath));
             
             if (additionalInfo!= null)
                 requestParameters.Add("additional", string.Join(",",additionalInfo).ToLower());

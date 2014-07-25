@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Api.FileStation
+﻿using System.Net;
+
+namespace SynoDs.Core.Api.FileStation
 {
     using System;
     using System.Collections.Generic;
@@ -39,7 +41,7 @@
             
             var requestParams = new RequestParameters
             {
-                {"folder_path", string.Join(",", folderPathList) },
+                {"folder_path", WebUtility.UrlEncode(string.Join(",", folderPathList)) },
                 {"name", string.Join(",", nameList)},
                 {"force_parent", forceParent ? "true" : "false"}
             };
@@ -59,7 +61,7 @@
 
             var requestParams = new RequestParameters
             {
-                {"path", string.Join(",", pathList)},
+                {"path", WebUtility.UrlEncode(string.Join(",", pathList))},
                 {"name", string.Join(",", nameList)}
             };
 

@@ -11,9 +11,9 @@ namespace SynologyTests
         internal static Uri Uri { get; set; }
         internal static string UserName { get; set; }
         internal static string Password { get; set; }
-
+        internal static string FolderToListContents { get; set; }
         [ClassInitialize]
-        public static void ClassInitialize()
+        public static void ClassInitialize(TestContext context)
         {
             if (string.IsNullOrEmpty(UserName))
                 throw new ArgumentException("Username is emtpy, tests can't run.");
@@ -23,6 +23,9 @@ namespace SynologyTests
 
             if (string.IsNullOrEmpty(Uri.ToString()))
                 throw new ArgumentException("Uri is empty, tests can't run.");
+
+            if (string.IsNullOrEmpty(FolderToListContents))
+                throw new ArgumentException("FolderToListis emtpy.");
         }
 
         [TestMethod]
@@ -30,9 +33,18 @@ namespace SynologyTests
         {
             var fsClient = new FileStation(UserName, Password, Uri);
             Assert.IsTrue(fsClient.LoginAsync().Result);
-            var list = fsClient.ListFilesInFolderAsync("/");
+            var list = fsClient.ListFilesInFolderAsync(FolderToListContents);
             Assert.IsTrue(list.Result.Success);
             Assert.IsNotNull(list.Result.ResponseData);
+            Assert.IsTrue(fsClient.LogoutAsync().Result);
+        }
+
+        [TestMethod]
+        public void UrlTest()
+        {
+            const string url = "/path/to/folder,/another/path";
+            var encoded = WebUtility.UrlEncode(url);
+            Assert.AreEqual("%2Fpath%2Fto%2Ffolder%2C%2Fanother%2Fpath", encoded);
         }
     }
 }
