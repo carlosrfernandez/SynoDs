@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Api
+﻿using System.Net;
+
+namespace SynoDs.Core.Api
 {
     using System;
     using System.IO;
@@ -215,6 +217,9 @@
             var apiMethod = AttributeMapper.ReadMethodAttributeFromT<T>();
             var request = new RequestBase {ApiName = apiName, Method = apiMethod};
 
+            if (optionalParameters != null)
+                request.RequestParameters = CleanRequestParameters(optionalParameters);
+
             var t = typeof (T);
             if (t == typeof(InfoResponse))
             {
@@ -222,7 +227,6 @@
                 request.Path = "query.cgi";
                 request.Version = "1";
                 request.Method = "query";
-                request.RequestParameters = optionalParameters;
                 // todo: possibly move the information api info to config file since it's the entry point for getting information on the other apis. 
             }
             else // this is a normal request
@@ -231,9 +235,23 @@
                 request.Path = apiInfo.Path;
                 request.Version = apiInfo.MaxVersion.ToString(); // use max version always. 
                 request.Sid = SessionId;
-                request.RequestParameters = optionalParameters;
             }
             return request;
+        }
+
+        /// <summary>
+        /// Encodes the parameters in the query so that no illegal symbols are sent through the get request..
+        /// </summary>
+        /// <param name="parameters">RequestParameters with possibly dirty chars.</param>
+        /// <returns>Clean parameter dictionary.</returns>
+        protected RequestParameters CleanRequestParameters(RequestParameters parameters)
+        {
+            var cleanParams = new RequestParameters();
+            foreach (var kvp in parameters)
+            {
+                cleanParams.Add(kvp.Key, WebUtility.UrlEncode(kvp.Value));
+            }
+            return cleanParams;
         }
     }
 }

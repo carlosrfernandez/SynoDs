@@ -40,7 +40,7 @@
             
             var requestParams = new RequestParameters
             {
-                {"folder_path", WebUtility.UrlEncode(string.Join(",", folderPathList)) },
+                {"folder_path", string.Join(",", folderPathList) },
                 {"name", string.Join(",", nameList)},
                 {"force_parent", forceParent ? "true" : "false"}
             };
@@ -60,7 +60,7 @@
 
             var requestParams = new RequestParameters
             {
-                {"path", WebUtility.UrlEncode(string.Join(",", pathList))},
+                {"path", string.Join(",", pathList)},
                 {"name", string.Join(",", nameList)}
             };
 

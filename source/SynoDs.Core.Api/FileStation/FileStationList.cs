@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Net;
     using Dal.HttpBase;
     using Dal.FileStation.List;
     using Dal.Enums;
@@ -38,11 +37,11 @@
         {
             var requestParameters = new RequestParameters
             {
-                {"folder_path", WebUtility.UrlEncode(folderPath)},
+                {"folder_path", folderPath},
                 {"offset", offset.ToString()},
                 {"limit", limit.ToString()},
                 {"sort_by", sortBy.ToString().ToLower()},
-                {"pattern", globPattern}, //test possible errors if this parameter is sent empty
+                {"pattern", globPattern},
                 {"filetype", fileType.ToString().ToLower()},
             };
 
@@ -50,7 +49,7 @@
                 requestParameters.Add("sort_direction", sortDirection.ToString().ToLower());
             
             if (!string.IsNullOrEmpty(gotoPath))
-                requestParameters.Add("goto_path", WebUtility.UrlEncode(gotoPath));
+                requestParameters.Add("goto_path", gotoPath);
             
             if (additionalInfo!= null)
                 requestParameters.Add("additional", string.Join(",",additionalInfo).ToLower());
