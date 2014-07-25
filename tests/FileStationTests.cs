@@ -6,31 +6,21 @@ using SynoDs.Core.Api.FileStation;
 namespace SynologyTests
 {
     [TestClass]
-    public class FileStationTests
+    public class FileStationTests : Abstract.TestBase
     {
-        internal static Uri Uri { get; set; }
-        internal static string UserName { get; set; }
-        internal static string Password { get; set; }
         internal static string FolderToListContents { get; set; }
+
         [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
+        public static void MyClassInitialize(TestContext context)
         {
-            if (string.IsNullOrEmpty(UserName))
-                throw new ArgumentException("Username is emtpy, tests can't run.");
-
-            if (string.IsNullOrEmpty(Password))
-                throw new ArgumentException("Password is emtpy, tests can't run.");
-
-            if (string.IsNullOrEmpty(Uri.ToString()))
-                throw new ArgumentException("Uri is empty, tests can't run.");
-
-            if (string.IsNullOrEmpty(FolderToListContents))
-                throw new ArgumentException("FolderToListis emtpy.");
+            ClassInitialize(context);
+            FolderToListContents = "/Development";
         }
-
+        
         [TestMethod]
         public void ListFilesInFolder()
         {
+            Assert.AreNotEqual("", FolderToListContents , "Folder param is empty. Test will not run");
             var fsClient = new FileStation(UserName, Password, Uri);
             Assert.IsTrue(fsClient.LoginAsync().Result);
             var list = fsClient.ListFilesInFolderAsync(FolderToListContents);

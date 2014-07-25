@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SynoDs.Core.Dal.Enums;
 using SynoDs.Core.Dal.HttpBase;
+using SynologyTests.Abstract;
 
 namespace SynologyTests
 {
     [TestClass]
-    public class DlManagerTests
+    public class DlManagerTests : TestBase
     {
         [TestMethod]
         public void TestUriSchemes()

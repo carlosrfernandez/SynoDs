@@ -1,29 +1,18 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SynoDs.Core.Api;
+using SynologyTests.Abstract;
 
 namespace SynologyTests
 {
     [TestClass]
-    public class DsClientBaseTests
+    public class DsClientBaseTests : TestBase
     {
-        internal static Uri Uri { get; set; }
-        internal static string UserName { get; set; }
-        internal static string Password { get; set; }
-
         [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
+        public static void MyClassInitialize(TestContext context)
         {
-            if(string.IsNullOrEmpty(UserName))
-                throw new ArgumentException("Username is emtpy, tests can't run.");
-
-            if (string.IsNullOrEmpty(Password))
-                throw new ArgumentException("Password is emtpy, tests can't run.");
-            
-            if (string.IsNullOrEmpty(Uri.ToString()))
-                throw new ArgumentException("Uri is empty, tests can't run.");
+            ClassInitialize(context);
         }
-
+        
         [TestMethod]
         public void SynologyLoginTest()
         {

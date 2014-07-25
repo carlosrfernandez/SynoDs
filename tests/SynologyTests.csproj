@@ -85,6 +85,7 @@
     <Compile Include="DsClientBaseTests.cs" />
     <Compile Include="JsonTests.cs" />
     <Compile Include="DlManagerTests.cs" />
+    <Compile Include="Abstract\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\source\SynoDs.Core.Api\SynoDs.Core.Api.csproj">
