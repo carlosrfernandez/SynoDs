@@ -1,11 +1,10 @@
-﻿using System.Net;
-
-namespace SynoDs.Core.Api
+﻿namespace SynoDs.Core.Api
 {
     using System;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Net;
     using Http;
     using StringUtils;
     using Dal.BaseApi;
