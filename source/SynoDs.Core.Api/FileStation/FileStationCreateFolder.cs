@@ -1,8 +1,9 @@
-﻿namespace SynoDs.Core.Api.FileStation
+﻿using System.Net;
+
+namespace SynoDs.Core.Api.FileStation
 {
     using System;
     using System.Collections.Generic;
-    using System.Net;
     using System.Threading.Tasks;
     using Dal.Enums;
     using Dal.FileStation.CreateFolder;
