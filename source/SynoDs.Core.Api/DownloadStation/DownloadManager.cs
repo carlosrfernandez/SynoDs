@@ -85,19 +85,19 @@
         /// <summary>
         /// Creates a Download task on the DownloadStation using the supplied URL and additional optional parameters.
         /// </summary>
-        /// <param name="taskUri">The URI for the download to create. Can be any valid URI.</param>
+        /// <param name="taskUrl">The URI for the download to create. Can be any valid URI.</param>
         /// <param name="userName">Optional username if the download requires authentication.</param>
         /// <param name="password">Optional password if the download requires authentication.</param>
         /// <param name="unzipPass">Unzip password if it is a zip file download and it has a password.</param>
         /// <param name="fileStream">FileStream for uploading a torrent file directly from your client.</param>
         /// <returns>A creation response, <see cref="CreateTaskResponse"/></returns>
-        public async Task<CreateTaskResponse> CreateTaskAsync(Uri taskUri, string userName = "", 
+        public async Task<CreateTaskResponse> CreateTaskAsync(string taskUrl, string userName = "", 
             string password = "", string unzipPass = "", Stream fileStream = null)
         {
-            // Todo: refactor parameter parsin
+            // Todo: refactor parameter parsing
             var requestParams = new RequestParameters
             {
-                { "uri", taskUri.ToString() }
+                { "uri", taskUrl }
             };
             if (userName != string.Empty)
                 requestParams.Add("username", userName);
