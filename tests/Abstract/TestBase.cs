@@ -25,7 +25,7 @@ namespace SynologyTests.Abstract
             // URI can be:
             // Uri = new Uri("http://yoursynologySubDomain.synology.me:5000");
             // Uri = new Uri("192.168.1.XXX:5000"); // ip address
-
+            
             if (string.IsNullOrEmpty(UserName))
                 throw new ArgumentException("Username is emtpy, tests can't run.");
 
