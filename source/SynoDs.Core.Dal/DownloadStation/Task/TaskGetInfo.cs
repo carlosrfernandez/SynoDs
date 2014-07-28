@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
-using SynoDs.Core.Dal.Attributes;
-
-namespace SynoDs.Core.Dal.DownloadStation.Task
+﻿namespace SynoDs.Core.Dal.DownloadStation.Task
 {
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
+    using Attributes;
+
     [DataContract]
     [ApiMethod("getinfo")]
     public class TaskGetInfo

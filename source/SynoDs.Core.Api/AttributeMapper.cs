@@ -19,10 +19,29 @@
         {
             var info = typeof(T).GetTypeInfo();
             var genericParams = info.BaseType.GenericTypeArguments;
-            return genericParams.Select(type => type.GetTypeInfo().GetCustomAttribute<ApiMethod>())
+            
+            // First level generic type argument check.
+            var result = genericParams.Select(type => type.GetTypeInfo().GetCustomAttribute<ApiMethod>())
                                 .Where(methodName => methodName != null)
                                 .Select(methodName => methodName.GetMethodName())
                                 .FirstOrDefault();
+
+            if (result != null)
+                return result;
+            
+            // If we have a second level generic entity (like IEnumerable<MyType>) we need to check IEnumerable's generic type arguments.
+            foreach (var secondLevelResult in genericParams.Select(item => item.GetTypeInfo().GenericTypeArguments))
+            {
+                result = secondLevelResult.Select(type => type.GetTypeInfo().GetCustomAttribute<ApiMethod>())
+                    .Where(methodName => methodName != null)
+                    .Select(methodName => methodName.GetMethodName())
+                    .FirstOrDefault();
+
+                if (result != null)
+                    break;
+            }
+
+            return result;
         }
 
         /// <summary>

@@ -94,6 +94,10 @@
         public async Task<CreateTaskResponse> CreateTaskAsync(string taskUrl, string userName = "", 
             string password = "", string unzipPass = "", Stream fileStream = null)
         {
+
+            if (string.IsNullOrEmpty(taskUrl))
+                throw new ArgumentNullException("taskUrl");
+
             // Todo: refactor parameter parsing
             var requestParams = new RequestParameters
             {
@@ -117,9 +121,10 @@
         /// <summary>
         /// Deletes a Task(s) from the DownloadStation
         /// </summary>
-        /// <param name="taskList">Task list to delete.</param>
+        /// <param name="taskList">List of Task ID's to delete.</param>
         /// <param name="forceComplete">Delete tasks and force to move uncompleted download files to the destination.</param>
-        /// <returns>A delete response, with a list of ID's and a boolean value indicating if it was deleted correctly. <see cref="DeleteTaskResponse"/></returns>
+        /// <returns>A delete response, with a list of ID's and a boolean value indicating if it was deleted correctly.
+        ///  <see cref="DeleteTaskResponse"/></returns>
         public async Task<DeleteTaskResponse> DeleteTaskAsync(IList<string> taskList, bool forceComplete)
         {
             var requestParams = new RequestParameters

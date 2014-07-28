@@ -1,7 +1,7 @@
-﻿using System.Runtime.Serialization;
-
-namespace SynoDs.Core.Dal.DownloadStation.Task
+﻿namespace SynoDs.Core.Dal.DownloadStation.Task
 {
+    using System.Runtime.Serialization;
+
     [DataContract]
     public class TaskTransfer
     {

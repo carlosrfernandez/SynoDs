@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Runtime.Serialization;
-using SynoDs.Core.Dal.Attributes;
-
-namespace SynoDs.Core.Dal.DownloadStation.Task
+﻿namespace SynoDs.Core.Dal.DownloadStation.Task
 {
+    using System.Runtime.Serialization;
+    using Attributes;
+
     [DataContract]
     [ApiMethod("pause")]
     public class PauseTask : TaskOperationBase
