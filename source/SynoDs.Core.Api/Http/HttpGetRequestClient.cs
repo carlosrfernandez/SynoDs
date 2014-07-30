@@ -9,6 +9,9 @@ using SynoDs.Core.Interfaces;
 namespace SynoDs.Core.Api.Http
 {
     // TODO: Refactor this class 
+    // Bug: This class implementation can't handle SSL.
+    // TODO: Remove from main API project and let the client handle the HTTP communication. 
+    // Until PCL's support SSL .
     // Change all HTTP objects to use "using" statements.
     // Add exception handling. 
     public class HttpGetRequestClient : IHttpClient, IDisposable
@@ -93,7 +96,11 @@ namespace SynoDs.Core.Api.Http
                     return resultString;
                 }
             }
-            catch (Exception ex) 
+            catch (WebException)
+            {
+                throw;
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error performing web request", ex);
             }

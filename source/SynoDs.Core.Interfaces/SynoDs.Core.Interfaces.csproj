@@ -38,16 +38,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
-      <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
-      <Name>SynoDs.Core.Dal</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="IHttpClient.cs" />
     <Compile Include="IJsonParser.cs" />
-    <Compile Include="IParameterMapper.cs" />
+    <Compile Include="IoCFactory.cs" />
+    <Compile Include="IoC\IContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
