@@ -1,5 +1,5 @@
 SynoDs
-======
+=
 
 A C#, Asynchronous, Portable Class Library for the Synology DiskStation public APIs
 
@@ -14,7 +14,7 @@ An initial implementation supporting the basic operations of the following APIs 
 - FileStation: Create, List, Info, Rename, CopyMove operations on files and folders using Async calls to the DS.
 
 
-Features "In-Work"
+Features under Development
 ===================
 
 - Exception and handling of known error responses.
