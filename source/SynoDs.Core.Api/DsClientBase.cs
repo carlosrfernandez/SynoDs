@@ -23,9 +23,9 @@
         protected string DsPassword { get; set; }
         protected Uri DsAddress { get; set; }
         protected string SessionId { get; set; }
-        protected IParameterMapper ParameterMapper { get; set; }
         protected IHttpClient RequestClient { get; set; }
         protected IJsonParser JsonParser { get; set; }
+        protected IErrorProvider ErrorProvider { get; set; }
         protected string SessionName { get; set; }
 
         /// <summary>
