@@ -1,13 +1,10 @@
-﻿using Newtonsoft.Json;
-using SynoDs.Core.Interfaces;
-
-namespace SynoDs.Core.Api.StringUtils
+﻿namespace SynoDs.Core.Api.StringUtils
 {
+    using Newtonsoft.Json;
+    using Interfaces;
+
     public class JsonHandler : IJsonParser
     {
-        //ILoggingProvider Logger { get; set; }
-        //IExceptionHandler ExceptionHandler { get; set; }
-
         public string ToJson<T>(T instance)
         {
             return JsonConvert.SerializeObject(instance);
