@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="errorCode">Synology API error code.</param>
         /// <returns>String with error description.</returns>
-        string GetErrorDescription(int errorCode);
+        string GetErrorDescriptionForType<T>(int errorCode);
     }
 }

@@ -18,5 +18,15 @@
         {
             return string.Format("SYNO.{0}.{1}", RootApi, ChildApi);
         }
+
+        public string GetRootApi()
+        {
+            return RootApi.ToString();
+        }
+
+        public string GetChildApi()
+        {
+            return ChildApi.ToString();
+        }
     }
 }

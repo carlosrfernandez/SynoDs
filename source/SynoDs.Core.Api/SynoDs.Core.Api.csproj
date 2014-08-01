@@ -58,7 +58,6 @@
     <Compile Include="FileStation\FileStationList.cs" />
     <Compile Include="FileStation\FileStationCreateFolder.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
-    <Compile Include="Http\UriExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringUtils\JsonHelper.cs" />
   </ItemGroup>
