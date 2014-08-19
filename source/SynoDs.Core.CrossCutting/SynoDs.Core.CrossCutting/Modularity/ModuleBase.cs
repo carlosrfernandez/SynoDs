@@ -1,8 +1,7 @@
-﻿using SynoDs.Core.Interfaces.IoC;
-
-namespace SynoDs.Core.CrossCutting.Modularity
+﻿namespace SynoDs.Core.CrossCutting.Modularity
 {
-    using Interfaces;
+    using Interfaces.IoC;
+    using Interfaces.Modularity;
 
     public abstract class ModuleBase : IModule
     {

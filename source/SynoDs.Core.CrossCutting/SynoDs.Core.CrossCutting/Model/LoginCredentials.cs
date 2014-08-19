@@ -1,4 +1,4 @@
-﻿namespace SynoDs.Core.CrossCutting
+﻿namespace SynoDs.Core.CrossCutting.Model
 {
     using System;
 

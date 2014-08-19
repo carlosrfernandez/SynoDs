@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="BootStrapper.cs" />
     <Compile Include="Common\Validate.cs" />
-    <Compile Include="LoginCredentials.cs" />
+    <Compile Include="Model\LoginCredentials.cs" />
     <Compile Include="Modularity\ModuleBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

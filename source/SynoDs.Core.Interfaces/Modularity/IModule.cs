@@ -1,4 +1,4 @@
-﻿namespace SynoDs.Core.Interfaces
+﻿namespace SynoDs.Core.Interfaces.Modularity
 {
     public interface IModule
     {

@@ -1,6 +1,4 @@
-﻿using SynoDs.Core.CrossCutting.Common;
-
-namespace SynoDs.Core.Api
+﻿namespace SynoDs.Core.Api
 {
     using System;
     using System.IO;
@@ -8,8 +6,9 @@ namespace SynoDs.Core.Api
     using System.Threading.Tasks;
     using System.Net;
     using Http;
-    using CrossCutting;
-    using StringUtils;
+    using CrossCutting.Model;
+    // using CrossCutting.Modularity;
+    using CrossCutting.Common;
     using Dal.BaseApi;
     using Dal.HttpBase;
     using Interfaces;
@@ -17,6 +16,9 @@ namespace SynoDs.Core.Api
     /// <summary>
     /// This is the API base class. It contains a Generic PerformOperationAsync method that 
     /// can be used by the rest of the API's in order to communicate with the Diskstation.
+    /// TODO: Convert to abstract.
+    /// TODO: Remove Login and Information Methods into separate projects.
+    /// TODO: Refactor the Info cache so that it is properly used in the base class (use information interface to access the Api Cache)
     /// TODO: Add the File Upload method for uploading torrents from the client application.
     /// TODO: Add known error handling of the API
     /// </summary>
@@ -30,18 +32,18 @@ namespace SynoDs.Core.Api
         protected string SessionName { get; set; }
 
         // Dependencies
-        protected IHttpClient HttpClient { get; set; }
-        protected IJsonParser JsonParser { get; set; }
-        protected IErrorProvider ErrorProvider { get; set; }
+        private readonly IHttpClient _httpClient;
+        private readonly IJsonParser _jsonParser;
+        private readonly IErrorProvider _errorProvider;
         
         
         /// <summary>
         /// Checks the SessionId to see if it's set (means we're logged in).
         /// </summary>
-        public bool IsLoggedIn
-        {
-            get { return SessionId != string.Empty; }
-        }
+        //public bool IsLoggedIn
+        //{
+        //    get { return SessionId != string.Empty; }
+        //}
 
         /// <summary>
         /// Checks if the dictionary with the API Information is loaded.
@@ -85,41 +87,41 @@ namespace SynoDs.Core.Api
             Validate.ArgumentIsNotNullOrEmpty(jsonParser);
             Validate.ArgumentIsNotNullOrEmpty(errorProvider);
 
-            ErrorProvider = errorProvider;
-            HttpClient = httpClient;
-            JsonParser = jsonParser;
+            _errorProvider = errorProvider;
+            _httpClient = httpClient;
+            _jsonParser = jsonParser;
         }
 
-        /// <summary>
-        /// Logs into the DiskStation with the supplied credentials.
-        /// </summary>
-        /// <returns>True if logged in and false if any errors occur.</returns>
-        public async Task<bool> LoginAsync(LoginCredentials loginCredentials)
-        {
-            Validate.ArgumentIsNotNullOrEmpty(loginCredentials.UserName);
-            Validate.ArgumentIsNotNullOrEmpty(loginCredentials.Password);
-            Validate.ArgumentIsNotNullOrEmpty(loginCredentials.Uri);
+        ///// <summary>
+        ///// Logs into the DiskStation with the supplied credentials.
+        ///// </summary>
+        ///// <returns>True if logged in and false if any errors occur.</returns>
+        //public async Task<bool> LoginAsync(LoginCredentials loginCredentials)
+        //{
+        //    Validate.ArgumentIsNotNullOrEmpty(loginCredentials.UserName);
+        //    Validate.ArgumentIsNotNullOrEmpty(loginCredentials.Password);
+        //    Validate.ArgumentIsNotNullOrEmpty(loginCredentials.Uri);
 
-            // store the data.
-            DsAddress = loginCredentials.Uri;
-            DsUsername = loginCredentials.UserName;
-            DsPassword = loginCredentials.Password;
+        //    // store the data.
+        //    DsAddress = loginCredentials.Uri;
+        //    DsUsername = loginCredentials.UserName;
+        //    DsPassword = loginCredentials.Password;
             
-            if (IsApiInfoCacheEmtpy)
-            {
-                await GetApiInformationCache();
-            }
-            var parameters = new RequestParameters
-            {
-                {"account", DsUsername},
-                {"passwd", DsPassword},
-                {"session", SessionName},
-                {"format", "sid" }
-            };
-            var loginResult = await PerformOperationAsync<LoginResponse>(parameters);
-            SessionId = loginResult.ResponseData.Sid;
-            return loginResult.Success;
-        }
+        //    if (IsApiInfoCacheEmtpy)
+        //    {
+        //        await GetApiInformationCache();
+        //    }
+        //    var parameters = new RequestParameters
+        //    {
+        //        {"account", DsUsername},
+        //        {"passwd", DsPassword},
+        //        {"session", SessionName},
+        //        {"format", "sid" }
+        //    };
+        //    var loginResult = await PerformOperationAsync<LoginResponse>(parameters);
+        //    SessionId = loginResult.ResponseData.Sid;
+        //    return loginResult.Success;
+        //}
 
         /// <summary>
         /// Gets all of the DiskStation's API information. This method will store
@@ -159,21 +161,21 @@ namespace SynoDs.Core.Api
             return result;
         }
 
-        /// <summary>
-        /// Logs out of the DiskStation. 
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> LogoutAsync()
-        {
-            var logoutParams = new RequestParameters
-            {
-                {"session", SessionName}
-            };
+        ///// <summary>
+        ///// Logs out of the DiskStation. 
+        ///// </summary>
+        ///// <returns></returns>
+        //public async Task<bool> LogoutAsync()
+        //{
+        //    var logoutParams = new RequestParameters
+        //    {
+        //        {"session", SessionName}
+        //    };
 
-            var logoutRequestResult = await PerformOperationAsync<LogoutResponse>(logoutParams);
-            SessionId = string.Empty; // erase the sid.
-            return logoutRequestResult.Success;
-        }
+        //    var logoutRequestResult = await PerformOperationAsync<LogoutResponse>(logoutParams);
+        //    SessionId = string.Empty; // erase the sid.
+        //    return logoutRequestResult.Success;
+        //}
         
         /// <summary>
         /// Performs a Request to the DiskStation with the supplied parameters. 
@@ -189,7 +191,7 @@ namespace SynoDs.Core.Api
                 using (var requestClient = new HttpGetRequestClient(string.Format("{0}{1}", DsAddress, request)))
                 {
                     var jsonResult = await requestClient.SendRequestAsync();
-                    var result = JsonParser.FromJson<T>(jsonResult);
+                    var result = _jsonParser.FromJson<T>(jsonResult);
                     return result;
                 }
             }

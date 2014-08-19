@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SynoDs.Core.Api.FileStation;
+using SynologyTests.Abstract;
 
 namespace SynologyTests
 {
     [TestClass]
-    public class FileStationTests : Abstract.TestBase
+    public class FileStationTests : TestBase
     {
         internal static string FolderToListContents { get; set; }
 

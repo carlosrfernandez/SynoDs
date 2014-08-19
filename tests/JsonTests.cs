@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SynoDs.Core.Api.StringUtils;
 using SynoDs.Core.Interfaces;
 
 namespace SynologyTests
@@ -14,7 +13,7 @@ namespace SynologyTests
         public void TestDeserializeMissingDataJsonObjectMethod1()
         {
             //ILoggingProvider logging 
-            JsonHandler = new JsonHandler();
+            //JsonHandler = new JsonHandler();
             //var result = JsonHandler.FromJson<TaskActionResponse>(ValidJson);
             //Assert.IsNotNull(result);
         }
