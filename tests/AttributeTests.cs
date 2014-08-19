@@ -10,8 +10,8 @@ namespace SynologyTests
         [TestMethod]
         public void TestApiAttributeForBaseApi()
         {
-            var infoApiString = AttributeMapper.ReadApiNameFromT<InfoResponse>();
-            var loginApiString = AttributeMapper.ReadApiNameFromT<LoginResponse>();
+            var infoApiString = AttributeReader.ReadApiNameFromT<InfoResponse>();
+            var loginApiString = AttributeReader.ReadApiNameFromT<LoginResponse>();
 
             Assert.AreEqual("SYNO.API.Info", infoApiString);
             Assert.AreEqual("SYNO.API.Auth", loginApiString);
@@ -20,9 +20,9 @@ namespace SynologyTests
         [TestMethod]
         public void TestMethodAttributeForBaseApi()
         {
-            var authMethodName = AttributeMapper.ReadMethodAttributeFromT<LoginResponse>();
+            var authMethodName = AttributeReader.ReadMethodAttributeFromT<LoginResponse>();
 
-            var infoMethodName = AttributeMapper.ReadMethodAttributeFromT<InfoResponse>();
+            var infoMethodName = AttributeReader.ReadMethodAttributeFromT<InfoResponse>();
 
             Assert.AreEqual("query", infoMethodName);
             Assert.AreEqual("login", authMethodName);

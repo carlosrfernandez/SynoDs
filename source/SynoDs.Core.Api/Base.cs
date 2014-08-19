@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Api
+﻿using SynoDs.Core.CrossCutting.Common;
+
+namespace SynoDs.Core.Api
 {
     using System;
     using System.IO;
@@ -6,6 +8,7 @@
     using System.Threading.Tasks;
     using System.Net;
     using Http;
+    using CrossCutting;
     using StringUtils;
     using Dal.BaseApi;
     using Dal.HttpBase;
@@ -17,17 +20,21 @@
     /// TODO: Add the File Upload method for uploading torrents from the client application.
     /// TODO: Add known error handling of the API
     /// </summary>
-    public class DsClientBase
+    public class Base
     {
+        // Api properties
         protected string DsUsername { get; set; }
         protected string DsPassword { get; set; }
         protected Uri DsAddress { get; set; }
         protected string SessionId { get; set; }
-        protected IHttpClient RequestClient { get; set; }
-        protected IJsonParser JsonParser { get; set; }
-        protected IErrorProvider ErrorProvider { get; set; }
         protected string SessionName { get; set; }
 
+        // Dependencies
+        protected IHttpClient HttpClient { get; set; }
+        protected IJsonParser JsonParser { get; set; }
+        protected IErrorProvider ErrorProvider { get; set; }
+        
+        
         /// <summary>
         /// Checks the SessionId to see if it's set (means we're logged in).
         /// </summary>
@@ -61,41 +68,43 @@
         /// <summary>
         /// Default parameterless constructor
         /// </summary>
-        public DsClientBase()
+        public Base()
         {
-            JsonParser = new JsonHandler();
             SessionName = "DsBase";
         }
 
         /// <summary>
         /// Constructor that checks the input parameters for any errors and stores the information
         /// </summary>
-        /// <param name="username">Username that has access to the DiskStation</param>
-        /// <param name="password">Password that goes with the username. </param>
-        /// <param name="host">DiskStation IP address or hostname.</param>
-        public DsClientBase(string username, string password, Uri host) : this()
+        /// <param name="httpClient"></param>
+        /// <param name="jsonParser"></param>
+        /// <param name="errorProvider"></param>
+        public Base(IHttpClient httpClient, IJsonParser jsonParser, IErrorProvider errorProvider) : this()
         {
-            if (string.IsNullOrEmpty(username))
-                throw new ArgumentNullException("username", @"Username cannot be emtpy.");
+            Validate.ArgumentIsNotNullOrEmpty(httpClient);
+            Validate.ArgumentIsNotNullOrEmpty(jsonParser);
+            Validate.ArgumentIsNotNullOrEmpty(errorProvider);
 
-            if(string.IsNullOrEmpty(password))
-                throw new ArgumentNullException("password", @"Password cannot be empty.");
-
-            if (!host.IsWellFormedOriginalString())
-                throw new ArgumentException("Invalid host.");
-
-            DsUsername = username;
-            DsPassword = password;
-            DsAddress = host;
-            SessionId = string.Empty;
+            ErrorProvider = errorProvider;
+            HttpClient = httpClient;
+            JsonParser = jsonParser;
         }
 
         /// <summary>
         /// Logs into the DiskStation with the supplied credentials.
         /// </summary>
         /// <returns>True if logged in and false if any errors occur.</returns>
-        public async Task<bool> LoginAsync()
+        public async Task<bool> LoginAsync(LoginCredentials loginCredentials)
         {
+            Validate.ArgumentIsNotNullOrEmpty(loginCredentials.UserName);
+            Validate.ArgumentIsNotNullOrEmpty(loginCredentials.Password);
+            Validate.ArgumentIsNotNullOrEmpty(loginCredentials.Uri);
+
+            // store the data.
+            DsAddress = loginCredentials.Uri;
+            DsUsername = loginCredentials.UserName;
+            DsPassword = loginCredentials.Password;
+            
             if (IsApiInfoCacheEmtpy)
             {
                 await GetApiInformationCache();
@@ -172,7 +181,7 @@
         /// <typeparam name="T">Response type object, will tell us what method and which API to call by use of attributes.</typeparam>
         /// <param name="optionalParameters">Additional optional parameters to send the request with.</param>
         /// <returns>Task of type T which represents the response object.</returns>
-        protected async Task<T> PerformOperationAsync<T>(RequestParameters optionalParameters = null)
+        public async Task<T> PerformOperationAsync<T>(RequestParameters optionalParameters = null)
         {
             var request = PrepareRequest<T>(optionalParameters);
             try
@@ -212,8 +221,8 @@
         /// <returns>A Request object with the resulting string to use in the GET Request.</returns>
         protected virtual RequestBase PrepareRequest<T>(RequestParameters optionalParameters)
         {
-            var apiName = AttributeMapper.ReadApiNameFromT<T>();
-            var apiMethod = AttributeMapper.ReadMethodAttributeFromT<T>();
+            var apiName = AttributeReader.ReadApiNameFromT<T>();
+            var apiMethod = AttributeReader.ReadMethodAttributeFromT<T>();
             var request = new RequestBase {ApiName = apiName, Method = apiMethod};
 
             if (optionalParameters != null)
@@ -251,6 +260,6 @@
                 cleanParams.Add(kvp.Key, WebUtility.UrlEncode(kvp.Value));
             }
             return cleanParams;
-        }
+        }       
     }
 }

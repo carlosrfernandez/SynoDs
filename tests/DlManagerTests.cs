@@ -38,10 +38,10 @@ namespace SynologyTests
         [Description("Before executing this test, provide a total number of tasks on your box's DownloadStation.")]
         public void GetTasksInDs()
         {
-            var dlStation = new DownloadManager(UserName, Password, Uri);
+            var dlStation = new DownloadManager();
             
             // Make sure we can login first.
-            Assert.IsTrue(dlStation.LoginAsync().Result);
+            Assert.IsTrue(dlStation.LoginAsync(Credentials).Result);
 
             // Let's get the current downloads.
 
@@ -60,9 +60,9 @@ namespace SynologyTests
         public void CreateTaskTest()
         {
 
-            var dlStation = new DownloadManager(UserName, Password, Uri);
+            var dlStation = new DownloadManager();
 
-            Assert.IsTrue(dlStation.LoginAsync().Result);
+            Assert.IsTrue(dlStation.LoginAsync(Credentials).Result);
 
             var totalTaskCount = dlStation.ListTasksAsync().Result.ResponseData.Total;
 
@@ -77,9 +77,9 @@ namespace SynologyTests
         [TestMethod]
         public void DeleteTaskTest()
         {
-            var dlStation = new DownloadManager(UserName, Password, Uri);
+            var dlStation = new DownloadManager();
 
-            Assert.IsTrue(dlStation.LoginAsync().Result);
+            Assert.IsTrue(dlStation.LoginAsync(Credentials).Result);
 
             Assert.IsTrue(dlStation.CreateTaskAsync(Resource).Result.Success);
 

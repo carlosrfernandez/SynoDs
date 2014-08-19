@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SynoDs.Core.Api;
+using SynoDs.Core.CrossCutting;
 using SynologyTests.Abstract;
 
 namespace SynologyTests
@@ -16,16 +17,17 @@ namespace SynologyTests
         [TestMethod]
         public void SynologyLoginTest()
         {
-            var ds = new DsClientBase(UserName, Password, Uri);
-            Assert.IsTrue(ds.LoginAsync().Result);
+            var ds = new Base();
+            Assert.IsTrue(ds.LoginAsync(Credentials).Result);
         }
         
         [TestMethod]
         public void SynologyLogoutTest()
         {
-            var ds = new DsClientBase(UserName, Password, Uri);
+            var ds = new Base();
             var ot = new PrivateObject(ds);
-            Assert.IsTrue(ds.LoginAsync().Result);
+
+            Assert.IsTrue(ds.LoginAsync(Credentials).Result);
             var sid = ot.GetFieldOrProperty("SessionId");
             Assert.AreNotEqual(string.Empty, sid);
             Assert.IsTrue(ds.LogoutAsync().Result);
@@ -36,7 +38,7 @@ namespace SynologyTests
         [TestMethod]
         public void TestGetApiInfo()
         {
-            var ds = new DsClientBase(UserName, Password, Uri);
+            var ds = new Base();
             var result = ds.GetApiInformation("SYNO.API.Auth");
             Assert.IsTrue(result.Result.Success);
             Assert.IsNotNull(result.Result.ResponseData);

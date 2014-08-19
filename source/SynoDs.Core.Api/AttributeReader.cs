@@ -8,7 +8,7 @@
     /// Read the attributes of the Objects defined in the DAL so that we can retrieve the API to which they belong 
     /// and the methods that we need to use. 
     /// </summary>
-    public static class AttributeMapper
+    public static class AttributeReader
     {
         /// <summary>
         /// Reads the method attribute from the Generic member of the supplied generic Object.>

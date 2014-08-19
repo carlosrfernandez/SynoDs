@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SynoDs.Core.CrossCutting;
 
 namespace SynologyTests.Abstract
 {
@@ -10,9 +11,7 @@ namespace SynologyTests.Abstract
     [TestClass]
     public abstract class TestBase
     {
-        public static string UserName { get; set; }
-        public static string Password { get; set; }
-        public static Uri Uri { get; set; }
+        public static LoginCredentials Credentials { get; set; }
 
         public TestContext TestContext { get; set; }
 
@@ -20,19 +19,16 @@ namespace SynologyTests.Abstract
         public static void ClassInitialize(TestContext context)
         {
             // Example credentials. 
-            // UserName = "username";
-            // Password = "password";
             // URI can be:
-            // Uri = new Uri("http://yoursynologySubDomain.synology.me:5000");
             // Uri = new Uri("192.168.1.XXX:5000"); // ip address
             
-            if (string.IsNullOrEmpty(UserName))
+            if (string.IsNullOrEmpty(Credentials.UserName))
                 throw new ArgumentException("Username is emtpy, tests can't run.");
 
-            if (string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(Credentials.Password))
                 throw new ArgumentException("Password is emtpy, tests can't run.");
 
-            if (string.IsNullOrEmpty(Uri.ToString()))
+            if (string.IsNullOrEmpty(Credentials.Uri.ToString()))
                 throw new ArgumentException("Uri is empty, tests can't run.");
         }
     }

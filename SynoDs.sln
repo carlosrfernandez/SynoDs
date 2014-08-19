@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.Dal", "source\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.Interfaces", "source\SynoDs.Core.Interfaces\SynoDs.Core.Interfaces.csproj", "{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.Api", "source\SynoDs.Core.Api\SynoDs.Core.Api.csproj", "{7E0BDC20-A490-4DB0-869B-35576D74332F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.ApiBase", "source\SynoDs.Core.Api\SynoDs.Core.ApiBase.csproj", "{7E0BDC20-A490-4DB0-869B-35576D74332F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynologyTests", "tests\SynologyTests.csproj", "{F2BF1FA2-30FE-42E3-A60F-33A4D09006E8}"
 EndProject

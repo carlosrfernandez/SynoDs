@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Api.DownloadStation
+﻿using SynoDs.Core.Interfaces;
+
+namespace SynoDs.Core.Api.DownloadStation
 {
     using System;
     using System.Collections.Generic;
@@ -11,23 +13,12 @@
     /// <summary>
     /// DownloadStation client class.
     /// </summary>
-    public class DownloadManager : DsClientBase
+    public sealed class DownloadManager : Base
     {
         /// <summary>
         /// Basic Constructor
         /// </summary>
         public DownloadManager()
-        {
-            SessionName = "DownloadManager";
-        }
-
-        /// <summary>
-        /// Constructor for storing the credentials and the url information of the DiskStation.
-        /// </summary>
-        /// <param name="userName">Username</param>
-        /// <param name="password">Password</param>
-        /// <param name="hostUri">IP Address / hostname and port for the diskstation in URI format.</param>
-        public DownloadManager(string userName, string password, Uri hostUri) : base(userName, password, hostUri)
         {
             SessionName = "DownloadManager";
         }

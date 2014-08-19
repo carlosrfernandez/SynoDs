@@ -1,6 +1,4 @@
-﻿using SynoDs.Core.Interfaces.IoC;
-
-namespace SynoDs.Core.Interfaces
+﻿namespace SynoDs.Core.Interfaces.IoC
 {
 // ReSharper disable once InconsistentNaming
     public interface IoCFactory

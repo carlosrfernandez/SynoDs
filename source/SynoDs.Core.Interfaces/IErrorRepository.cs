@@ -7,6 +7,7 @@ namespace SynoDs.Core.Interfaces
     /// </summary>
     public interface IErrorRepository
     {
-        IDictionary<int, string> ErrorDictionary { get; set; } 
+        IDictionary<int, string> ErrorDictionary { get; set; }
+        string GetErrorDescription(int errorCode);
     }
 }

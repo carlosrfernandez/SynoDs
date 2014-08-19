@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.ErrorProvider
+﻿using System.Reflection;
+
+namespace SynoDs.Core.ErrorProvider
 {
     using Interfaces;
 
@@ -24,6 +26,14 @@
             //    BaseErrors.ResourceManager.GetString(string.Format("{0}{1}", ErrorKeyPrefixSymbol, errorCode));
             
             //return string.IsNullOrEmpty(errorForCode) ? UnknownErrorCodeMessage : errorForCode;
+            return string.Empty;
+        }
+
+        public IErrorRepository ErrorRepository { get; private set; }
+        
+        public string GetErrorDescriptionForType(int errorCode)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -5,20 +5,16 @@
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}</ProjectGuid>
+    <ProjectGuid>{ADBFE2AC-59DA-4F12-8701-6AED991ABE22}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SynoDs.Core.Interfaces</RootNamespace>
-    <AssemblyName>SynoDs.Core.Interfaces</AssemblyName>
+    <RootNamespace>SynoDs.Core.CrossCutting</RootNamespace>
+    <AssemblyName>SynoDs.Core.CrossCutting</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,17 +34,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BootstrapperBase.cs" />
-    <Compile Include="IErrorRepository.cs" />
-    <Compile Include="IErrorProvider.cs" />
-    <Compile Include="IFtpClient.cs" />
-    <Compile Include="IHttpClient.cs" />
-    <Compile Include="IJsonParser.cs" />
-    <Compile Include="IModule.cs" />
-    <Compile Include="IoC\IoCFactory.cs" />
-    <Compile Include="IoC\IContainer.cs" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\..\SynoDs.Core.Interfaces\SynoDs.Core.Interfaces.csproj">
+      <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
+      <Name>SynoDs.Core.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BootStrapper.cs" />
+    <Compile Include="Common\Validate.cs" />
+    <Compile Include="LoginCredentials.cs" />
+    <Compile Include="Modularity\ModuleBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

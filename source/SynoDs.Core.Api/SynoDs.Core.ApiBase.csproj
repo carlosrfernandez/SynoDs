@@ -41,6 +41,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
+      <Project>{adbfe2ac-59da-4f12-8701-6aed991abe22}</Project>
+      <Name>SynoDs.Core.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
       <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
       <Name>SynoDs.Core.Dal</Name>
@@ -51,9 +55,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributeMapper.cs" />
+    <Compile Include="AttributeReader.cs" />
     <Compile Include="DownloadStation\DownloadManager.cs" />
-    <Compile Include="DsClientBase.cs" />
+    <Compile Include="Base.cs" />
     <Compile Include="FileStation\FileStationInfo.cs" />
     <Compile Include="FileStation\FileStationList.cs" />
     <Compile Include="FileStation\FileStationCreateFolder.cs" />

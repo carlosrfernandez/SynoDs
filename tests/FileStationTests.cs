@@ -20,8 +20,8 @@ namespace SynologyTests
         public void ListFilesInFolder()
         {
             Assert.AreNotEqual("", FolderToListContents , "Folder param is empty. Test will not run");
-            var fsClient = new FileStation(UserName, Password, Uri);
-            Assert.IsTrue(fsClient.LoginAsync().Result);
+            var fsClient = new FileStation();
+            Assert.IsTrue(fsClient.LoginAsync(Credentials).Result);
             var list = fsClient.ListFilesInFolderAsync(FolderToListContents);
             Assert.IsTrue(list.Result.Success);
             Assert.IsNotNull(list.Result.ResponseData);

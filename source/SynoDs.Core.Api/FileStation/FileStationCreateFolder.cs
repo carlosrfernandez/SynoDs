@@ -12,12 +12,18 @@
     /// Contains the File and Folder related operations
     /// Like Create, Rename, CopyMove.
     /// </summary>
-    public partial class FileStation : DsClientBase
+    public partial class FileStation : Base
     {
-        public FileStation(string userName, string password, Uri uri) : base(userName,password,uri)
+        public FileStation()
         {
             SessionName = "FileStation";
         }
+
+        //protected override sealed string SessionName
+        //{
+        //    get { return base.SessionName; }
+        //    set { base.SessionName = value; }
+        //}
 
         /// <summary>
         /// Creates a folder with the given "name" in the given folderPath. See parameter descriptions:
