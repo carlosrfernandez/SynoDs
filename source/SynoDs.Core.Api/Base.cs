@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Api
+﻿using SynoDs.Core.Interfaces.Synology;
+
+namespace SynoDs.Core.Api
 {
     using System;
     using System.IO;
@@ -34,7 +36,7 @@
         // Dependencies
         private readonly IHttpClient _httpClient;
         private readonly IJsonParser _jsonParser;
-        private readonly IErrorProvider _errorProvider;
+        private readonly IApiInformation _iApiInformation;
         
         
         /// <summary>
@@ -45,18 +47,18 @@
         //    get { return SessionId != string.Empty; }
         //}
 
-        /// <summary>
-        /// Checks if the dictionary with the API Information is loaded.
-        /// </summary>
-        private bool IsApiInfoCacheEmtpy
-        {
-            get { return ApiInformationCache == null || ApiInformationCache.Count == 0; }
-        }
+        ///// <summary>
+        ///// Checks if the dictionary with the API Information is loaded.
+        ///// </summary>
+        //private bool IsApiInfoCacheEmtpy
+        //{
+        //    get { return ApiInformationCache == null || ApiInformationCache.Count == 0; }
+        //}
 
         /// <summary>
         /// Stores the API information retrieved from the NAS.
         /// </summary>
-        protected ApiInfoWrapper ApiInformationCache { get; set; }
+        //protected ApiInfoWrapper ApiInformationCache { get; set; }
 
         /// <summary>
         /// Overridable method to get the session name used to log out.
@@ -80,14 +82,14 @@
         /// </summary>
         /// <param name="httpClient"></param>
         /// <param name="jsonParser"></param>
-        /// <param name="errorProvider"></param>
-        public Base(IHttpClient httpClient, IJsonParser jsonParser, IErrorProvider errorProvider) : this()
+        /// <param name="iApiInformation"></param>
+        public Base(IHttpClient httpClient, IJsonParser jsonParser, IApiInformation iApiInformation) : this()
         {
             Validate.ArgumentIsNotNullOrEmpty(httpClient);
             Validate.ArgumentIsNotNullOrEmpty(jsonParser);
-            Validate.ArgumentIsNotNullOrEmpty(errorProvider);
+            Validate.ArgumentIsNotNullOrEmpty(iApiInformation);
 
-            _errorProvider = errorProvider;
+            _iApiInformation = iApiInformation;
             _httpClient = httpClient;
             _jsonParser = jsonParser;
         }
@@ -128,38 +130,38 @@
         /// the API's in an internal dictionary until the client is destroyed.
         /// </summary>
         /// <returns>An emtpy task.</returns>
-        private async Task GetApiInformationCache()
-        {
-            var infoResult = await PerformOperationAsync<InfoResponse>(new RequestParameters
-            {
-                {"query", "ALL"}
-            });
+        //private async Task GetApiInformationCache()
+        //{
+        //    var infoResult = await PerformOperationAsync<InfoResponse>(new RequestParameters
+        //    {
+        //        {"query", "ALL"}
+        //    });
 
-            if (infoResult.Success)
-            {
-                ApiInformationCache = infoResult.ResponseData;
-            }
-            else
-            {
-                throw new Exception("Error while getting API Information. ");
-            }
-        }
+        //    if (infoResult.Success)
+        //    {
+        //        ApiInformationCache = infoResult.ResponseData;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Error while getting API Information. ");
+        //    }
+        //}
         
-        /// <summary>
-        /// Gets the Api information for the requested API Name
-        /// </summary>
-        /// <param name="apiName">Api name to get information on. </param>
-        /// <returns>The InformationResponse for the supplied API.</returns>
-        public async Task<InfoResponse> GetApiInformation(string apiName)
-        {
-            var requestParams = new RequestParameters
-            {
-                {"query", apiName}
-            };
+        ///// <summary>
+        ///// Gets the Api information for the requested API Name
+        ///// </summary>
+        ///// <param name="apiName">Api name to get information on. </param>
+        ///// <returns>The InformationResponse for the supplied API.</returns>
+        //public async Task<InfoResponse> GetApiInformation(string apiName)
+        //{
+        //    var requestParams = new RequestParameters
+        //    {
+        //        {"query", apiName}
+        //    };
 
-            var result = await PerformOperationAsync<InfoResponse>(requestParams);
-            return result;
-        }
+        //    var result = await PerformOperationAsync<InfoResponse>(requestParams);
+        //    return result;
+        //}
 
         ///// <summary>
         ///// Logs out of the DiskStation. 
@@ -221,11 +223,11 @@
         /// <typeparam name="T">ResponseWrapper object that will tell us through attributes, which API and method to call</typeparam>
         /// <param name="optionalParameters">The optional parameters to add to the tail of the Request.</param>
         /// <returns>A Request object with the resulting string to use in the GET Request.</returns>
-        protected virtual RequestBase PrepareRequest<T>(RequestParameters optionalParameters)
+        protected virtual async Task<RequestBase> PrepareRequest<T>(RequestParameters optionalParameters)
         {
             var apiName = AttributeReader.ReadApiNameFromT<T>();
             var apiMethod = AttributeReader.ReadMethodAttributeFromT<T>();
-            var request = new RequestBase {ApiName = apiName, Method = apiMethod};
+            var request = new RequestBase { ApiName = apiName, Method = apiMethod };
 
             if (optionalParameters != null)
                 request.RequestParameters = CleanRequestParameters(optionalParameters);
@@ -241,7 +243,8 @@
             }
             else // this is a normal request
             {
-                var apiInfo = ApiInformationCache.FirstOrDefault(n => n.Key == apiName).Value;
+                //ApiInformationCache.FirstOrDefault(n => n.Key == apiName).Value;
+                var apiInfo = await _iApiInformation.GetApiInformationAsync(apiName);
                 request.Path = apiInfo.Path;
                 request.Version = apiInfo.MaxVersion.ToString(); // use max version always. 
                 request.Sid = SessionId;

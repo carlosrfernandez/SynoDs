@@ -1,23 +1,25 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using SynoDs.Core.Api;
-using SynoDs.Core.Dal.BaseApi;
-using SynoDs.Core.Dal.HttpBase;
-using SynoDs.Core.Interfaces.Synology;
-
-namespace SynoDs.Core.BaseApi.Info
+﻿namespace SynoDs.Core.BaseApi.Info
 {
-    public class Information : Base, IApiInformationProvider<InfoResponse>
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Api;
+    using Dal.BaseApi;
+    using Dal.HttpBase;
+    using Interfaces.Synology;
+
+    public class Information : Base, IApiInformation
     {
         public bool IsCacheEmtpy { get; set; }
-        
-        private ApiInfoWrapper ApiInfoCache { get; set; }
 
+        public bool FullyLoadApiInformationCache { get; set; }
+
+        private ApiInfoWrapper ApiInformationCache { get; set; }
+        
         public Information()
         {
             IsCacheEmtpy = true;
-            ApiInfoCache = new ApiInfoWrapper();
+            FullyLoadApiInformationCache = false;
         }
 
         /// <summary>
@@ -25,20 +27,15 @@ namespace SynoDs.Core.BaseApi.Info
         /// </summary>
         /// <param name="apiName">Api name to get information on. </param>
         /// <returns>The InformationResponse for the supplied API.</returns>
-        public async Task<InfoResponse> GetApiInformationAsync(string apiName)
+        public async Task<ApiInfo> GetApiInformationAsync(string apiName)
         {
+            if (IsCacheEmtpy && FullyLoadApiInformationCache)
+                await GetApiInformationCacheAsync();
+
             var apiInfo = ApiInformationCache.FirstOrDefault(n => n.Key == apiName).Value;
             if (apiInfo != null)
             {
-                return new InfoResponse
-                    {
-                        ErrorCode = 0,
-                        Success = true,
-                        ResponseData = new ApiInfoWrapper
-                        {
-                            {apiName, apiInfo}
-                        }
-                    };
+                return apiInfo;
             }
 
             var requestParams = new RequestParameters
@@ -48,14 +45,15 @@ namespace SynoDs.Core.BaseApi.Info
 
             var result = await PerformOperationAsync<InfoResponse>(requestParams);
             if (result.Success)
-                ApiInfoCache.Add(apiName, result.ResponseData[apiName]);
-            return result;
+                ApiInformationCache.Add(apiName, result.ResponseData[apiName]);
+
+            return ApiInformationCache.FirstOrDefault(n=>n.Key == apiName).Value;
         }
 
         /// <summary>
         /// Fills the internal cache of information
         /// </summary>
-        public async void GetApiInformationCacheAsync()
+        public async Task GetApiInformationCacheAsync()
         {
             var infoResult = await PerformOperationAsync<InfoResponse>(new RequestParameters
             {
@@ -66,6 +64,7 @@ namespace SynoDs.Core.BaseApi.Info
             {
                 ApiInformationCache = infoResult.ResponseData;
                 IsCacheEmtpy = false;
+                FullyLoadApiInformationCache = false; // reset for now. test this.
             }
             else
             {
