@@ -20,7 +20,7 @@
         /// <summary>
         /// Asynchronous call to Login
         /// </summary>
-        Task<bool> LoginAsync();
+        Task<bool> LoginAsync(LoginCredentials credentials);
 
         /// <summary>
         /// Asynchronous call to logout.
