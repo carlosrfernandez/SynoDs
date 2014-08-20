@@ -15,12 +15,12 @@
     /// This is the API base class. It contains a Generic PerformOperationAsync method that 
     /// can be used by the rest of the API's in order to communicate with the Diskstation.
     /// TODO: Convert to abstract.
-    /// TODO: Remove Login and Information Methods into separate projects.
-    /// TODO: Refactor the Info cache so that it is properly used in the base class (use information interface to access the Api Cache)
+    /// Done: TODO: Remove Login and Information Methods into separate projects. Done.
+    /// Done: Refactor the Info cache so that it is properly used in the base class (use information interface to access the Api Cache)
     /// TODO: Add the File Upload method for uploading torrents from the client application.
     /// TODO: Add known error handling of the API
     /// </summary>
-    public class Base
+    public abstract class Base
     {
         // Api properties
         protected string DsUsername { get; set; }
@@ -67,7 +67,7 @@
         /// <summary>
         /// Default parameterless constructor
         /// </summary>
-        public Base()
+        protected Base()
         {
             SessionName = "DsBase";
         }
@@ -78,7 +78,7 @@
         /// <param name="httpClient"></param>
         /// <param name="jsonParser"></param>
         /// <param name="iApiInformation"></param>
-        public Base(IHttpClient httpClient, IJsonParser jsonParser, IApiInformation iApiInformation) : this()
+        protected Base(IHttpClient httpClient, IJsonParser jsonParser, IApiInformation iApiInformation) : this()
         {
             Validate.ArgumentIsNotNullOrEmpty(httpClient);
             Validate.ArgumentIsNotNullOrEmpty(jsonParser);
@@ -89,76 +89,6 @@
             _jsonParser = jsonParser;
         }
 
-        ///// <summary>
-        ///// Logs into the DiskStation with the supplied credentials.
-        ///// </summary>
-        ///// <returns>True if logged in and false if any errors occur.</returns>
-        //public async Task<bool> LoginAsync(LoginCredentials loginCredentials)
-        //{
-        //    Validate.ArgumentIsNotNullOrEmpty(loginCredentials.UserName);
-        //    Validate.ArgumentIsNotNullOrEmpty(loginCredentials.Password);
-        //    Validate.ArgumentIsNotNullOrEmpty(loginCredentials.Uri);
-
-        //    // store the data.
-        //    DsAddress = loginCredentials.Uri;
-        //    DsUsername = loginCredentials.UserName;
-        //    DsPassword = loginCredentials.Password;
-            
-        //    if (IsApiInfoCacheEmtpy)
-        //    {
-        //        await GetApiInformationCache();
-        //    }
-        //    var parameters = new RequestParameters
-        //    {
-        //        {"account", DsUsername},
-        //        {"passwd", DsPassword},
-        //        {"session", SessionName},
-        //        {"format", "sid" }
-        //    };
-        //    var loginResult = await PerformOperationAsync<LoginResponse>(parameters);
-        //    SessionId = loginResult.ResponseData.Sid;
-        //    return loginResult.Success;
-        //}
-
-        /// <summary>
-        /// Gets all of the DiskStation's API information. This method will store
-        /// the API's in an internal dictionary until the client is destroyed.
-        /// </summary>
-        /// <returns>An emtpy task.</returns>
-        //private async Task GetApiInformationCache()
-        //{
-        //    var infoResult = await PerformOperationAsync<InfoResponse>(new RequestParameters
-        //    {
-        //        {"query", "ALL"}
-        //    });
-
-        //    if (infoResult.Success)
-        //    {
-        //        ApiInformationCache = infoResult.ResponseData;
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Error while getting API Information. ");
-        //    }
-        //}
-        
-        ///// <summary>
-        ///// Gets the Api information for the requested API Name
-        ///// </summary>
-        ///// <param name="apiName">Api name to get information on. </param>
-        ///// <returns>The InformationResponse for the supplied API.</returns>
-        //public async Task<InfoResponse> GetApiInformation(string apiName)
-        //{
-        //    var requestParams = new RequestParameters
-        //    {
-        //        {"query", apiName}
-        //    };
-
-        //    var result = await PerformOperationAsync<InfoResponse>(requestParams);
-        //    return result;
-        //}
-
-        
         /// <summary>
         /// Performs a Request to the DiskStation with the supplied parameters. 
         /// </summary>
@@ -237,7 +167,7 @@
         /// </summary>
         /// <param name="parameters">RequestParameters with possibly dirty chars.</param>
         /// <returns>Clean parameter dictionary.</returns>
-        protected RequestParameters CleanRequestParameters(RequestParameters parameters)
+        protected virtual RequestParameters CleanRequestParameters(RequestParameters parameters)
         {
             var cleanParams = new RequestParameters();
             foreach (var kvp in parameters)
