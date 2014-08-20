@@ -49,6 +49,7 @@
     <Compile Include="BaseApi\ApiInfo.cs" />
     <Compile Include="BaseApi\ApiInfoWrapper.cs" />
     <Compile Include="BaseApi\Login.cs" />
+    <Compile Include="BaseApi\LoginCredentials.cs" />
     <Compile Include="BaseApi\LoginResponse.cs" />
     <Compile Include="BaseApi\InfoResponse.cs" />
     <Compile Include="BaseApi\Logout.cs" />

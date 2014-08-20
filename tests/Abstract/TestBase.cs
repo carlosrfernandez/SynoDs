@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SynoDs.Core.CrossCutting;
-using SynoDs.Core.CrossCutting.Model;
+using SynoDs.Core.Dal.BaseApi;
 
 namespace SynologyTests.Abstract
 {

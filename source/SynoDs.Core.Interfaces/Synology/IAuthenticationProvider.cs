@@ -1,6 +1,7 @@
 ﻿namespace SynoDs.Core.Interfaces.Synology
 {
     using System.Threading.Tasks;
+    using Dal.BaseApi;
     
     /// <summary>
     /// Defines the methods needed in order to authenticate

@@ -1,19 +1,15 @@
-﻿using SynoDs.Core.Interfaces.Synology;
-
-namespace SynoDs.Core.Api
+﻿namespace SynoDs.Core.Api
 {
     using System;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Net;
     using Http;
-    using CrossCutting.Model;
-    // using CrossCutting.Modularity;
     using CrossCutting.Common;
     using Dal.BaseApi;
     using Dal.HttpBase;
     using Interfaces;
+    using Interfaces.Synology;
     
     /// <summary>
     /// This is the API base class. It contains a Generic PerformOperationAsync method that 
@@ -37,7 +33,6 @@ namespace SynoDs.Core.Api
         private readonly IHttpClient _httpClient;
         private readonly IJsonParser _jsonParser;
         private readonly IApiInformation _iApiInformation;
-        
         
         /// <summary>
         /// Checks the SessionId to see if it's set (means we're logged in).
@@ -163,21 +158,6 @@ namespace SynoDs.Core.Api
         //    return result;
         //}
 
-        ///// <summary>
-        ///// Logs out of the DiskStation. 
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<bool> LogoutAsync()
-        //{
-        //    var logoutParams = new RequestParameters
-        //    {
-        //        {"session", SessionName}
-        //    };
-
-        //    var logoutRequestResult = await PerformOperationAsync<LogoutResponse>(logoutParams);
-        //    SessionId = string.Empty; // erase the sid.
-        //    return logoutRequestResult.Success;
-        //}
         
         /// <summary>
         /// Performs a Request to the DiskStation with the supplied parameters. 
