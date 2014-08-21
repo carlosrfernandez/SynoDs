@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
+    <ProjectReference Include="..\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
       <Project>{adbfe2ac-59da-4f12-8701-6aed991abe22}</Project>
       <Name>SynoDs.Core.CrossCutting</Name>
     </ProjectReference>

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace SynoDs.Core.CrossCutting.Common
+﻿namespace SynoDs.Core.CrossCutting.Common
 {
+    using System;
+
     /// <summary>
     /// Used to validate parameters.
     /// </summary>
