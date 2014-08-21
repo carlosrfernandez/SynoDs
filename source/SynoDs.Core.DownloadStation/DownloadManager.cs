@@ -1,10 +1,10 @@
 ﻿namespace SynoDs.Core.DownloadStation
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
     using Api;
+    using CrossCutting.Common;
     using Dal.DownloadStation.Task;
     using Dal.Enums;
     using Dal.HttpBase;
@@ -32,8 +32,8 @@
         public async Task<TaskListResponse> ListTasksAsync(int offset = 0, int limit = -1,
             TaskAdditionalInfoValues[] additionalInfo = null)
         {
-            var requestParams = new RequestParameters()
-                ;
+            var requestParams = new RequestParameters();
+
             if (offset != 0)
                 requestParams.Add("offset", offset.ToString());
 
@@ -61,6 +61,8 @@
         public async Task<TaskGetInfoResponse> GetTaskInfoAsync(IList<string> taskList,
             TaskAdditionalInfoValues[] additionalInfo = null)
         {
+            Validate.ArgumentIsNotNullOrEmpty(taskList);
+
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)}
@@ -85,9 +87,8 @@
             string password = "", string unzipPass = "", Stream fileStream = null)
         {
 
-            if (string.IsNullOrEmpty(taskUrl))
-                throw new ArgumentNullException("taskUrl");
-
+            Validate.ArgumentIsNotNullOrEmpty(taskUrl);
+            
             // Todo: refactor parameter parsing
             var requestParams = new RequestParameters
             {
@@ -117,6 +118,8 @@
         ///  <see cref="DeleteTaskResponse"/></returns>
         public async Task<DeleteTaskResponse> DeleteTaskAsync(IList<string> taskList, bool forceComplete)
         {
+            Validate.ArgumentIsNotNullOrEmpty(taskList);
+
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},
@@ -133,6 +136,8 @@
         /// <returns>A list of Task Id's with the boolean value indicating if it was paused correctly.</returns>
         public async Task<PauseTaskResponse> PauseTaskAsync(IList<string> taskList)
         {
+            Validate.ArgumentIsNotNullOrEmpty(taskList);
+
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},
@@ -148,6 +153,8 @@
         /// <returns>A list of Id's with the boolean value indicating if it was properly resumed.</returns>
         public async Task<ResumeTaskResponse> ResumeTaskAsync(IList<string> taskList)
         {
+            Validate.ArgumentIsNotNullOrEmpty(taskList);
+
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},
