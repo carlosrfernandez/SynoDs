@@ -14,8 +14,8 @@
     /// <summary>
     /// This is the API base class. It contains a Generic PerformOperationAsync method that 
     /// can be used by the rest of the API's in order to communicate with the Diskstation.
-    /// TODO: Convert to abstract.
-    /// Done: TODO: Remove Login and Information Methods into separate projects. Done.
+    /// DONE: Convert to abstract.
+    /// Done: Remove Login and Information Methods into separate projects.
     /// Done: Refactor the Info cache so that it is properly used in the base class (use information interface to access the Api Cache)
     /// TODO: Add the File Upload method for uploading torrents from the client application.
     /// TODO: Add known error handling of the API
@@ -33,28 +33,10 @@
         private readonly IHttpClient _httpClient;
         private readonly IJsonParser _jsonParser;
         private readonly IApiInformation _iApiInformation;
+
+        // Virtual members:
+        protected abstract IErrorProvider ErrorProvider { get; set; }
         
-        /// <summary>
-        /// Checks the SessionId to see if it's set (means we're logged in).
-        /// </summary>
-        //public bool IsLoggedIn
-        //{
-        //    get { return SessionId != string.Empty; }
-        //}
-
-        ///// <summary>
-        ///// Checks if the dictionary with the API Information is loaded.
-        ///// </summary>
-        //private bool IsApiInfoCacheEmtpy
-        //{
-        //    get { return ApiInformationCache == null || ApiInformationCache.Count == 0; }
-        //}
-
-        /// <summary>
-        /// Stores the API information retrieved from the NAS.
-        /// </summary>
-        //protected ApiInfoWrapper ApiInformationCache { get; set; }
-
         /// <summary>
         /// Overridable method to get the session name used to log out.
         /// </summary>
