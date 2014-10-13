@@ -1,9 +1,9 @@
-﻿namespace SynoDs.Core.Api.FileStation
+﻿namespace SynoDs.Core.FileStation
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Dal.HttpBase;
     using Dal.FileStation.List;
+    using Dal.HttpBase;
     using Dal.Enums;
 
     /// <summary>

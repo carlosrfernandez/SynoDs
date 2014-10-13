@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.DownloadStation
+﻿using SynoDs.Core.DownloadStation.ErrorHandling;
+
+namespace SynoDs.Core.DownloadStation
 {
     using System.Collections.Generic;
     using System.IO;

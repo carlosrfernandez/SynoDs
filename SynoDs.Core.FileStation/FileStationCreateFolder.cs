@@ -1,15 +1,14 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SynoDs.Core.Api;
+using SynoDs.Core.Dal.Enums;
+using SynoDs.Core.Dal.FileStation.CreateFolder;
+using SynoDs.Core.Dal.FileStation.Rename;
+using SynoDs.Core.Dal.HttpBase;
 
-namespace SynoDs.Core.Api.FileStation
+namespace SynoDs.Core.FileStation
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Dal.Enums;
-    using Dal.FileStation.CreateFolder;
-    using Dal.HttpBase;
-    using Dal.FileStation.Rename;
-
     /// <summary>
     /// Contains the File and Folder related operations
     /// Like Create, Rename, CopyMove.
@@ -20,6 +19,7 @@ namespace SynoDs.Core.Api.FileStation
 
         public FileStation()
         {
+
         }
 
         protected override string GetSessionName()

@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.BaseApi.Auth", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.CrossCutting", "source\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj", "{ADBFE2AC-59DA-4F12-8701-6AED991ABE22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.FileStation", "SynoDs.Core.FileStation\SynoDs.Core.FileStation.csproj", "{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{ADBFE2AC-59DA-4F12-8701-6AED991ABE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADBFE2AC-59DA-4F12-8701-6AED991ABE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADBFE2AC-59DA-4F12-8701-6AED991ABE22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{9A8FF5E8-762B-470F-8037-0686B791356F} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
 		{F075E54F-9F90-470E-9576-96F0FD3B07F7} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
 		{ADBFE2AC-59DA-4F12-8701-6AED991ABE22} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
+		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
 	EndGlobalSection
 EndGlobal

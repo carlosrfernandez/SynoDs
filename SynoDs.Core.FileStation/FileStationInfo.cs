@@ -1,8 +1,7 @@
-﻿using SynoDs.Core.Interfaces;
-
-namespace SynoDs.Core.Api.FileStation
+﻿namespace SynoDs.Core.FileStation
 {
     using System.Threading.Tasks;
+    using Interfaces;
     using Dal.FileStation.Info;
 
     /// <summary>

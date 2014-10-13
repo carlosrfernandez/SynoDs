@@ -62,9 +62,6 @@
     <Compile Include="AttributeReader.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="ErrorProviderBase.cs" />
-    <Compile Include="FileStation\FileStationInfo.cs" />
-    <Compile Include="FileStation\FileStationList.cs" />
-    <Compile Include="FileStation\FileStationCreateFolder.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

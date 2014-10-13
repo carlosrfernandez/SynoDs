@@ -101,6 +101,7 @@ namespace SynoDs.Core.Api
             {
                 return default(T);
             }
+            // TODO: Add the verification for errors in here.
         }
 
         /// <summary>
