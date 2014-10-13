@@ -21,14 +21,7 @@ namespace SynologyTests.Abstract
             // Example credentials. 
             // URI can be:
             // Uri = new Uri("192.168.1.XXX:5000"); // ip address
-            Credentials = new LoginCredentials
-            {
-                Uri = new Uri("http://192.168.1.140:5000"),
-                UserName = "admin",
-                Password = "L3tm31nt0myn4s!",
-                UseSsl = false
-            };
-
+            
             if (string.IsNullOrEmpty(Credentials.UserName))
                 throw new ArgumentException("Username is emtpy, tests can't run.");
 
