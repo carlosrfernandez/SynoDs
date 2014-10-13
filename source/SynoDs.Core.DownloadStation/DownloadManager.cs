@@ -40,6 +40,15 @@
         }
 
         /// <summary>
+        /// Injection of IErrorProvider for the DownloadStation api errors.
+        /// </summary>
+        /// <param name="errorProvider">The source of error descriptions.</param>
+        public DownloadManager(IErrorProvider errorProvider)
+        {
+            _dlErrorProvider = errorProvider;
+        }
+
+        /// <summary>
         /// Retrieves a list of tasks that are available on the DownloadStation
         /// </summary>
         /// <param name="offset">For pagination purposes.</param>

@@ -1,6 +1,4 @@
-﻿using SynoDs.Core.Interfaces;
-
-namespace SynoDs.Core.BaseApi.Auth
+﻿namespace SynoDs.Core.BaseApi.Auth
 {
     using System.Threading.Tasks;
     using Api;
@@ -8,6 +6,8 @@ namespace SynoDs.Core.BaseApi.Auth
     using Dal.HttpBase;
     using Interfaces.Synology;
     using Dal.BaseApi;
+    using ErrorHandling;
+    using Interfaces;
 
     public class Authentication : Base, IAuthenticationProvider
     {

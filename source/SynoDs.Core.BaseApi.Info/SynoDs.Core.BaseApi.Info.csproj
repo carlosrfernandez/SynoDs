@@ -49,9 +49,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InfoErrorProvider.cs" />
+    <Compile Include="ErrorData\en-en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>en-en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorHandling\InfoErrorProvider.cs" />
+    <Compile Include="ErrorHandling\InfoErrorRepository.cs" />
     <Compile Include="Information.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ErrorData\en-en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>en-en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

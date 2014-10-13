@@ -1,5 +1,4 @@
-﻿using SynoDs.Core.Api.Http;
-using SynoDs.Core.Interfaces;
+﻿using SynoDs.Core.BaseApi.Info.ErrorHandling;
 
 namespace SynoDs.Core.BaseApi.Info
 {
@@ -9,6 +8,7 @@ namespace SynoDs.Core.BaseApi.Info
     using Api;
     using Dal.BaseApi;
     using Dal.HttpBase;
+    using Interfaces;
     using Interfaces.Synology;
 
     public class Information : Base, IApiInformation

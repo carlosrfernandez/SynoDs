@@ -5,7 +5,7 @@
     public class DownloadErrorProvider : IErrorProvider
     {
         public IErrorRepository ErrorRepository { get; private set; }
-        public string GetErrorDescriptionForType(int errorCode)
+        public string GetErrorDescriptionForCode(int errorCode)
         {
             return "This is a Download Error";
         }
