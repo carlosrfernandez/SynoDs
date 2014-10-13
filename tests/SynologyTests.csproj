@@ -92,9 +92,21 @@
       <Project>{7e0bdc20-a490-4db0-869b-35576d74332f}</Project>
       <Name>SynoDs.Core.ApiBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\SynoDs.Core.BaseApi.Auth\SynoDs.Core.BaseApi.Auth.csproj">
+      <Project>{f075e54f-9f90-470e-9576-96f0fd3b07f7}</Project>
+      <Name>SynoDs.Core.BaseApi.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\SynoDs.Core.BaseApi.Info\SynoDs.Core.BaseApi.Info.csproj">
+      <Project>{9a8ff5e8-762b-470f-8037-0686b791356f}</Project>
+      <Name>SynoDs.Core.BaseApi.Info</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
       <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
       <Name>SynoDs.Core.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\SynoDs.Core.DownloadStation\SynoDs.Core.DownloadStation.csproj">
+      <Project>{d78f4068-26a0-47c7-9b3e-dd032535ace9}</Project>
+      <Name>SynoDs.Core.DownloadStation</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\SynoDs.Core.Interfaces\SynoDs.Core.Interfaces.csproj">
       <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>

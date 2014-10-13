@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SynoDs.Core.Api.DownloadStation;
 using SynoDs.Core.Dal.Enums;
+using SynoDs.Core.DownloadStation;
 using SynologyTests.Abstract;
 
 namespace SynologyTests
@@ -41,7 +41,7 @@ namespace SynologyTests
             var dlStation = new DownloadManager();
             
             // Make sure we can login first.
-            Assert.IsTrue(dlStation.LoginAsync(Credentials).Result);
+            //Assert.IsTrue((Credentials).Result);
 
             // Let's get the current downloads.
 
@@ -62,8 +62,8 @@ namespace SynologyTests
 
             var dlStation = new DownloadManager();
 
-            Assert.IsTrue(dlStation.LoginAsync(Credentials).Result);
-
+            //Assert.IsTrue(dlStation.LoginAsync(Credentials).Result);
+            
             var totalTaskCount = dlStation.ListTasksAsync().Result.ResponseData.Total;
 
             // test creation of a download task
@@ -79,7 +79,7 @@ namespace SynologyTests
         {
             var dlStation = new DownloadManager();
 
-            Assert.IsTrue(dlStation.LoginAsync(Credentials).Result);
+            //Assert.IsTrue(dlStation.LoginAsync(Credentials).Result);
 
             Assert.IsTrue(dlStation.CreateTaskAsync(Resource).Result.Success);
 
