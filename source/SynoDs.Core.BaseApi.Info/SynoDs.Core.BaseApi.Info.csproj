@@ -49,6 +49,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InfoErrorProvider.cs" />
     <Compile Include="Information.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

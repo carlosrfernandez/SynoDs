@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.BaseApi.Auth
+﻿using SynoDs.Core.Interfaces;
+
+namespace SynoDs.Core.BaseApi.Auth
 {
     using System.Threading.Tasks;
     using Api;
@@ -13,9 +15,18 @@
         
         public string Sid { get; set; }
 
+        private readonly IErrorProvider _authErrorProvider;
+
         public Authentication()
         {
+            _authErrorProvider = new AuthenticationErrorProvider();
             IsLoggedIn = false;
+        }
+
+        public Authentication(IErrorProvider authErrorProvider)
+        {
+            IsLoggedIn = false;
+            this._authErrorProvider = authErrorProvider;
         }
 
         /// <summary>
@@ -61,6 +72,11 @@
             SessionId = string.Empty; // erase the sid.
             IsLoggedIn = false;
             return logoutRequestResult.Success;
+        }
+
+        protected override IErrorProvider ErrorProvider
+        {
+            get { return this._authErrorProvider; }
         }
     }
 }

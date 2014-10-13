@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Api.FileStation
+﻿using SynoDs.Core.Interfaces;
+
+namespace SynoDs.Core.Api.FileStation
 {
     using System.Threading.Tasks;
     using Dal.FileStation.Info;
@@ -15,6 +17,11 @@
         public async Task<FsInfoResponse> GetFileStationInfoAsync()
         {
             return await PerformOperationAsync<FsInfoResponse>();
+        }
+
+        protected override IErrorProvider ErrorProvider
+        {
+            get { throw new System.NotImplementedException(); }
         }
     }
 }

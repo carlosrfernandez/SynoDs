@@ -1,11 +1,13 @@
-﻿namespace SynoDs.Core.Api
+﻿using SynoDs.Core.Interfaces.IoC;
+
+namespace SynoDs.Core.Api
 {
     using System;
     using System.IO;
     using System.Threading.Tasks;
     using System.Net;
     using Http;
-    using CrossCutting.Common;
+    using JsonParser;
     using Dal.BaseApi;
     using Dal.HttpBase;
     using Interfaces;
@@ -27,15 +29,15 @@
         protected string DsPassword { get; set; }
         protected Uri DsAddress { get; set; }
         protected string SessionId { get; set; }
-        protected string SessionName { get; set; }
+        protected const string SessionName = "DsBase";
 
         // Dependencies
-        private readonly IHttpClient _httpClient;
-        private readonly IJsonParser _jsonParser;
-        private readonly IApiInformation _iApiInformation;
+        private IHttpClient HttpClient { get; set; }
+        private IJsonParser JsonParser { get; set; }
+        private IApiInformation Information { get; set; }
 
         // Virtual members:
-        protected abstract IErrorProvider ErrorProvider { get; set; }
+        protected abstract IErrorProvider ErrorProvider { get; }
         
         /// <summary>
         /// Overridable method to get the session name used to log out.
@@ -51,24 +53,30 @@
         /// </summary>
         protected Base()
         {
-            SessionName = "DsBase";
+            this.HttpClient = new HttpGetRequestClient();
+            this.JsonParser = new JsonParser();
         }
 
-        /// <summary>
-        /// Constructor that checks the input parameters for any errors and stores the information
-        /// </summary>
-        /// <param name="httpClient"></param>
-        /// <param name="jsonParser"></param>
-        /// <param name="iApiInformation"></param>
-        protected Base(IHttpClient httpClient, IJsonParser jsonParser, IApiInformation iApiInformation) : this()
+        protected Base(IApiInformation informationApi)
         {
-            Validate.ArgumentIsNotNullOrEmpty(httpClient);
-            Validate.ArgumentIsNotNullOrEmpty(jsonParser);
-            Validate.ArgumentIsNotNullOrEmpty(iApiInformation);
+            this.Information = informationApi;
+        }
 
-            _iApiInformation = iApiInformation;
-            _httpClient = httpClient;
-            _jsonParser = jsonParser;
+        protected Base(IJsonParser jsonParser) 
+        {
+            this.JsonParser = jsonParser;
+        }
+
+        protected Base(IHttpClient httpClient)
+        {
+            this.HttpClient = httpClient;
+        }
+
+        protected Base(IHttpClient httpClient, IJsonParser jsonParser, IApiInformation apiInformation)
+        {
+            this.Information = apiInformation;
+            this.JsonParser = jsonParser;
+            this.HttpClient = httpClient;
         }
 
         /// <summary>
@@ -85,7 +93,7 @@
                 using (var requestClient = new HttpGetRequestClient(string.Format("{0}{1}", DsAddress, request)))
                 {
                     var jsonResult = await requestClient.SendRequestAsync();
-                    var result = _jsonParser.FromJson<T>(jsonResult);
+                    var result = JsonParser.FromJson<T>(jsonResult);
                     return result;
                 }
             }
@@ -136,7 +144,7 @@
             else // this is a normal request
             {
                 //ApiInformationCache.FirstOrDefault(n => n.Key == apiName).Value;
-                var apiInfo = await _iApiInformation.GetApiInformationAsync(apiName);
+                var apiInfo = await Information.GetApiInformationAsync(apiName);
                 request.Path = apiInfo.Path;
                 request.Version = apiInfo.MaxVersion.ToString(); // use max version always. 
                 request.Sid = SessionId;

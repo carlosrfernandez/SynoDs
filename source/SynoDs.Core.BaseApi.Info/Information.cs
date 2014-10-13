@@ -1,4 +1,7 @@
-﻿namespace SynoDs.Core.BaseApi.Info
+﻿using SynoDs.Core.Api.Http;
+using SynoDs.Core.Interfaces;
+
+namespace SynoDs.Core.BaseApi.Info
 {
     using System;
     using System.Linq;
@@ -14,12 +17,27 @@
 
         public bool FullyLoadApiInformationCache { get; set; }
 
+        private const string InfoSessionName = "InfoSession";
+
         private ApiInfoWrapper ApiInformationCache { get; set; }
-        
+
+        private readonly IErrorProvider _errorProvider;
+
         public Information()
         {
             IsCacheEmtpy = true;
             FullyLoadApiInformationCache = false;
+            _errorProvider = new InfoErrorProvider();
+        }
+
+        public Information(IErrorProvider infoErrorProvider)
+        {
+            this._errorProvider = infoErrorProvider;
+        }
+
+        protected override string GetSessionName()
+        {
+            return InfoSessionName;
         }
 
         /// <summary>
@@ -70,6 +88,11 @@
             {
                 throw new Exception("Error while getting API Information. ");
             }
+        }
+
+        protected override IErrorProvider ErrorProvider
+        {
+            get { return this._errorProvider; }
         }
     }
 }

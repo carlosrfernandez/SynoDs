@@ -8,18 +8,35 @@
     using Dal.DownloadStation.Task;
     using Dal.Enums;
     using Dal.HttpBase;
+    using Interfaces;
 
     /// <summary>
     /// DownloadStation client class.
     /// </summary>
     public sealed class DownloadManager : Base
     {
+        // TODO: Add constructor overload to inject error providers.
+
+        public const string DlSessionName = "DownloadStation";
+
+        private readonly IErrorProvider _dlErrorProvider;
+
+        protected override IErrorProvider ErrorProvider
+        {
+            get { return this._dlErrorProvider; }
+        }
+
+        protected override string GetSessionName()
+        {
+            return DlSessionName;
+        }
+
         /// <summary>
         /// Basic Constructor
         /// </summary>
         public DownloadManager()
         {
-            SessionName = "DownloadManager";
+            _dlErrorProvider = new DownloadErrorProvider();
         }
 
         /// <summary>

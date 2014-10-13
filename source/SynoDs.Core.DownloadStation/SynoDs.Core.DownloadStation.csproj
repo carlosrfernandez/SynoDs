@@ -53,6 +53,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DownloadErrorProvider.cs" />
     <Compile Include="DownloadManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

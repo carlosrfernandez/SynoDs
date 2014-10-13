@@ -12,6 +12,7 @@
                 Container = container;
             }
         }
+
         public abstract void Configure();
 
         protected IContainer Container { get; private set; }

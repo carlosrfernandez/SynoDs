@@ -14,7 +14,7 @@ namespace SynoDs.Core.Api.Http
     // Until PCL's support SSL .
     // Change all HTTP objects to use "using" statements.
     // Add exception handling. 
-    public class HttpGetRequestClient : IHttpClient, IDisposable
+    public class HttpGetRequestClient : IHttpClient
     {
         private readonly string _url;
 /*
@@ -25,7 +25,11 @@ namespace SynoDs.Core.Api.Http
         private HttpClientHandler Handler { get; set; }
         private HttpClient Client { get; set; }
         private StreamContent FileStreamContent { get; set; }
-        
+
+        public HttpGetRequestClient()
+        {
+        }
+
         public HttpGetRequestClient(string url)
         {
             _url = url;

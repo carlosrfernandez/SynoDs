@@ -53,10 +53,13 @@
       <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
       <Name>SynoDs.Core.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SynoDs.Core.JsonParser\SynoDs.Core.JsonParser.csproj">
+      <Project>{5202ee3e-c77e-4799-b841-cd60dbd8b38d}</Project>
+      <Name>SynoDs.Core.JsonParser</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeReader.cs" />
-    <Compile Include="DownloadStation\DownloadManager.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="FileStation\FileStationInfo.cs" />
     <Compile Include="FileStation\FileStationList.cs" />

@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Api.FileStation
+﻿using System.Runtime.InteropServices.WindowsRuntime;
+
+namespace SynoDs.Core.Api.FileStation
 {
     using System;
     using System.Collections.Generic;
@@ -14,9 +16,15 @@
     /// </summary>
     public partial class FileStation : Base
     {
+        private const string FsSessionName = "FileStation";
+
         public FileStation()
         {
-            SessionName = "FileStation";
+        }
+
+        protected override string GetSessionName()
+        {
+            return FsSessionName;
         }
 
         //protected override sealed string SessionName
