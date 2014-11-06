@@ -56,7 +56,7 @@
     </Compile>
     <Compile Include="ErrorHandling\InfoErrorProvider.cs" />
     <Compile Include="ErrorHandling\InfoErrorRepository.cs" />
-    <Compile Include="Information.cs" />
+    <Compile Include="InformationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

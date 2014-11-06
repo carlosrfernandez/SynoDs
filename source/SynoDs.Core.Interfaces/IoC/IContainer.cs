@@ -17,14 +17,15 @@
         /// </summary>
         /// <typeparam name="TAbs">Abstract class or interface</typeparam>
         /// <typeparam name="TImpl">Implementation of TAbs</typeparam>
-        void Register<TAbs, TImpl>();
+        /// <param name="instance">the instance to register</param>
+        void RegisterWithInstance<TAbs, TImpl>(TImpl instance) where TImpl : TAbs;
 
 
         /// <summary>
         /// Register an existing instance of an abstraction.
         /// </summary>
         /// <typeparam name="T">The abstract class or interface to register.</typeparam>
-        /// <param name="instance">The instance of the implementation of the abstract class or interface.</param>
-        void RegisterInstance<T>(T instance);
+        /// <typeparam name="TR">The implementation of T to register</typeparam>
+        void Register<T, TR>() where TR : T;
     }
 }

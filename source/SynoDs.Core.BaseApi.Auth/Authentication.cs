@@ -11,6 +11,30 @@
 
     public class Authentication : Base, IAuthenticationProvider
     {
+        #region singleton stuff - might not use
+        private static Authentication _instance;
+
+        private static readonly object SyncRoot = new object();
+
+        public static IAuthenticationProvider Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (SyncRoot)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new Authentication();
+                        }
+                    }
+                }
+                return _instance;
+            }
+        }
+        #endregion
+
         public bool IsLoggedIn { get; set; }
         
         public string Sid { get; set; }

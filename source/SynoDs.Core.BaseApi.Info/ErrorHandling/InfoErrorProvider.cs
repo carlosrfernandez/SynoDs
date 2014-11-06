@@ -1,7 +1,6 @@
 ﻿namespace SynoDs.Core.BaseApi.Info.ErrorHandling
 {
     using Api;
-    using ErrorData;
     using Interfaces;
 
     public class InfoErrorProvider : ErrorProviderBase

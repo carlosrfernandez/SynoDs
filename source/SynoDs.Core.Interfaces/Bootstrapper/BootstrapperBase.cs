@@ -1,4 +1,4 @@
-﻿namespace SynoDs.Core.Interfaces
+﻿namespace SynoDs.Core.Interfaces.Bootstrapper
 {
     public abstract class BootstrapperBase
     {

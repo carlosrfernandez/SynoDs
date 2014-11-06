@@ -55,6 +55,11 @@ namespace SynoDs.Core.Api.Http
             return await PerformRequestAsync();
         }
 
+        public void CreateRequestSession(string requestUrl)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task<string> PerformRequestAsync()
         {
             try

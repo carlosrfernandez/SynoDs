@@ -11,7 +11,7 @@ namespace SynoDs.Core.BaseApi.Info
     using Interfaces;
     using Interfaces.Synology;
 
-    public class Information : Base, IApiInformation
+    public class InformationProvider : Base, IInformationProvider
     {
         public bool IsCacheEmtpy { get; set; }
 
@@ -23,14 +23,14 @@ namespace SynoDs.Core.BaseApi.Info
 
         private readonly IErrorProvider _errorProvider;
 
-        public Information()
+        public InformationProvider()
         {
             IsCacheEmtpy = true;
             FullyLoadApiInformationCache = false;
             _errorProvider = new InfoErrorProvider();
         }
 
-        public Information(IErrorProvider infoErrorProvider)
+        public InformationProvider(IErrorProvider infoErrorProvider)
         {
             this._errorProvider = infoErrorProvider;
         }
@@ -86,7 +86,7 @@ namespace SynoDs.Core.BaseApi.Info
             }
             else
             {
-                throw new Exception("Error while getting API Information. ");
+                throw new Exception("Error while getting API InformationProvider. ");
             }
         }
 

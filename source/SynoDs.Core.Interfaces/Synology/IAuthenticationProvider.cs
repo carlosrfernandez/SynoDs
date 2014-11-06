@@ -6,7 +6,7 @@
     /// <summary>
     /// Defines the methods needed in order to authenticate
     /// </summary>
-    public interface IAuthenticationProvider
+    public interface IAuthenticationProvider : IApi
     {
         /// <summary>
         /// Will tell us if we're logged in.

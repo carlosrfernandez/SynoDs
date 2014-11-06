@@ -1,8 +1,8 @@
-﻿namespace SynoDs.Core.Api
-{
-    using System;
-    using Interfaces;
+﻿using System;
+using SynoDs.Core.Interfaces;
 
+namespace SynoDs.Core.Api
+{
     public abstract class ErrorProviderBase : IErrorProvider
     {
         protected ErrorProviderBase(IErrorRepository errorRepository)

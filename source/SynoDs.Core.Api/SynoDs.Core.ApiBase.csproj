@@ -59,10 +59,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiCoreBootstrapper.cs" />
     <Compile Include="AttributeReader.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="ErrorProviderBase.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
+    <Compile Include="OperationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

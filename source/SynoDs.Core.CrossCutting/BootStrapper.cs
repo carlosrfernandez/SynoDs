@@ -1,7 +1,5 @@
 ﻿namespace SynoDs.Core.CrossCutting
 {
-    using Interfaces.IoC;
-
     public class Bootstrapper
     {
         public IoCFactory Factory { get; set; }

@@ -6,7 +6,7 @@
     /// <summary>
     /// Defines the way that the Info Api will be implemented.
     /// </summary>
-    public interface IApiInformation
+    public interface IInformationProvider : IApi
     {
         /// <summary>
         /// True if the cache still needs filling up.

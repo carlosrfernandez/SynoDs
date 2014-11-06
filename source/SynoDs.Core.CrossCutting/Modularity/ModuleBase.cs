@@ -5,16 +5,15 @@
 
     public abstract class ModuleBase : IModule
     {
-        protected ModuleBase(IContainer container)
+        private bool _requiresAuthentication;
+        private string _apiName;
+        
+        protected ModuleBase(string apiModuleName, bool requiresLogin)
         {
-            if (container != null)
-            {
-                Container = container;
-            }
+            _apiName = apiModuleName;
+            _requiresAuthentication = requiresLogin;
         }
 
         public abstract void Configure();
-
-        protected IContainer Container { get; private set; }
     }
 }

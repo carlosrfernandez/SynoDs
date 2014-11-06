@@ -1,4 +1,6 @@
-﻿using SynoDs.Core.DownloadStation.ErrorHandling;
+﻿using SynoDs.Core.Dal.BaseApi;
+using SynoDs.Core.DownloadStation.ErrorHandling;
+using SynoDs.Core.Interfaces.Synology;
 
 namespace SynoDs.Core.DownloadStation
 {
@@ -17,11 +19,10 @@ namespace SynoDs.Core.DownloadStation
     /// </summary>
     public sealed class DownloadManager : Base
     {
-        // TODO: Add constructor overload to inject error providers.
-
         public const string DlSessionName = "DownloadStation";
 
         private readonly IErrorProvider _dlErrorProvider;
+        private readonly IAuthenticationProvider _loginProvider;
 
         protected override IErrorProvider ErrorProvider
         {
@@ -34,20 +35,21 @@ namespace SynoDs.Core.DownloadStation
         }
 
         /// <summary>
-        /// Basic Constructor
+        /// Default constructor
         /// </summary>
-        public DownloadManager()
+        public DownloadManager(LoginCredentials dsCredentials)
         {
             _dlErrorProvider = new DownloadErrorProvider();
-        }
+        }   
 
         /// <summary>
         /// Injection of IErrorProvider for the DownloadStation api errors.
         /// </summary>
         /// <param name="errorProvider">The source of error descriptions.</param>
-        public DownloadManager(IErrorProvider errorProvider)
+        public DownloadManager(IAuthenticationProvider authenticationProvider, IErrorProvider errorProvider)
         {
             _dlErrorProvider = errorProvider;
+            _loginProvider = authenticationProvider;
         }
 
         /// <summary>

@@ -39,6 +39,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper\BootstrapperBase.cs" />
+    <Compile Include="Synology\ApiBase.cs" />
+    <Compile Include="Synology\ApiCore.cs" />
     <Compile Include="Synology\IApi.cs" />
     <Compile Include="IErrorRepository.cs" />
     <Compile Include="IErrorProvider.cs" />
@@ -46,11 +48,11 @@
     <Compile Include="IHttpClient.cs" />
     <Compile Include="IJsonParser.cs" />
     <Compile Include="Modularity\IModule.cs" />
-    <Compile Include="IoC\IoCFactory.cs" />
     <Compile Include="IoC\IContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Synology\IApiInformation.cs" />
+    <Compile Include="Synology\IInformationProvider.cs" />
     <Compile Include="Synology\IAuthenticationProvider.cs" />
+    <Compile Include="Synology\IOperationProviders.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">

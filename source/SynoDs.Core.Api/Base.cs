@@ -1,6 +1,4 @@
-﻿using SynoDs.Core.Interfaces.IoC;
-
-namespace SynoDs.Core.Api
+﻿namespace SynoDs.Core.Api
 {
     using System;
     using System.IO;
@@ -17,7 +15,7 @@ namespace SynoDs.Core.Api
     /// This is the API base class. It contains a Generic PerformOperationAsync method that 
     /// can be used by the rest of the API's in order to communicate with the Diskstation.
     /// DONE: Convert to abstract.
-    /// Done: Remove Login and Information Methods into separate projects.
+    /// Done: Remove Login and InformationProvider Methods into separate projects.
     /// Done: Refactor the Info cache so that it is properly used in the base class (use information interface to access the Api Cache)
     /// TODO: Add the File Upload method for uploading torrents from the client application.
     /// TODO: Add known error handling of the API
@@ -34,10 +32,11 @@ namespace SynoDs.Core.Api
         // Dependencies
         private IHttpClient HttpClient { get; set; }
         private IJsonParser JsonParser { get; set; }
-        private IApiInformation Information { get; set; }
+        private IInformationProvider InformationProvider { get; set; }
 
         // Virtual members:
         protected abstract IErrorProvider ErrorProvider { get; }
+
         
         /// <summary>
         /// Overridable method to get the session name used to log out.
@@ -57,9 +56,9 @@ namespace SynoDs.Core.Api
             this.JsonParser = new JsonParser();
         }
 
-        protected Base(IApiInformation informationApi)
+        protected Base(IInformationProvider informationProvider)
         {
-            this.Information = informationApi;
+            this.InformationProvider = informationProvider;
         }
 
         protected Base(IJsonParser jsonParser) 
@@ -72,9 +71,9 @@ namespace SynoDs.Core.Api
             this.HttpClient = httpClient;
         }
 
-        protected Base(IHttpClient httpClient, IJsonParser jsonParser, IApiInformation apiInformation)
+        protected Base(IHttpClient httpClient, IJsonParser jsonParser, IInformationProvider informationProvider)
         {
-            this.Information = apiInformation;
+            this.InformationProvider = informationProvider;
             this.JsonParser = jsonParser;
             this.HttpClient = httpClient;
         }
@@ -88,6 +87,7 @@ namespace SynoDs.Core.Api
         public async Task<T> PerformOperationAsync<T>(RequestParameters optionalParameters = null)
         {
             var request = PrepareRequest<T>(optionalParameters);
+
             try
             {
                 using (var requestClient = new HttpGetRequestClient(string.Format("{0}{1}", DsAddress, request)))
@@ -145,7 +145,7 @@ namespace SynoDs.Core.Api
             else // this is a normal request
             {
                 //ApiInformationCache.FirstOrDefault(n => n.Key == apiName).Value;
-                var apiInfo = await Information.GetApiInformationAsync(apiName);
+                var apiInfo = await InformationProvider.GetApiInformationAsync(apiName);
                 request.Path = apiInfo.Path;
                 request.Version = apiInfo.MaxVersion.ToString(); // use max version always. 
                 request.Sid = SessionId;
