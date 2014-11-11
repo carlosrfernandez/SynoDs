@@ -43,7 +43,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacContainer.cs" />
+    <Compile Include="NinjectContainer.cs" />
     <Compile Include="BootStrapper.cs" />
     <Compile Include="Common\Validate.cs" />
     <Compile Include="IoCFactory.cs" />

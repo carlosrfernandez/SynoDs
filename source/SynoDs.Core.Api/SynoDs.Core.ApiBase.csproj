@@ -62,8 +62,11 @@
     <Compile Include="ApiCoreBootstrapper.cs" />
     <Compile Include="AttributeReader.cs" />
     <Compile Include="Base.cs" />
+    <Compile Include="ErrorHandling\CoreErrorProvider.cs" />
+    <Compile Include="ErrorHandling\CoreErrorRepository.cs" />
     <Compile Include="ErrorProviderBase.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
+    <Compile Include="Module\ApiCoreModule.cs" />
     <Compile Include="OperationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

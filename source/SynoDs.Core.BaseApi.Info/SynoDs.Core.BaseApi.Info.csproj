@@ -39,6 +39,10 @@
       <Project>{7e0bdc20-a490-4db0-869b-35576d74332f}</Project>
       <Name>SynoDs.Core.ApiBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
+      <Project>{ADBFE2AC-59DA-4F12-8701-6AED991ABE22}</Project>
+      <Name>SynoDs.Core.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
       <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
       <Name>SynoDs.Core.Dal</Name>
@@ -57,6 +61,7 @@
     <Compile Include="ErrorHandling\InfoErrorProvider.cs" />
     <Compile Include="ErrorHandling\InfoErrorRepository.cs" />
     <Compile Include="InformationProvider.cs" />
+    <Compile Include="Module\InformationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

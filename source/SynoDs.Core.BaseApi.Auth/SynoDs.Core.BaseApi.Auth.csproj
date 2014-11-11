@@ -56,6 +56,7 @@
     <Compile Include="Authentication.cs" />
     <Compile Include="ErrorHandling\AuthenticationErrorProvider.cs" />
     <Compile Include="ErrorHandling\AuthenticationErrorRepository.cs" />
+    <Compile Include="Module\AuthenticationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

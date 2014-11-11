@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper\BootstrapperBase.cs" />
+    <Compile Include="Modularity\IApiModule.cs" />
     <Compile Include="Synology\ApiBase.cs" />
     <Compile Include="Synology\ApiCore.cs" />
     <Compile Include="Synology\IApi.cs" />
@@ -47,7 +48,6 @@
     <Compile Include="IFtpClient.cs" />
     <Compile Include="IHttpClient.cs" />
     <Compile Include="IJsonParser.cs" />
-    <Compile Include="Modularity\IModule.cs" />
     <Compile Include="IoC\IContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Synology\IInformationProvider.cs" />
