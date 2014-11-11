@@ -39,7 +39,7 @@ namespace SynologyTests
         public void GetTasksInDs()
         {
             var dlStation = new DownloadManager();
-            
+
             // Make sure we can login first.
             //Assert.IsTrue((Credentials).Result);
 

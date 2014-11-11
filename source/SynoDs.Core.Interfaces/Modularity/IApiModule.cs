@@ -1,6 +1,6 @@
 ﻿namespace SynoDs.Core.Interfaces.Modularity
 {
-    public interface IModule
+    public interface IApiModule
     {
         void Configure();
     }
