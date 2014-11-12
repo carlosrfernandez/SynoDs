@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SynoDs.Core.BaseApi.Info.ErrorData {
+namespace SynoDs.Core.Api.Resources {
     using System;
     using System.Reflection;
     
@@ -23,14 +23,14 @@ namespace SynoDs.Core.BaseApi.Info.ErrorData {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class en_en {
+    internal class ErrorRepository {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal en_en() {
+        internal ErrorRepository() {
         }
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace SynoDs.Core.BaseApi.Info.ErrorData {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SynoDs.Core.BaseApi.Info.ErrorData.en-en", typeof(en_en).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SynoDs.Core.Api.Resources.ErrorRepository", typeof(ErrorRepository).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,11 +62,29 @@ namespace SynoDs.Core.BaseApi.Info.ErrorData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown error in Info API.
+        ///   Looks up a localized string similar to error 100.
         /// </summary>
-        internal static string _100 {
+        internal static string Info100 {
             get {
-                return ResourceManager.GetString("_100", resourceCulture);
+                return ResourceManager.GetString("Info100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to error 101.
+        /// </summary>
+        internal static string Info101 {
+            get {
+                return ResourceManager.GetString("Info101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to error 102.
+        /// </summary>
+        internal static string Info102 {
+            get {
+                return ResourceManager.GetString("Info102", resourceCulture);
             }
         }
     }

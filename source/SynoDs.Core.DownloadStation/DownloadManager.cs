@@ -21,13 +21,7 @@ namespace SynoDs.Core.DownloadStation
     {
         public const string DlSessionName = "DownloadStation";
 
-        private readonly IErrorProvider _dlErrorProvider;
         private readonly IAuthenticationProvider _loginProvider;
-
-        protected override IErrorProvider ErrorProvider
-        {
-            get { return this._dlErrorProvider; }
-        }
 
         protected override string GetSessionName()
         {
@@ -39,17 +33,15 @@ namespace SynoDs.Core.DownloadStation
         /// </summary>
         public DownloadManager(LoginCredentials dsCredentials)
         {
-            _dlErrorProvider = new DownloadErrorProvider();
         }   
 
         /// <summary>
         /// Injection of IErrorProvider for the DownloadStation api errors.
         /// </summary>
         /// <param name="errorProvider">The source of error descriptions.</param>
-        public DownloadManager(IAuthenticationProvider authenticationProvider, IErrorProvider errorProvider)
+        public DownloadManager(IAuthenticationProvider authenticationProvider)
         {
             _dlErrorProvider = errorProvider;
-            _loginProvider = authenticationProvider;
         }
 
         /// <summary>

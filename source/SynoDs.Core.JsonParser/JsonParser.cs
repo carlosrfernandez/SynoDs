@@ -5,10 +5,9 @@
     using Newtonsoft.Json.Linq;
     using Exception;
 
-
     public class JsonParser : IJsonParser
     {
-        public IErrorProvider ErrorProvider { get; private set; }
+        public IErrorProvider ErrorProvider { get; set; }
 
         public JsonParser(IErrorProvider errorProvider)
         {
@@ -29,7 +28,7 @@
             {
                 return JsonConvert.DeserializeObject<T>(json);
             }
-            var errorMessage = ErrorProvider.GetErrorDescriptionForCode(errorCode);
+            var errorMessage = ErrorProvider.GetErrorDescriptionForCode("",errorCode);
             throw new SynologyException(errorMessage);
         }
     }

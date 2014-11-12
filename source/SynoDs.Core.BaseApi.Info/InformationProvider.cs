@@ -1,6 +1,4 @@
-﻿using SynoDs.Core.BaseApi.Info.ErrorHandling;
-
-namespace SynoDs.Core.BaseApi.Info
+﻿namespace SynoDs.Core.BaseApi.Info
 {
     using System;
     using System.Linq;
@@ -22,8 +20,6 @@ namespace SynoDs.Core.BaseApi.Info
 
         private ApiInfoWrapper ApiInformationCache { get; set; }
 
-        private static readonly IErrorProvider _errorProvider = new InfoErrorProvider();
-
         private const string ErrorProviderName = "InfoErrorProvider";
 
         private readonly IOperationProvider _operationProvider;
@@ -35,11 +31,6 @@ namespace SynoDs.Core.BaseApi.Info
             FullyLoadApiInformationCache = true; //add config and read this from it.
             this._operationProvider = operationProvider;
             this._jsonParser = jsonParser;
-        }
-
-        protected override IErrorProvider ErrorProvider
-        {
-            get { return _errorProvider; }
         }
 
         protected override string GetSessionName()

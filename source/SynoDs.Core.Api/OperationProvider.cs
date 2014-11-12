@@ -16,7 +16,8 @@ namespace SynoDs.Core.Exceptions
         private readonly LoginCredentials _userCredentials;
         private readonly DsStationInfo _dsStationHostInfo;
 
-        public OperationProvider(DsStationInfo dsStationHostInfo, LoginCredentials userCredentials, IHttpClient httpClient, IRequestProvider requestProvider)
+        public OperationProvider(DsStationInfo dsStationHostInfo, LoginCredentials userCredentials,
+            IHttpClient httpClient, IRequestProvider requestProvider)
         {
             _httpClient = httpClient;
             _requestProvider = requestProvider;
@@ -32,7 +33,8 @@ namespace SynoDs.Core.Exceptions
             return jsonResult;
         }
 
-        public async Task<string> PerformOperationWithFileAsync<TResult>(RequestParameters requestParameters, Stream fileStream)
+        public async Task<string> PerformOperationWithFileAsync<TResult>(RequestParameters requestParameters,
+            Stream fileStream)
         {
             throw new System.NotImplementedException();
         }

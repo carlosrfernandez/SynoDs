@@ -15,12 +15,8 @@
         /// <returns>Returns a FileStation InfoResponse <see cref="FsInfo"/></returns>
         public async Task<FsInfoResponse> GetFileStationInfoAsync()
         {
-            return await PerformOperationAsync<FsInfoResponse>();
-        }
-
-        protected override IErrorProvider ErrorProvider
-        {
-            get { throw new System.NotImplementedException(); }
+            //return await PerformOperationAsync<FsInfoResponse>();
+            return null; //todo implement
         }
     }
 }

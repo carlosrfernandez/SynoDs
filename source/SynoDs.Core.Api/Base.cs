@@ -36,10 +36,6 @@ namespace SynoDs.Core.Exceptions
         private IJsonParser JsonParser { get; set; }
         private IInformationProvider InformationProvider { get; set; }
 
-        // Virtual members:
-        protected abstract IErrorProvider ErrorProvider { get; }
-
-        
         /// <summary>
         /// Overridable method to get the session name used to log out.
         /// </summary>
