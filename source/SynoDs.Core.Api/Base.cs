@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.Exceptions
+﻿using SynoDs.Core.CrossCutting;
+
+namespace SynoDs.Core.Exceptions
 {
     using System;
     using System.IO;
@@ -53,7 +55,7 @@
         protected Base()
         {
             this.HttpClient = new HttpGetRequestClient();
-            this.JsonParser = new JsonParser();
+            this.JsonParser = new JsonParser(IoCFactory.Container.Resolve<IErrorProvider>());
         }
 
         protected Base(IInformationProvider informationProvider)

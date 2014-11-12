@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SynoDs.Core.Dal.BaseApi;
+using SynoDs.Core.Exception;
 using SynoDs.Core.Interfaces;
 using SynoDs.Core.JsonParser;
 
@@ -32,13 +33,33 @@ namespace SynologyTests
             errorMock.Setup(p => p.GetErrorDescriptionForCode(0)).Returns("Some error");
 
             var json = new JsonParser(errorMock.Object);
-            var res = json.FromJson<LoginResponse>("{\"data\":\"9769a8dhf\",\"error\":\"0\", \"success\":\"true\"");
+            var res = json.FromJson<LoginResponse>("{\"data\":{\"sid\":\"9769a8dhf\"},\"error\":\"0\", \"success\":\"true\"}");
             Assert.AreEqual("9769a8dhf",res.ResponseData.Sid );
+        }
 
-            //ILoggingProvider logging 
-            //JsonHandler = new JsonHandler();
-            //var result = JsonHandler.FromJson<TaskActionResponse>(ValidJson);
-            //Assert.IsNotNull(result);
+        [TestMethod]
+        [ExpectedException(typeof(SynologyException), AllowDerivedTypes = true)]
+        public void TestErrorDataDeserializationWithLogin()
+        {
+            var errorMock = new Mock<IErrorProvider>();
+            errorMock.Setup(p=>p.GetErrorDescriptionForCode(101)).Returns("Some error");
+
+            var json = new JsonParser(errorMock.Object);
+            var res = json.FromJson<LoginResponse>("{\"error\":\"101\", \"success\":\"false\"}");
+         }
+
+        [TestMethod]
+        public void TestErrorDataWithSuccessFlagAndNoErrorCode()
+        {
+            var errorMock = new Mock<IErrorProvider>();
+            errorMock.Setup(p => p.GetErrorDescriptionForCode(101)).Returns("Some error");
+
+            var json = new JsonParser(errorMock.Object);
+            var res = json.FromJson<LoginResponse>("{\"error\":\"0\", \"success\":\"true\"}");
+
+            Assert.AreEqual(0,res.ErrorCode);
+            Assert.IsNull(res.ResponseData);
+            Assert.IsTrue(res.Success);
         }
     }
 }

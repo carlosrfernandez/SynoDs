@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
-using SynoDs.Core.Exceptions.Exceptions;
+﻿using System.Threading.Tasks;
 using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.Dal.HttpBase;
 using SynoDs.Core.Interfaces;
@@ -31,7 +29,6 @@ namespace SynoDs.Core.Exceptions
             var request = _requestProvider.PrepareRequest<TResult>(requestParameters);
             _httpClient.CreateRequestSession(request);
             var jsonResult = await _httpClient.SendRequestAsync();
-            //var result = _jsonParser.FromJson<TResult>(jsonResult);
             return jsonResult;
         }
 
