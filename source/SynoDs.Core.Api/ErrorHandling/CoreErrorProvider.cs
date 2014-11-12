@@ -1,6 +1,6 @@
 ﻿using SynoDs.Core.Interfaces;
 
-namespace SynoDs.Core.Api.ErrorHandling
+namespace SynoDs.Core.Exceptions.ErrorHandling
 {
     public class CoreErrorProvider : ErrorProviderBase
     {

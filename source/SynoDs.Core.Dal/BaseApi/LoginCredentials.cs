@@ -1,7 +1,5 @@
 ﻿namespace SynoDs.Core.Dal.BaseApi
 {
-    using System;
-
     /// <summary>
     /// Model object to store login credentials.
     /// </summary>
@@ -16,15 +14,5 @@
         /// Password
         /// </summary>
         public string Password { get; set; }
-        
-        /// <summary>
-        /// Url of the DiskStation
-        /// </summary>
-        public Uri Uri { get; set; }
-
-        /// <summary>
-        /// UseSSL
-        /// </summary>
-        public bool UseSsl { get; set; }
     }
 }

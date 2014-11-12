@@ -69,6 +69,7 @@
     <Compile Include="Module\ApiCoreModule.cs" />
     <Compile Include="OperationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestProvider.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

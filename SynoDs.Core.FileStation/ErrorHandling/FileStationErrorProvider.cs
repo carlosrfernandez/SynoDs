@@ -1,6 +1,6 @@
 ﻿namespace SynoDs.Core.FileStation.ErrorHandling
 {
-    using Api;
+    using Exceptions;
     using Interfaces;
 
     public class FileStationErrorProvider : ErrorProviderBase

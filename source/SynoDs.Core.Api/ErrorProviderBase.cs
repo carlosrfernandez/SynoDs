@@ -1,7 +1,7 @@
 ﻿using System;
 using SynoDs.Core.Interfaces;
 
-namespace SynoDs.Core.Api
+namespace SynoDs.Core.Exceptions
 {
     public abstract class ErrorProviderBase : IErrorProvider
     {

@@ -1,4 +1,4 @@
-﻿using SynoDs.Core.Api;
+﻿using SynoDs.Core.Exceptions;
 using SynoDs.Core.Interfaces;
 
 namespace SynoDs.Core.BaseApi.Auth.ErrorHandling

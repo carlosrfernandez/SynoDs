@@ -50,6 +50,9 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -100,6 +103,10 @@
       <Project>{9a8ff5e8-762b-470f-8037-0686b791356f}</Project>
       <Name>SynoDs.Core.BaseApi.Info</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
+      <Project>{adbfe2ac-59da-4f12-8701-6aed991abe22}</Project>
+      <Name>SynoDs.Core.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
       <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
       <Name>SynoDs.Core.Dal</Name>
@@ -111,6 +118,18 @@
     <ProjectReference Include="..\source\SynoDs.Core.Interfaces\SynoDs.Core.Interfaces.csproj">
       <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
       <Name>SynoDs.Core.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\SynoDs.Core.JsonParser\SynoDs.Core.JsonParser.csproj">
+      <Project>{5202ee3e-c77e-4799-b841-cd60dbd8b38d}</Project>
+      <Name>SynoDs.Core.JsonParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SynoDs.Core.Exception\SynoDs.Core.Exception.csproj">
+      <Project>{8dc00c72-0107-4774-aaf3-d5cd49b5f66d}</Project>
+      <Name>SynoDs.Core.Exception</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SynoDs.Core.FileStation\SynoDs.Core.FileStation.csproj">
+      <Project>{65dbb4bf-2c0e-4689-867a-0629d05bdcff}</Project>
+      <Name>SynoDs.Core.FileStation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

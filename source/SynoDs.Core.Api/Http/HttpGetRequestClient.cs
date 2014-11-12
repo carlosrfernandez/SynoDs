@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SynoDs.Core.Interfaces;
 
-namespace SynoDs.Core.Api.Http
+namespace SynoDs.Core.Exceptions.Http
 {
     // TODO: Refactor this class 
     // Bug: This class implementation can't handle SSL.
@@ -16,7 +16,7 @@ namespace SynoDs.Core.Api.Http
     // Add exception handling. 
     public class HttpGetRequestClient : IHttpClient
     {
-        private readonly string _url;
+        private string Url { get; set; }
 /*
         private byte[] FileStream { get; set; }
 */
@@ -32,9 +32,7 @@ namespace SynoDs.Core.Api.Http
 
         public HttpGetRequestClient(string url)
         {
-            _url = url;
-            Handler = new HttpClientHandler();
-            Client = new HttpClient(Handler);
+           CreateRequestSession(url);
         }
 
         public HttpGetRequestClient(string url, Stream file, string fileName, string fileParam) : this(url)
@@ -57,14 +55,16 @@ namespace SynoDs.Core.Api.Http
 
         public void CreateRequestSession(string requestUrl)
         {
-            throw new NotImplementedException();
+            Url = requestUrl;
+            Handler = new HttpClientHandler();
+            Client = new HttpClient(Handler);
         }
 
         private async Task<string> PerformRequestAsync()
         {
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, _url);
+                var request = new HttpRequestMessage(HttpMethod.Get, Url);
                 if (Handler.SupportsTransferEncodingChunked())
                 {
                     request.Headers.TransferEncodingChunked = true;
@@ -85,7 +85,7 @@ namespace SynoDs.Core.Api.Http
         {
             try
             {
-                var message = new HttpRequestMessage(HttpMethod.Post, new Uri(_url));
+                var message = new HttpRequestMessage(HttpMethod.Post, new Uri(Url));
                 if (Handler.SupportsTransferEncodingChunked())
                 {
                     message.Headers.TransferEncodingChunked = true;

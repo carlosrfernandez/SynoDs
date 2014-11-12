@@ -7,7 +7,7 @@ namespace SynoDs.Core.DownloadStation
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
-    using Api;
+    using Exceptions;
     using CrossCutting.Common;
     using Dal.DownloadStation.Task;
     using Dal.Enums;

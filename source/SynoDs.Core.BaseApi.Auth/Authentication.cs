@@ -1,7 +1,7 @@
 ﻿namespace SynoDs.Core.BaseApi.Auth
 {
     using System.Threading.Tasks;
-    using Api;
+    using Exceptions;
     using CrossCutting.Common;
     using Dal.HttpBase;
     using Interfaces.Synology;

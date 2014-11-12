@@ -5,7 +5,7 @@ namespace SynoDs.Core.BaseApi.Info
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Api;
+    using Exceptions;
     using Dal.BaseApi;
     using Dal.HttpBase;
     using Interfaces;
@@ -21,18 +21,22 @@ namespace SynoDs.Core.BaseApi.Info
 
         private ApiInfoWrapper ApiInformationCache { get; set; }
 
-        private readonly IErrorProvider _errorProvider;
+        private static readonly IErrorProvider _errorProvider = new InfoErrorProvider();
 
-        public InformationProvider()
+        private const string ErrorProviderName = "InfoErrorProvider";
+
+        private readonly IOperationProvider _operationProvider;
+
+        public InformationProvider(IOperationProvider operationProvider)
         {
             IsCacheEmtpy = true;
             FullyLoadApiInformationCache = false;
-            _errorProvider = new InfoErrorProvider();
+            this._operationProvider = operationProvider;
         }
 
-        public InformationProvider(IErrorProvider infoErrorProvider)
+        protected override IErrorProvider ErrorProvider
         {
-            this._errorProvider = infoErrorProvider;
+            get { return _errorProvider; }
         }
 
         protected override string GetSessionName()
@@ -61,7 +65,7 @@ namespace SynoDs.Core.BaseApi.Info
                 {"query", apiName}
             };
 
-            var result = await PerformOperationAsync<InfoResponse>(requestParams);
+            var result = await _operationProvider.PerformOperationAsync<InfoResponse>(requestParams);
             if (result.Success)
                 ApiInformationCache.Add(apiName, result.ResponseData[apiName]);
 
@@ -73,7 +77,7 @@ namespace SynoDs.Core.BaseApi.Info
         /// </summary>
         public async Task GetApiInformationCacheAsync()
         {
-            var infoResult = await PerformOperationAsync<InfoResponse>(new RequestParameters
+            var infoResult = await _operationProvider.PerformOperationAsync<InfoResponse>(new RequestParameters
             {
                 {"query", "ALL"}
             });
@@ -90,9 +94,6 @@ namespace SynoDs.Core.BaseApi.Info
             }
         }
 
-        protected override IErrorProvider ErrorProvider
-        {
-            get { return this._errorProvider; }
-        }
+        IErrorProvider IApi.ErrorProvider { get; set; }
     }
 }

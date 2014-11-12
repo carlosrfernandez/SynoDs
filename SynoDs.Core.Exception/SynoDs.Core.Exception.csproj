@@ -5,20 +5,16 @@
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}</ProjectGuid>
+    <ProjectGuid>{8DC00C72-0107-4774-AAF3-D5CD49B5F66D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SynoDs.Core.Interfaces</RootNamespace>
-    <AssemblyName>SynoDs.Core.Interfaces</AssemblyName>
+    <RootNamespace>SynoDs.Core.Exception</RootNamespace>
+    <AssemblyName>SynoDs.Core.Exception</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,27 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Bootstrapper\BootstrapperBase.cs" />
-    <Compile Include="IAttributeReader.cs" />
-    <Compile Include="Modularity\IApiModule.cs" />
-    <Compile Include="Synology\IApi.cs" />
-    <Compile Include="IErrorRepository.cs" />
-    <Compile Include="IErrorProvider.cs" />
-    <Compile Include="IFtpClient.cs" />
-    <Compile Include="IHttpClient.cs" />
-    <Compile Include="IJsonParser.cs" />
-    <Compile Include="IoC\IContainer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Synology\IInformationProvider.cs" />
-    <Compile Include="Synology\IAuthenticationProvider.cs" />
-    <Compile Include="Synology\IOperationProviders.cs" />
-    <Compile Include="Synology\IRequestProvider.cs" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
-      <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
-      <Name>SynoDs.Core.Dal</Name>
-    </ProjectReference>
+    <Compile Include="SynologyException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

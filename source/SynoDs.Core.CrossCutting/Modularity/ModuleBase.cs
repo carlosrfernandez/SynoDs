@@ -3,17 +3,9 @@
     using Interfaces.IoC;
     using Interfaces.Modularity;
 
-    public abstract class ModuleBase : IModule
+    public abstract class ModuleBase : IApiModule
     {
-        private bool _requiresAuthentication;
-        private string _apiName;
-        
-        protected ModuleBase(string apiModuleName, bool requiresLogin)
-        {
-            _apiName = apiModuleName;
-            _requiresAuthentication = requiresLogin;
-        }
-
+        public bool RequiresAuthenticatedRequests { get; private set; }
         public abstract void Configure();
     }
 }

@@ -1,21 +1,22 @@
-﻿namespace SynoDs.Core.Api
+﻿namespace SynoDs.Core.Exceptions
 {
     using System.Linq;
     using System.Reflection;
     using Dal.Attributes;
+    using Interfaces;
 
     /// <summary>
     /// Read the attributes of the Objects defined in the DAL so that we can retrieve the API to which they belong 
     /// and the methods that we need to use. 
     /// </summary>
-    public static class AttributeReader
+    public class AttributeReader : IAttributeReader
     {
         /// <summary>
         /// Reads the method attribute from the Generic member of the supplied generic Object.>
         /// </summary>
         /// <typeparam name="T">The object to read the Method attribute from</typeparam>
         /// <returns>The method name.</returns>
-        public static string ReadMethodAttributeFromT<T>()
+        public string ReadMethodAttributeFromT<T>()
         {
             var info = typeof(T).GetTypeInfo();
             var genericParams = info.BaseType.GenericTypeArguments;
@@ -49,7 +50,7 @@
         /// </summary>
         /// <typeparam name="T">The object to read the API attribute from</typeparam>
         /// <returns>A tring with the API name</returns>
-        public static string ReadApiNameFromT<T>()
+        public string ReadApiNameFromT<T>()
         {
             var info = typeof (T).GetTypeInfo();
             var attribute = info.GetCustomAttribute<Api>();
