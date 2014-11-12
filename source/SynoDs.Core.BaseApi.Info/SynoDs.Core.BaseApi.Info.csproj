@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\..\SynoDs.Core.Exception\SynoDs.Core.Exception.csproj">
+      <Project>{8dc00c72-0107-4774-aaf3-d5cd49b5f66d}</Project>
+      <Name>SynoDs.Core.Exception</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.Api\SynoDs.Core.ApiBase.csproj">
       <Project>{7e0bdc20-a490-4db0-869b-35576d74332f}</Project>
       <Name>SynoDs.Core.ApiBase</Name>
@@ -59,7 +63,6 @@
       <DependentUpon>en-en.resx</DependentUpon>
     </Compile>
     <Compile Include="ErrorHandling\InfoErrorProvider.cs" />
-    <Compile Include="ErrorHandling\InfoErrorRepository.cs" />
     <Compile Include="InformationProvider.cs" />
     <Compile Include="Module\InformationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

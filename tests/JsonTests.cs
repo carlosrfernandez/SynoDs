@@ -46,6 +46,7 @@ namespace SynologyTests
 
             var json = new JsonParser(errorMock.Object);
             var res = json.FromJson<LoginResponse>("{\"error\":\"101\", \"success\":\"false\"}");
+            Assert.Fail("We were expecting an exception");
          }
 
         [TestMethod]

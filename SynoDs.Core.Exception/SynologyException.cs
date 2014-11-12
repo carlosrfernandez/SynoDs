@@ -3,7 +3,7 @@
     public class SynologyException : System.Exception
     {
         public SynologyException()
-            : base("Unknown error occurred.")
+            : base()
         {
         }
 

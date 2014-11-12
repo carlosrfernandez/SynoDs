@@ -3,14 +3,11 @@
     using Exceptions;
     using Interfaces;
 
-    public class InfoErrorProvider : ErrorProviderBase
+    public class InfoErrorProvider : IErrorProvider
     {
-        public InfoErrorProvider() : this(new InfoErrorRepository())
+        public string GetErrorDescriptionForCode(int errorCode)
         {
-        }
-
-        public InfoErrorProvider(IErrorRepository errorRepository) : base(errorRepository)
-        {
+            throw new System.NotImplementedException();
         }
     }
 }

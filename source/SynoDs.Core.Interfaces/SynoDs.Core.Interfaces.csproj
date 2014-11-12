@@ -42,7 +42,6 @@
     <Compile Include="IAttributeReader.cs" />
     <Compile Include="Modularity\IApiModule.cs" />
     <Compile Include="Synology\IApi.cs" />
-    <Compile Include="IErrorRepository.cs" />
     <Compile Include="IErrorProvider.cs" />
     <Compile Include="IFtpClient.cs" />
     <Compile Include="IHttpClient.cs" />

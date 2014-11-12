@@ -10,6 +10,7 @@ namespace SynoDs.Core.BaseApi.Info
     using Dal.HttpBase;
     using Interfaces;
     using Interfaces.Synology;
+    using SynoDs.Core.Exception;
 
     public class InformationProvider : Base, IInformationProvider
     {
@@ -26,12 +27,14 @@ namespace SynoDs.Core.BaseApi.Info
         private const string ErrorProviderName = "InfoErrorProvider";
 
         private readonly IOperationProvider _operationProvider;
+        private readonly IJsonParser _jsonParser;
 
-        public InformationProvider(IOperationProvider operationProvider)
+        public InformationProvider(IOperationProvider operationProvider, IJsonParser jsonParser)
         {
             IsCacheEmtpy = true;
-            FullyLoadApiInformationCache = false;
+            FullyLoadApiInformationCache = true; //add config and read this from it.
             this._operationProvider = operationProvider;
+            this._jsonParser = jsonParser;
         }
 
         protected override IErrorProvider ErrorProvider
@@ -66,8 +69,11 @@ namespace SynoDs.Core.BaseApi.Info
             };
 
             var result = await _operationProvider.PerformOperationAsync<InfoResponse>(requestParams);
-            if (result.Success)
-                ApiInformationCache.Add(apiName, result.ResponseData[apiName]);
+            if (string.IsNullOrEmpty(result))
+                throw new NullReferenceException("Error while getting information.");
+
+            var response = _jsonParser.FromJson<InfoResponse>(result);
+            //ApiInformationCache.Add(apiName,]);
 
             return ApiInformationCache.FirstOrDefault(n=>n.Key == apiName).Value;
         }
@@ -77,10 +83,12 @@ namespace SynoDs.Core.BaseApi.Info
         /// </summary>
         public async Task GetApiInformationCacheAsync()
         {
-            var infoResult = await _operationProvider.PerformOperationAsync<InfoResponse>(new RequestParameters
+            var infoResponse = await _operationProvider.PerformOperationAsync<InfoResponse>(new RequestParameters
             {
                 {"query", "ALL"}
             });
+
+            var infoResult = _jsonParser.FromJson<InfoResponse>(infoResponse);
 
             if (infoResult.Success)
             {
@@ -90,7 +98,7 @@ namespace SynoDs.Core.BaseApi.Info
             }
             else
             {
-                throw new Exception("Error while getting API InformationProvider. ");
+                throw new SynologyException("Error while getting API InformationProvider.");
             }
         }
 

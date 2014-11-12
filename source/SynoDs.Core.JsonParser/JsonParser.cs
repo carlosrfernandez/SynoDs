@@ -22,22 +22,15 @@
 
         public T FromJson<T>(string json)
         {
-            try
+            var obj = JObject.Parse(json);
+            var errorCode = (int)obj["error"];
+            var success = (bool)obj["success"];
+            if (success && errorCode == 0)
             {
-                var obj = JObject.Parse(json);
-                var errorCode = (int)obj["error"];
-                var success = (bool)obj["success"];
-                if (success && errorCode == 0)
-                {
-                    return JsonConvert.DeserializeObject<T>(json);
-                }
-                var errorMessage = ErrorProvider.GetErrorDescriptionForCode(errorCode);
-                throw new SynologyException(errorCode, errorMessage);
+                return JsonConvert.DeserializeObject<T>(json);
             }
-            catch(System.Exception exception)
-            {
-                throw new System.Exception("Error while parsing the response from the Api.", exception);
-            }
+            var errorMessage = ErrorProvider.GetErrorDescriptionForCode(errorCode);
+            throw new SynologyException(errorMessage);
         }
     }
 }

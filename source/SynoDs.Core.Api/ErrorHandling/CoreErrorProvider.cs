@@ -1,16 +1,14 @@
-﻿using SynoDs.Core.Interfaces;
-
-namespace SynoDs.Core.Exceptions.ErrorHandling
+﻿namespace SynoDs.Core.Api.ErrorHandling
 {
-    public class CoreErrorProvider : ErrorProviderBase
+    public class CoreErrorProvider
     {
-        public CoreErrorProvider() : this(new CoreErrorRepository())
-        {
-        }
+        //public CoreErrorProvider() : this(new CoreErrorRepository())
+        //{
+        //}
 
-        public CoreErrorProvider(IErrorRepository errorRepository)
-            : base(errorRepository)
-        {
-        }
+        //public CoreErrorProvider(IErrorRepository errorRepository)
+        //    : base(errorRepository)
+        //{
+        //}
     }
 }
