@@ -8,8 +8,8 @@ namespace SynoDs.Core.Interfaces.Synology
 {
     public interface IOperationProvider
     {
-        Task<string> PerformOperationAsync<TResponse>(RequestParameters requestParameters);
+        Task<TResponse> PerformOperationAsync<TResponse>(RequestParameters requestParameters, string authenticationToken = "");
 
-        Task<string> PerformOperationWithFileAsync<TResponse>(RequestParameters requestParameters,Stream fileStream);
+        Task<TResponse> PerformOperationWithFileAsync<TResponse>(RequestParameters requestParameters,Stream fileStream, string authenticationToken = "");
     }
 }

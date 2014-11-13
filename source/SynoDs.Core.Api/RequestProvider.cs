@@ -8,18 +8,21 @@ namespace SynoDs.Core.Api
     public class RequestProvider : IRequestProvider
     {
         private readonly IAttributeReader _attributeReader;
+        private readonly IInformationProvider _informationProvider;
 
         public RequestProvider(IAttributeReader attributeReader, IInformationProvider informationProvider)
         {
             this._attributeReader = attributeReader;
+            _informationProvider = informationProvider;
         }
 
         /// <summary>
         /// Todo: Implement
         /// </summary>
         /// <param name="requestParameters">The Request params.</param>
+        /// <param name="authenticationToken"></param>
         /// <returns></returns>
-        public string PrepareRequest<TResult>(RequestParameters requestParameters)
+        public string PrepareRequest<TResult>(RequestParameters requestParameters, string authenticationToken = "")
         {
             var api = _attributeReader.ReadApiNameFromT<TResult>();
             var method = _attributeReader.ReadMethodAttributeFromT<TResult>();
@@ -27,14 +30,16 @@ namespace SynoDs.Core.Api
             var requestBase = new RequestBase
             {
                 ApiName = api,
-                Method = method
+                Method = method,
             };
 
             if (requestParameters != null)
-                requestBase.RequestParameters = CleanRequestParams(requestParameters);    
+                requestBase.RequestParameters = CleanRequestParams(requestParameters);
 
-         //   requestBase.Path = inform
-            return "";
+            if (authenticationToken != string.Empty)
+                requestBase.Sid = authenticationToken;
+
+            return requestBase.ToString();
         }
 
         public RequestParameters CleanRequestParams(RequestParameters dirtyRequestParameters)

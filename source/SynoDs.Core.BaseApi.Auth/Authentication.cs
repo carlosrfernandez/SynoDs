@@ -6,51 +6,20 @@
     using Dal.HttpBase;
     using Interfaces.Synology;
     using Dal.BaseApi;
-    using ErrorHandling;
     using Interfaces;
 
     public class Authentication : Base, IAuthenticationProvider
     {
-        #region singleton stuff - might not use
-        private static Authentication _instance;
-
-        private static readonly object SyncRoot = new object();
-
-        public static IAuthenticationProvider Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_instance == null)
-                        {
-                            _instance = new Authentication();
-                        }
-                    }
-                }
-                return _instance;
-            }
-        }
-        #endregion
-
         public bool IsLoggedIn { get; set; }
         
         public string Sid { get; set; }
 
-        private readonly IErrorProvider _authErrorProvider;
+        private readonly IOperationProvider _operationProvider;
 
-        public Authentication()
-        {
-            _authErrorProvider = new AuthenticationErrorProvider();
-            IsLoggedIn = false;
-        }
-
-        public Authentication(IErrorProvider authErrorProvider)
+        public Authentication(IOperationProvider operationProvider)
         {
             IsLoggedIn = false;
-            this._authErrorProvider = authErrorProvider;
+            this._operationProvider = operationProvider;
         }
 
         /// <summary>
@@ -61,10 +30,8 @@
         {
             Validate.ArgumentIsNotNullOrEmpty(credentials.UserName);
             Validate.ArgumentIsNotNullOrEmpty(credentials.Password);
-            Validate.ArgumentIsNotNullOrEmpty(credentials.Uri);
 
             // store the data.
-            DsAddress = credentials.Uri;
             DsUsername = credentials.UserName;
             DsPassword = credentials.Password;
 
@@ -75,7 +42,7 @@
                 {"session", SessionName},
                 {"format", "sid" }
             };
-            var loginResult = await PerformOperationAsync<LoginResponse>(parameters);
+            var loginResult = await _operationProvider.PerformOperationAsync<LoginResponse>(parameters);
             SessionId = loginResult.ResponseData.Sid;
             IsLoggedIn = true;
             return loginResult.Success;
@@ -92,15 +59,10 @@
                 {"session", SessionName}
             };
 
-            var logoutRequestResult = await PerformOperationAsync<LogoutResponse>(logoutParams);
+            var logoutRequestResult = await _operationProvider.PerformOperationAsync<LogoutResponse>(logoutParams);
             SessionId = string.Empty; // erase the sid.
             IsLoggedIn = false;
             return logoutRequestResult.Success;
-        }
-
-        protected override IErrorProvider ErrorProvider
-        {
-            get { return this._authErrorProvider; }
         }
     }
 }

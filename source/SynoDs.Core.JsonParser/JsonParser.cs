@@ -7,11 +7,11 @@
 
     public class JsonParser : IJsonParser
     {
-        public IErrorProvider ErrorProvider { get; set; }
+        private readonly IErrorProvider _errorProvider;
 
         public JsonParser(IErrorProvider errorProvider)
         {
-            ErrorProvider = errorProvider;
+            _errorProvider = errorProvider;
         }
 
         public string ToJson<T>(T instance)
@@ -28,7 +28,9 @@
             {
                 return JsonConvert.DeserializeObject<T>(json);
             }
-            var errorMessage = ErrorProvider.GetErrorDescriptionForCode("",errorCode);
+
+            //TODO: Implement calling API for error handling.
+            var errorMessage = _errorProvider.GetErrorDescriptionForCode("", errorCode);
             throw new SynologyException(errorMessage);
         }
     }

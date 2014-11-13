@@ -25,12 +25,11 @@
         private readonly IOperationProvider _operationProvider;
         private readonly IJsonParser _jsonParser;
 
-        public InformationProvider(IOperationProvider operationProvider, IJsonParser jsonParser)
+        public InformationProvider(IOperationProvider operationProvider)
         {
             IsCacheEmtpy = true;
             FullyLoadApiInformationCache = true; //add config and read this from it.
             this._operationProvider = operationProvider;
-            this._jsonParser = jsonParser;
         }
 
         protected override string GetSessionName()
@@ -60,11 +59,9 @@
             };
 
             var result = await _operationProvider.PerformOperationAsync<InfoResponse>(requestParams);
-            if (string.IsNullOrEmpty(result))
-                throw new NullReferenceException("Error while getting information.");
 
-            var response = _jsonParser.FromJson<InfoResponse>(result);
-            //ApiInformationCache.Add(apiName,]);
+            if (result.Success)
+                ApiInformationCache.Add(result.ResponseData.Keys.First(), result.ResponseData.Values.First());//revise this.
 
             return ApiInformationCache.FirstOrDefault(n=>n.Key == apiName).Value;
         }
