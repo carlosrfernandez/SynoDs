@@ -19,7 +19,6 @@ namespace SynoDs.Core.BaseApi.Info.Module
         {
             this.RequiresAuthenticatedRequests = false;
             IoCFactory.Container.Register<IInformationProvider, InformationProvider>();
-            IoCFactory.Container.Register<IErrorProvider, InfoErrorProvider>();
         }
     }
 }

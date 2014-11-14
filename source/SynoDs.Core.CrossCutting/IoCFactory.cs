@@ -2,7 +2,6 @@
 
 namespace SynoDs.Core.CrossCutting
 {
-// ReSharper disable once InconsistentNaming
     public class IoCFactory
     {
         private static IContainer _container;

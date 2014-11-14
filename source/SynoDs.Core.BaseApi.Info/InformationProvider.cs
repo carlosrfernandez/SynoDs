@@ -23,7 +23,6 @@
         private const string ErrorProviderName = "InfoErrorProvider";
 
         private readonly IOperationProvider _operationProvider;
-        private readonly IJsonParser _jsonParser;
 
         public InformationProvider(IOperationProvider operationProvider)
         {
@@ -76,11 +75,9 @@
                 {"query", "ALL"}
             });
 
-            var infoResult = _jsonParser.FromJson<InfoResponse>(infoResponse);
-
-            if (infoResult.Success)
+            if (infoResponse.Success)
             {
-                ApiInformationCache = infoResult.ResponseData;
+                ApiInformationCache = infoResponse.ResponseData;
                 IsCacheEmtpy = false;
                 FullyLoadApiInformationCache = false; // reset for now. test this.
             }
