@@ -1,14 +1,12 @@
 ﻿using SynoDs.Core.Api.ErrorHandling;
-using SynoDs.Core.Exceptions.Http;
 using SynoDs.Core.CrossCutting;
-using SynoDs.Core.CrossCutting.Modularity;
+using SynoDs.Core.Exceptions;
+using SynoDs.Core.Exceptions.Http;
 using SynoDs.Core.Interfaces;
-using SynoDs.Core.Interfaces.IoC;
 using SynoDs.Core.Interfaces.Modularity;
 using SynoDs.Core.Interfaces.Synology;
-using SynoDs.Core.JsonParser;
 
-namespace SynoDs.Core.Exceptions.Module
+namespace SynoDs.Core.Api.Module
 {
     public class ApiCoreModule : IApiModule
     {

@@ -16,24 +16,27 @@
 
         private readonly IOperationProvider _operationProvider;
 
-        public Authentication(IOperationProvider operationProvider)
+        private readonly LoginCredentials _credentials;
+
+        public Authentication(IOperationProvider operationProvider, LoginCredentials loginCredentials)
         {
             IsLoggedIn = false;
-            this._operationProvider = operationProvider;
+            _operationProvider = operationProvider;
+            _credentials = loginCredentials;
         }
 
         /// <summary>
         /// Logs into the DiskStation with the supplied credentials.
         /// </summary>
         /// <returns>True if logged in and false if any errors occur.</returns>
-        public async Task<bool> LoginAsync(LoginCredentials credentials)
+        public async Task<bool> LoginAsync()
         {
-            Validate.ArgumentIsNotNullOrEmpty(credentials.UserName);
-            Validate.ArgumentIsNotNullOrEmpty(credentials.Password);
+            Validate.ArgumentIsNotNullOrEmpty(_credentials.UserName);
+            Validate.ArgumentIsNotNullOrEmpty(_credentials.Password);
 
             // store the data.
-            DsUsername = credentials.UserName;
-            DsPassword = credentials.Password;
+            DsUsername = _credentials.UserName;
+            DsPassword = _credentials.Password;
 
             var parameters = new RequestParameters
             {

@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
+using SynoDs.Core.CrossCutting;
 using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.Dal.HttpBase;
 using SynoDs.Core.Interfaces;
 using SynoDs.Core.Interfaces.Synology;
-using System.IO;
 
-namespace SynoDs.Core.Exceptions
+namespace SynoDs.Core.Api
 {
     public class OperationProvider : IOperationProvider
     {
@@ -13,30 +14,32 @@ namespace SynoDs.Core.Exceptions
         private readonly IHttpClient _httpClient;
         private readonly IRequestProvider _requestProvider;
         private readonly IJsonParser _jsonParser;
+        private readonly IAuthenticationProvider _authenticationProvider;
 
-        private readonly LoginCredentials _userCredentials;
-        private readonly DsStationInfo _dsStationHostInfo;
-
-        public OperationProvider(DsStationInfo dsStationHostInfo, LoginCredentials userCredentials,
+        public OperationProvider(IAuthenticationProvider authenticationProvider,
             IHttpClient httpClient, IRequestProvider requestProvider, IJsonParser jsonParser)
         {
             _httpClient = httpClient;
             _requestProvider = requestProvider;
-            _dsStationHostInfo = dsStationHostInfo;
-            _userCredentials = userCredentials;
             _jsonParser = jsonParser;
+            _authenticationProvider = authenticationProvider;
         }
         
-        public async Task<TResult> PerformOperationAsync<TResult>(RequestParameters requestParameters = null, string authenticationToken = "")
+        public async Task<TResult> PerformOperationAsync<TResult>(RequestParameters requestParameters = null, bool isAuthenticatedRequest = false)
         {
-            var request = _requestProvider.PrepareRequest<TResult>(requestParameters, authenticationToken);
+            if (isAuthenticatedRequest && !_authenticationProvider.IsLoggedIn)
+            {
+                _authenticationProvider.LoginAsync();
+            }
+
+            var request = _requestProvider.PrepareRequest<TResult>(requestParameters, _authenticationProvider.Sid);
             _httpClient.CreateRequestSession(request);
             var jsonResult = await _httpClient.SendRequestAsync();
             var resultObject = _jsonParser.FromJson<TResult>(jsonResult);
             return resultObject;
         }
 
-        public async Task<TResult> PerformOperationWithFileAsync<TResult>(RequestParameters requestParameters, Stream fileStream, string authenticationToken = "")
+        public async Task<TResult> PerformOperationWithFileAsync<TResult>(RequestParameters requestParameters, Stream fileStream, bool isAuthenticatedRequest = true)
         {
             throw new System.NotImplementedException();
         }
