@@ -1,4 +1,6 @@
-﻿namespace SynoDs.Core.BaseApi.Info
+﻿using SynoDs.Core.Api;
+
+namespace SynoDs.Core.BaseApi.Info
 {
     using System;
     using System.Linq;
@@ -10,7 +12,7 @@
     using Interfaces.Synology;
     using SynoDs.Core.Exception;
 
-    public class InformationProvider : Base, IInformationProvider
+    public class InformationProvider :  IInformationProvider
     {
         public bool IsCacheEmtpy { get; set; }
 

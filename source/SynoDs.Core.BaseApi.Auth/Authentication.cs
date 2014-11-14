@@ -1,14 +1,12 @@
-﻿namespace SynoDs.Core.BaseApi.Auth
-{
-    using System.Threading.Tasks;
-    using Exceptions;
-    using CrossCutting.Common;
-    using Dal.HttpBase;
-    using Interfaces.Synology;
-    using Dal.BaseApi;
-    using Interfaces;
+﻿using System.Threading.Tasks;
+using SynoDs.Core.CrossCutting.Common;
+using SynoDs.Core.Dal.BaseApi;
+using SynoDs.Core.Dal.HttpBase;
+using SynoDs.Core.Interfaces.Synology;
 
-    public class Authentication : Base, IAuthenticationProvider
+namespace SynoDs.Core.BaseApi.Auth
+{
+    public class Authentication : IAuthenticationProvider
     {
         public bool IsLoggedIn { get; set; }
         
@@ -17,6 +15,8 @@
         private readonly IOperationProvider _operationProvider;
 
         private readonly LoginCredentials _credentials;
+
+        private const string SessionName = "DiskStation";
 
         public Authentication(IOperationProvider operationProvider, LoginCredentials loginCredentials)
         {
@@ -34,19 +34,16 @@
             Validate.ArgumentIsNotNullOrEmpty(_credentials.UserName);
             Validate.ArgumentIsNotNullOrEmpty(_credentials.Password);
 
-            // store the data.
-            DsUsername = _credentials.UserName;
-            DsPassword = _credentials.Password;
-
+            // prepare request
             var parameters = new RequestParameters
             {
-                {"account", DsUsername},
-                {"passwd", DsPassword},
-                {"session", SessionName},
+                {"account", _credentials.UserName},
+                {"passwd", _credentials.Password},
+                {"session", SessionName },
                 {"format", "sid" }
             };
             var loginResult = await _operationProvider.PerformOperationAsync<LoginResponse>(parameters);
-            SessionId = loginResult.ResponseData.Sid;
+            Sid = loginResult.ResponseData.Sid;
             IsLoggedIn = true;
             return loginResult.Success;
         }
@@ -54,7 +51,7 @@
         /// <summary>
         /// Logs out of the DiskStation. 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if logged in, false in case of errors.</returns>
         public async Task<bool> LogoutAsync()
         {
             var logoutParams = new RequestParameters
@@ -63,7 +60,7 @@
             };
 
             var logoutRequestResult = await _operationProvider.PerformOperationAsync<LogoutResponse>(logoutParams);
-            SessionId = string.Empty; // erase the sid.
+            Sid = string.Empty; // erase the sid.
             IsLoggedIn = false;
             return logoutRequestResult.Success;
         }

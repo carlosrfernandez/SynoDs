@@ -1,4 +1,5 @@
-﻿using SynoDs.Core.Dal.BaseApi;
+﻿using SynoDs.Core.Api;
+using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.DownloadStation.ErrorHandling;
 using SynoDs.Core.Interfaces.Synology;
 

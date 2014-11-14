@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SynoDs.Core.Api;
 using SynoDs.Core.Exceptions;
 using SynoDs.Core.Dal.Enums;
 using SynoDs.Core.Dal.FileStation.CreateFolder;
