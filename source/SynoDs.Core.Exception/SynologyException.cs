@@ -1,4 +1,4 @@
-﻿namespace SynoDs.Core.Exception
+﻿namespace SynoDs.Core.Exceptions
 {
     public class SynologyException : System.Exception
     {
@@ -16,5 +16,7 @@
         {
             throw new SynologyException(string.Format("Error code: {0}: {1}", errorCode, message));
         }
+
+        public SynologyException(string error, System.Exception innerException) : base(error, innerException) { }
     }
 }

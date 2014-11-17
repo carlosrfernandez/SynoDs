@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using SynoDs.Core.Dal.HttpBase;
-using SynoDs.Core.Exception;
+using SynoDs.Core.Exceptions;
 using SynoDs.Core.Interfaces;
 using SynoDs.Core.Interfaces.Synology;
 

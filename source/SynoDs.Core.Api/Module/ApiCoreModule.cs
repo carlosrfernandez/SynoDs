@@ -1,7 +1,7 @@
 ﻿using SynoDs.Core.Api.ErrorHandling;
+using SynoDs.Core.Api.Http;
 using SynoDs.Core.CrossCutting;
 using SynoDs.Core.Exceptions;
-using SynoDs.Core.Exceptions.Http;
 using SynoDs.Core.Interfaces;
 using SynoDs.Core.Interfaces.Modularity;
 using SynoDs.Core.Interfaces.Synology;

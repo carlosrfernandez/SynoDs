@@ -4,9 +4,10 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using SynoDs.Core.Exceptions;
 using SynoDs.Core.Interfaces;
 
-namespace SynoDs.Core.Exceptions.Http
+namespace SynoDs.Core.Api.Http
 {
     // TODO: Refactor this class 
     // Bug: This class implementation can't handle SSL.
@@ -77,7 +78,7 @@ namespace SynoDs.Core.Exceptions.Http
             }
             catch (Exception ex)
             {
-                throw new Exception("Error sending request", ex);
+                throw new SynologyException("Error sending request", ex);
             }
         }
 
@@ -105,13 +106,13 @@ namespace SynoDs.Core.Exceptions.Http
                     return resultString;
                 }
             }
-            catch (WebException)
+            catch (WebException webException)
             {
-                throw;
+                throw new SynologyException("Http error.", webException);
             }
             catch (Exception ex)
             {
-                throw new Exception("Error performing web request", ex);
+                throw new SynologyException("Error performing web request", ex);
             }
         }
 

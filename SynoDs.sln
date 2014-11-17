@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.BaseApi.Auth", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.CrossCutting", "source\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj", "{ADBFE2AC-59DA-4F12-8701-6AED991ABE22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.Exception", "source\SynoDs.Core.Exception\SynoDs.Core.Exception.csproj", "{8DC00C72-0107-4774-AAF3-D5CD49B5F66D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.Exceptions", "source\SynoDs.Core.Exception\SynoDs.Core.Exceptions.csproj", "{8DC00C72-0107-4774-AAF3-D5CD49B5F66D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.FileStation", "source\SynoDs.Core.FileStation\SynoDs.Core.FileStation.csproj", "{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}"
 EndProject
@@ -79,7 +79,6 @@ Global
 		{8DC00C72-0107-4774-AAF3-D5CD49B5F66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DC00C72-0107-4774-AAF3-D5CD49B5F66D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

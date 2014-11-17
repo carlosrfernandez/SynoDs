@@ -1,9 +1,10 @@
-﻿namespace SynoDs.Core.JsonParser
+﻿using SynoDs.Core.Exceptions;
+
+namespace SynoDs.Core.JsonParser
 {
     using Newtonsoft.Json;
     using Interfaces;
     using Newtonsoft.Json.Linq;
-    using Exception;
 
     public class JsonParser : IJsonParser
     {
