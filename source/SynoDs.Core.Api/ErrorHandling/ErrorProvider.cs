@@ -7,10 +7,20 @@ namespace SynoDs.Core.Api.ErrorHandling
     /// </summary>
     public class ErrorProvider : IErrorProvider
     {
-        //Todo add error info to resource file.
-        public string GetErrorDescriptionForCode(string apiName, int errorCode)
+        private readonly IAttributeReader _attributeReader;
+
+        public ErrorProvider(IAttributeReader attributeReader)
         {
-            // get that error info----
+            _attributeReader = attributeReader;
+        }
+
+        //Todo add error info to resource file.
+        public string GetErrorDescriptionForType<T>(int errorCode)
+        {
+            // Get API info. 
+            var apiName = _attributeReader.ReadApiNameFromT<T>();
+            
+            // get that error info.
             return ReadErrorCodeFromResource(string.Format("{0}{1}", apiName, errorCode));
         }
 

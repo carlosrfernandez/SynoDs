@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SynoDs.Core.Dal.BaseApi;
-using SynoDs.Core.Exception;
+using SynoDs.Core.Exceptions;
 using SynoDs.Core.Interfaces;
 using SynoDs.Core.JsonParser;
 

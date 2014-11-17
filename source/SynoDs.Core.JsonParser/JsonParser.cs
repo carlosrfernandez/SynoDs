@@ -31,7 +31,7 @@ namespace SynoDs.Core.JsonParser
             }
 
             //TODO: Implement calling API for error handling.
-            var errorMessage = _errorProvider.GetErrorDescriptionForCode("", errorCode);
+            var errorMessage = _errorProvider.GetErrorDescriptionForType<T>(errorCode);
             throw new SynologyException(errorMessage);
         }
     }
