@@ -12,7 +12,6 @@
         public void Startup()
         {
             // Register dependencies.
-
         }
 
         public void ShutDown()

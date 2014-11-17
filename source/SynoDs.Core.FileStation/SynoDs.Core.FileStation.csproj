@@ -35,15 +35,15 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\source\SynoDs.Core.Api\SynoDs.Core.ApiBase.csproj">
+    <ProjectReference Include="..\SynoDs.Core.Api\SynoDs.Core.ApiBase.csproj">
       <Project>{7E0BDC20-A490-4DB0-869B-35576D74332F}</Project>
       <Name>SynoDs.Core.ApiBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
+    <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
       <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
       <Name>SynoDs.Core.Dal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\SynoDs.Core.Interfaces\SynoDs.Core.Interfaces.csproj">
+    <ProjectReference Include="..\SynoDs.Core.Interfaces\SynoDs.Core.Interfaces.csproj">
       <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
       <Name>SynoDs.Core.Interfaces</Name>
     </ProjectReference>

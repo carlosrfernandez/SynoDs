@@ -109,10 +109,6 @@
       <Project>{5202ee3e-c77e-4799-b841-cd60dbd8b38d}</Project>
       <Name>SynoDs.Core.JsonParser</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SynoDs.Core.Exception\SynoDs.Core.Exception.csproj">
-      <Project>{8dc00c72-0107-4774-aaf3-d5cd49b5f66d}</Project>
-      <Name>SynoDs.Core.Exception</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

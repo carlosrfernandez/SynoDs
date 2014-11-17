@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using SynoDs.Core.CrossCutting;
-using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.Dal.HttpBase;
+using SynoDs.Core.Exception;
 using SynoDs.Core.Interfaces;
 using SynoDs.Core.Interfaces.Synology;
 
@@ -10,7 +9,6 @@ namespace SynoDs.Core.Api
 {
     public class OperationProvider : IOperationProvider
     {
-        //private readonly IJsonParser _jsonParser;
         private readonly IHttpClient _httpClient;
         private readonly IRequestProvider _requestProvider;
         private readonly IJsonParser _jsonParser;
@@ -29,7 +27,11 @@ namespace SynoDs.Core.Api
         {
             if (isAuthenticatedRequest && !_authenticationProvider.IsLoggedIn)
             {
-                _authenticationProvider.LoginAsync();
+               var loginResult =  await _authenticationProvider.LoginAsync();
+                if (!loginResult)
+                {
+                    throw new SynologyException("Error loggging in.");
+                }
             }
 
             var request = _requestProvider.PrepareRequest<TResult>(requestParameters, _authenticationProvider.Sid);
@@ -39,6 +41,7 @@ namespace SynoDs.Core.Api
             return resultObject;
         }
 
+// ReSharper disable once CSharpWarnings::CS1998
         public async Task<TResult> PerformOperationWithFileAsync<TResult>(RequestParameters requestParameters, Stream fileStream, bool isAuthenticatedRequest = true)
         {
             throw new System.NotImplementedException();
