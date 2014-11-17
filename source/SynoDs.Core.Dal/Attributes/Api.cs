@@ -3,7 +3,7 @@
     using System;
     using Enums;
 
-    public class Api : Attribute
+    public sealed class Api : Attribute
     {
         private RootApi RootApi { get; set; }
         private ChildApi ChildApi { get; set; }

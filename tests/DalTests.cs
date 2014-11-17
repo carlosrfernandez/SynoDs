@@ -59,39 +59,12 @@ namespace SynologyTests
 
 
         [TestMethod]
-        public void TestGetRootApi()
+        public void TestApiAttributes()
         {
-            
+            var api = new Api(SynoDs.Core.Dal.Enums.RootApi.API, SynoDs.Core.Dal.Enums.ChildApi.Auth);
 
+            Assert.AreEqual("SYNO.API", api.GetRootApi());
+            Assert.AreEqual("Auth", api.GetChildApi());
         }
-
-        [TestMethod]
-        public void TestGetApi()
-        {
-
-        }
-
-        [TestMethod]
-        public void GetChildApi()
-        {
-
-        }
-
-        /*
-         *   public string GetApi()
-        {
-            return string.Format("SYNO.{0}.{1}", RootApi, ChildApi);
-        }
-
-        public string GetRootApi()
-        {
-            return RootApi.ToString();
-        }
-
-        public string GetChildApi()
-        {
-            return ChildApi.ToString();
-        }
-         * */
     }
 }
