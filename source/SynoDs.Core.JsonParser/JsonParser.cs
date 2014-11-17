@@ -15,11 +15,6 @@ namespace SynoDs.Core.JsonParser
             _errorProvider = errorProvider;
         }
 
-        public string ToJson<T>(T instance)
-        {
-            return JsonConvert.SerializeObject(instance);    
-        }
-
         public T FromJson<T>(string json)
         {
             var obj = JObject.Parse(json);

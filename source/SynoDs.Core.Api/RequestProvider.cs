@@ -12,12 +12,12 @@ namespace SynoDs.Core.Api
 
         public RequestProvider(IAttributeReader attributeReader, IInformationProvider informationProvider)
         {
-            this._attributeReader = attributeReader;
+            _attributeReader = attributeReader;
             _informationProvider = informationProvider;
         }
 
         /// <summary>
-        /// Todo: Implement
+        /// Todo: Implement the missing params.
         /// </summary>
         /// <param name="requestParameters">The Request params.</param>
         /// <param name="authenticationToken"></param>

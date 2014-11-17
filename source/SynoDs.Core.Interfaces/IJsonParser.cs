@@ -4,7 +4,7 @@ namespace SynoDs.Core.Interfaces
 {
     public interface IJsonParser
     {
-        string ToJson<T>(T instance);
+        // string ToJson<T>(T instance);
         T FromJson<T>(string json);
     }
 }

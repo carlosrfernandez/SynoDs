@@ -30,7 +30,8 @@ namespace SynologyTests
         public void TestDeserializeMissingDataJsonObjectMethod1()
         {
             var errorMock = new Mock<IErrorProvider>();
-            errorMock.Setup(p => p.GetErrorDescriptionForCode(0)).Returns("Some error");
+            
+            errorMock.Setup(p => p.GetErrorDescriptionForType<InfoResponse>(0)).Returns("Some error");
 
             var json = new JsonParser(errorMock.Object);
             var res = json.FromJson<LoginResponse>("{\"data\":{\"sid\":\"9769a8dhf\"},\"error\":\"0\", \"success\":\"true\"}");
@@ -42,7 +43,7 @@ namespace SynologyTests
         public void TestErrorDataDeserializationWithLogin()
         {
             var errorMock = new Mock<IErrorProvider>();
-            errorMock.Setup(p=>p.GetErrorDescriptionForCode(101)).Returns("Some error");
+            errorMock.Setup(p=>p.GetErrorDescriptionForType<object>(101)).Returns("Some error");
 
             var json = new JsonParser(errorMock.Object);
             var res = json.FromJson<LoginResponse>("{\"error\":\"101\", \"success\":\"false\"}");
@@ -53,7 +54,7 @@ namespace SynologyTests
         public void TestErrorDataWithSuccessFlagAndNoErrorCode()
         {
             var errorMock = new Mock<IErrorProvider>();
-            errorMock.Setup(p => p.GetErrorDescriptionForCode(101)).Returns("Some error");
+            errorMock.Setup(p => p.GetErrorDescriptionForType<object>(101)).Returns("Some error");
 
             var json = new JsonParser(errorMock.Object);
             var res = json.FromJson<LoginResponse>("{\"error\":\"0\", \"success\":\"true\"}");
@@ -62,5 +63,6 @@ namespace SynologyTests
             Assert.IsNull(res.ResponseData);
             Assert.IsTrue(res.Success);
         }
+
     }
 }

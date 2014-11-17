@@ -1,4 +1,6 @@
-﻿using SynoDs.Core.Interfaces;
+﻿using System;
+using SynoDs.Core.Exceptions;
+using SynoDs.Core.Interfaces;
 
 namespace SynoDs.Core.Api.ErrorHandling
 {
@@ -30,9 +32,9 @@ namespace SynoDs.Core.Api.ErrorHandling
             {
                 return Resources.ErrorRepository.ResourceManager.GetString(index);
             }
-            catch
+            catch(Exception exception)
             {
-                return "Unknown error!";
+                throw new SynologyException("Could not get error description, unknown error occurred. See inner exception for details", exception);
             }
         }
     }

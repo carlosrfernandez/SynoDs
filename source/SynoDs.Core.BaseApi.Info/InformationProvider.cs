@@ -10,7 +10,7 @@ namespace SynoDs.Core.BaseApi.Info
     using Dal.HttpBase;
     using Interfaces;
     using Interfaces.Synology;
-    using SynoDs.Core.Exception;
+    using SynoDs.Core.Exceptions;
 
     public class InformationProvider :  IInformationProvider
     {
@@ -22,8 +22,6 @@ namespace SynoDs.Core.BaseApi.Info
 
         private ApiInfoWrapper ApiInformationCache { get; set; }
 
-        private const string ErrorProviderName = "InfoErrorProvider";
-
         private readonly IOperationProvider _operationProvider;
 
         public InformationProvider(IOperationProvider operationProvider)
@@ -33,7 +31,7 @@ namespace SynoDs.Core.BaseApi.Info
             this._operationProvider = operationProvider;
         }
 
-        protected override string GetSessionName()
+        protected string GetSessionName()
         {
             return InfoSessionName;
         }
@@ -88,7 +86,5 @@ namespace SynoDs.Core.BaseApi.Info
                 throw new SynologyException("Error while getting API InformationProvider.");
             }
         }
-
-        IErrorProvider IApi.ErrorProvider { get; set; }
     }
 }
