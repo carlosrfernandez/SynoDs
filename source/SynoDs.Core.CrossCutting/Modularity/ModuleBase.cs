@@ -1,8 +1,7 @@
-﻿namespace SynoDs.Core.CrossCutting.Modularity
-{
-    using Interfaces.IoC;
-    using Interfaces.Modularity;
+﻿using SynoDs.Core.Contracts.Modularity;
 
+namespace SynoDs.Core.CrossCutting.Modularity
+{
     public abstract class ModuleBase : IApiModule
     {
         public bool RequiresAuthenticatedRequests { get; private set; }

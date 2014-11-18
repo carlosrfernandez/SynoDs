@@ -1,4 +1,4 @@
-﻿using SynoDs.Core.Interfaces.IoC;
+﻿using SynoDs.Core.Contracts.IoC;
 
 namespace SynoDs.Core.CrossCutting
 {

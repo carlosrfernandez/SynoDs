@@ -2,7 +2,7 @@
 using SynoDs.Core.CrossCutting.Common;
 using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.Dal.HttpBase;
-using SynoDs.Core.Interfaces.Synology;
+using SynoDs.Core.Contracts.Synology;
 
 namespace SynoDs.Core.BaseApi.Auth
 {

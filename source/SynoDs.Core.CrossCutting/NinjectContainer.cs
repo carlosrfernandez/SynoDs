@@ -1,4 +1,4 @@
-﻿using SynoDs.Core.Interfaces.IoC;
+﻿using SynoDs.Core.Contracts.IoC;
 using Ninject;
 
 namespace SynoDs.Core.CrossCutting

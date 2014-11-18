@@ -1,6 +1,4 @@
-﻿using SynoDs.Core.Dal.HttpBase;
-
-namespace SynoDs.Core.Interfaces
+﻿namespace SynoDs.Core.Contracts
 {
     public interface IJsonParser
     {

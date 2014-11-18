@@ -1,16 +1,12 @@
-﻿using SynoDs.Core.Api;
+﻿using SynoDs.Core.Contracts.Synology;
 
 namespace SynoDs.Core.BaseApi.Info
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Exceptions;
     using Dal.BaseApi;
     using Dal.HttpBase;
-    using Interfaces;
-    using Interfaces.Synology;
-    using SynoDs.Core.Exceptions;
 
     public class InformationProvider :  IInformationProvider
     {

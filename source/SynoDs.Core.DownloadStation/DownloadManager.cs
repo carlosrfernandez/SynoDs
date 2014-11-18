@@ -1,24 +1,19 @@
-﻿using SynoDs.Core.Api;
-using SynoDs.Core.Dal.BaseApi;
-using SynoDs.Core.DownloadStation.ErrorHandling;
-using SynoDs.Core.Interfaces.Synology;
+﻿using SynoDs.Core.Dal.BaseApi;
 
 namespace SynoDs.Core.DownloadStation
 {
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
-    using Exceptions;
     using CrossCutting.Common;
     using Dal.DownloadStation.Task;
     using Dal.Enums;
     using Dal.HttpBase;
-    using Interfaces;
 
     /// <summary>
     /// DownloadStation client class.
     /// </summary>
-    public sealed class DownloadManager : Base
+    public sealed class DownloadManager
     {
         public const string DlSessionName = "DownloadStation";
 

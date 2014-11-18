@@ -41,6 +41,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\SynoDs.Core.Contracts\SynoDs.Core.Contracts.csproj">
+      <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
+      <Name>SynoDs.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
       <Project>{adbfe2ac-59da-4f12-8701-6aed991abe22}</Project>
       <Name>SynoDs.Core.CrossCutting</Name>
@@ -53,10 +57,6 @@
       <Project>{8DC00C72-0107-4774-AAF3-D5CD49B5F66D}</Project>
       <Name>SynoDs.Core.Exceptions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SynoDs.Core.Interfaces\SynoDs.Core.Interfaces.csproj">
-      <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
-      <Name>SynoDs.Core.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.JsonParser\SynoDs.Core.JsonParser.csproj">
       <Project>{5202ee3e-c77e-4799-b841-cd60dbd8b38d}</Project>
       <Name>SynoDs.Core.JsonParser</Name>
@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="ApiCoreBootstrapper.cs" />
     <Compile Include="AttributeReader.cs" />
-    <Compile Include="Base.cs" />
+    <Compile Include="DsClient.cs" />
     <Compile Include="ErrorHandling\ErrorProvider.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
     <Compile Include="Module\ApiCoreModule.cs" />

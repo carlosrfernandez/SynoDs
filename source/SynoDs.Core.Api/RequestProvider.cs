@@ -1,14 +1,13 @@
 ﻿using System.Net;
 using SynoDs.Core.Dal.HttpBase;
-using SynoDs.Core.Interfaces;
-using SynoDs.Core.Interfaces.Synology;
+using SynoDs.Core.Contracts;
+using SynoDs.Core.Contracts.Synology;
 
 namespace SynoDs.Core.Api
 {
     public class RequestProvider : IRequestProvider
     {
         private readonly IAttributeReader _attributeReader;
-        private readonly IInformationProvider _informationProvider;
 
         public RequestProvider(IAttributeReader attributeReader, IInformationProvider informationProvider)
         {

@@ -1,6 +1,6 @@
 ﻿using SynoDs.Core.CrossCutting;
-using SynoDs.Core.Interfaces.Modularity;
-using SynoDs.Core.Interfaces.Synology;
+using SynoDs.Core.Contracts.Modularity;
+using SynoDs.Core.Contracts.Synology;
 
 namespace SynoDs.Core.BaseApi.Auth.Module
 {

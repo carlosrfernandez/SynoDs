@@ -1,6 +1,6 @@
 ﻿using System;
 using SynoDs.Core.Exceptions;
-using SynoDs.Core.Interfaces;
+using SynoDs.Core.Contracts;
 
 namespace SynoDs.Core.Api.ErrorHandling
 {

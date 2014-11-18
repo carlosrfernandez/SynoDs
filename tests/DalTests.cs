@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SynoDs.Core.Dal.Attributes;
-using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.Dal.HttpBase;
 
 namespace SynologyTests
@@ -22,6 +21,15 @@ namespace SynologyTests
             };
 
             Assert.AreEqual("webapi/query.cgi?api=SYNO.API.Info&version=1&method=query&query=all", apiRequestBase.ToString());
+        }
+
+        [TestMethod]
+        public void ApiAttributesTest()
+        {
+            var api = new Api(SynoDs.Core.Dal.Enums.RootApi.API, SynoDs.Core.Dal.Enums.ChildApi.Auth);
+            Assert.AreEqual("API", api.GetRootApi());
+            Assert.AreEqual("Auth", api.GetChildApi());
+            Assert.AreEqual("SYNO.API.Auth", api.GetApi());
         }
 
         [TestMethod]
@@ -55,16 +63,6 @@ namespace SynologyTests
             };
             
             Assert.AreEqual(string.Format("webapi/query.cgi?api=SYNO.API.Info&version=1&method=query&query=all&_sid={0}", sid), apiRequestBase.ToString());
-        }
-
-
-        [TestMethod]
-        public void TestApiAttributes()
-        {
-            var api = new Api(SynoDs.Core.Dal.Enums.RootApi.API, SynoDs.Core.Dal.Enums.ChildApi.Auth);
-
-            Assert.AreEqual("SYNO.API", api.GetRootApi());
-            Assert.AreEqual("Auth", api.GetChildApi());
         }
     }
 }

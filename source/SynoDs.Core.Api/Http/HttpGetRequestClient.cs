@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using SynoDs.Core.Exceptions;
-using SynoDs.Core.Interfaces;
+using SynoDs.Core.Contracts;
 
 namespace SynoDs.Core.Api.Http
 {

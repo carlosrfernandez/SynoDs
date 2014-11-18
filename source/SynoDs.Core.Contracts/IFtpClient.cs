@@ -1,9 +1,9 @@
-﻿namespace SynoDs.Core.Interfaces
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
+namespace SynoDs.Core.Contracts
+{
     /// <summary>
     /// Basic interface to work with a very basic FTP client.
     /// It is not intended to be a full working client. Just read only operations.

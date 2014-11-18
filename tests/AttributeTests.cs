@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SynoDs.Core.Api;
 using SynoDs.Core.Exceptions;
 using SynoDs.Core.Dal.BaseApi;
 

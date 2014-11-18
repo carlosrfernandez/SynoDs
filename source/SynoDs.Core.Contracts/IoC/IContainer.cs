@@ -1,4 +1,4 @@
-﻿namespace SynoDs.Core.Interfaces.IoC
+﻿namespace SynoDs.Core.Contracts.IoC
 {
     /// <summary>
     /// Provides an abstraction to an inversion of control Container. It is up to the client to use which ever one they like. 

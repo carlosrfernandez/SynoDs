@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using SynoDs.Core.Dal.HttpBase;
 using SynoDs.Core.Exceptions;
-using SynoDs.Core.Interfaces;
-using SynoDs.Core.Interfaces.Synology;
+using SynoDs.Core.Contracts;
+using SynoDs.Core.Contracts.Synology;
 
 namespace SynoDs.Core.Api
 {

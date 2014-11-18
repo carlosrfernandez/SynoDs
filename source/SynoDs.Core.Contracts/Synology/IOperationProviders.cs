@@ -1,10 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using SynoDs.Core.Dal.HttpBase;
-using SynoDs.Core.Dal.BaseApi;
 
-namespace SynoDs.Core.Interfaces.Synology
+namespace SynoDs.Core.Contracts.Synology
 {
     public interface IOperationProvider
     {

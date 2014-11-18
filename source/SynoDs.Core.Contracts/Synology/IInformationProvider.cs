@@ -1,8 +1,8 @@
-﻿namespace SynoDs.Core.Interfaces.Synology
-{
-    using Dal.BaseApi;
-    using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using SynoDs.Core.Dal.BaseApi;
 
+namespace SynoDs.Core.Contracts.Synology
+{
     /// <summary>
     /// Defines the way that the Info Api will be implemented.
     /// </summary>

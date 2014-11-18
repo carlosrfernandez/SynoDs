@@ -1,7 +1,7 @@
-﻿namespace SynoDs.Core.Interfaces
-{
-    using System;
+﻿using System;
 
+namespace SynoDs.Core.Contracts
+{
     public interface IHttpClient : IDisposable
     {
         System.Threading.Tasks.Task<string> SendRequestAsync();

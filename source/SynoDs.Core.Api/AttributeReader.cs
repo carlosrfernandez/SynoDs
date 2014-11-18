@@ -1,10 +1,10 @@
-﻿namespace SynoDs.Core.Exceptions
-{
-    using System.Linq;
-    using System.Reflection;
-    using Dal.Attributes;
-    using Interfaces;
+﻿using System.Linq;
+using System.Reflection;
+using SynoDs.Core.Contracts;
+using SynoDs.Core.Dal.Attributes;
 
+namespace SynoDs.Core.Api
+{
     /// <summary>
     /// Read the attributes of the Objects defined in the DAL so that we can retrieve the API to which they belong 
     /// and the methods that we need to use. 
@@ -53,7 +53,7 @@
         public string ReadApiNameFromT<T>()
         {
             var info = typeof (T).GetTypeInfo();
-            var attribute = info.GetCustomAttribute<Api>();
+            var attribute = info.GetCustomAttribute<Dal.Attributes.Api>();
             return attribute.GetApi();
         }
     }

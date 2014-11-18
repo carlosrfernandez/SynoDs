@@ -1,22 +1,18 @@
-﻿namespace SynoDs.Core.CrossCutting
+﻿using SynoDs.Core.Contracts.IoC;
+
+namespace SynoDs.Core.CrossCutting
 {
-    public class Bootstrapper
+    public abstract class BootstrapperBase : IBootstrapper
     {
         public IoCFactory Factory { get; set; }
 
-        public Bootstrapper(IoCFactory factory)
+        protected BootstrapperBase(IoCFactory factory)
         {
             Factory = factory;
         }
 
-        public void Startup()
-        {
-            // Register dependencies.
-        }
+        public abstract void Startup();
 
-        public void ShutDown()
-        {
-            
-        }
+        public abstract void Shutdown();
     }
 }

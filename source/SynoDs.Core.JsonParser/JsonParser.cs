@@ -3,7 +3,7 @@
 namespace SynoDs.Core.JsonParser
 {
     using Newtonsoft.Json;
-    using Interfaces;
+    using Contracts;
     using Newtonsoft.Json.Linq;
 
     public class JsonParser : IJsonParser

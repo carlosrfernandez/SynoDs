@@ -8,8 +8,8 @@
     <ProjectGuid>{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SynoDs.Core.Interfaces</RootNamespace>
-    <AssemblyName>SynoDs.Core.Interfaces</AssemblyName>
+    <RootNamespace>SynoDs.Core.Contracts</RootNamespace>
+    <AssemblyName>SynoDs.Core.Contracts</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -38,8 +38,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Bootstrapper\BootstrapperBase.cs" />
     <Compile Include="IAttributeReader.cs" />
+    <Compile Include="IoC\IBootstrapper.cs" />
     <Compile Include="Modularity\IApiModule.cs" />
     <Compile Include="Synology\IApi.cs" />
     <Compile Include="IErrorProvider.cs" />

@@ -1,10 +1,9 @@
 ﻿using SynoDs.Core.Api.ErrorHandling;
 using SynoDs.Core.Api.Http;
 using SynoDs.Core.CrossCutting;
-using SynoDs.Core.Exceptions;
-using SynoDs.Core.Interfaces;
-using SynoDs.Core.Interfaces.Modularity;
-using SynoDs.Core.Interfaces.Synology;
+using SynoDs.Core.Contracts;
+using SynoDs.Core.Contracts.Modularity;
+using SynoDs.Core.Contracts.Synology;
 
 namespace SynoDs.Core.Api.Module
 {

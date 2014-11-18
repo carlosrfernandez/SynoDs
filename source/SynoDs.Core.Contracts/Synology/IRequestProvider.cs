@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SynoDs.Core.Dal.HttpBase;
+﻿using SynoDs.Core.Dal.HttpBase;
 
-namespace SynoDs.Core.Interfaces.Synology
+namespace SynoDs.Core.Contracts.Synology
 {
     /// <summary>
     /// Provides the contracts to be used by Operations.

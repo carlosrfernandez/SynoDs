@@ -1,4 +1,4 @@
-﻿namespace SynoDs.Core.Interfaces.Synology
+﻿namespace SynoDs.Core.Contracts.Synology
 {
     /// <summary>
     /// Defines the basic contracts to be implemented by all APIs

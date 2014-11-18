@@ -1,4 +1,4 @@
-﻿namespace SynoDs.Core.Interfaces
+﻿namespace SynoDs.Core.Contracts
 {
     /// <summary>
     /// Interface for getting known error types. 

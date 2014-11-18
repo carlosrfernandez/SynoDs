@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SynoDs.Core.Api;
-using SynoDs.Core.Exceptions;
 using SynoDs.Core.Dal.Enums;
 using SynoDs.Core.Dal.FileStation.CreateFolder;
 using SynoDs.Core.Dal.FileStation.Rename;
@@ -14,18 +13,13 @@ namespace SynoDs.Core.FileStation
     /// Contains the File and Folder related operations
     /// Like Create, Rename, CopyMove.
     /// </summary>
-    public partial class FileStation : Base
+    public partial class FileStation
     {
         private const string FsSessionName = "FileStation";
 
         public FileStation()
         {
 
-        }
-
-        protected override string GetSessionName()
-        {
-            return FsSessionName;
         }
 
         //protected override sealed string SessionName

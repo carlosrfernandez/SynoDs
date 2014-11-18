@@ -13,7 +13,7 @@ namespace SynoDs.Core.Api
     /// TODO: Add the File Upload method for uploading torrents from the client application.
     /// TODO: Add known error handling of the API
     /// </summary>
-    public abstract class Base
+    public class DsClient
     {
         // Api properties
         protected string DsUsername { get; set; }
@@ -34,7 +34,7 @@ namespace SynoDs.Core.Api
         /// <summary>
         /// Default parameterless constructor
         /// </summary>
-        protected Base(DsStationInfo dsInfo, LoginCredentials credentials)
+        protected DsClient(DsStationInfo dsInfo, LoginCredentials credentials)
         {
             Validate.ArgumentIsNotNullOrEmpty(dsInfo);
             Validate.ArgumentIsNotNullOrEmpty(credentials);

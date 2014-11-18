@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SynoDs.Core.CrossCutting;
-using SynoDs.Core.Interfaces;
-using SynoDs.Core.Interfaces.Modularity;
+using SynoDs.Core.Contracts;
+using SynoDs.Core.Contracts.Modularity;
 
 namespace SynoDs.Core.JsonParser.Module
 {

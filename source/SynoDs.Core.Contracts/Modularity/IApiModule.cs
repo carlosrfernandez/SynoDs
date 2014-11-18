@@ -1,4 +1,4 @@
-﻿namespace SynoDs.Core.Interfaces.Modularity
+﻿namespace SynoDs.Core.Contracts.Modularity
 {
     public interface IApiModule
     {

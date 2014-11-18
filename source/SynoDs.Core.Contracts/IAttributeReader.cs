@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SynoDs.Core.Interfaces
+﻿namespace SynoDs.Core.Contracts
 {
     /// <summary>
     /// Reads attributes from the DAL classes in order to get some information required for requests.

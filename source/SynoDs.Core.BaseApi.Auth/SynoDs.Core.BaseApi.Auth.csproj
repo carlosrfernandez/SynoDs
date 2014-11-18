@@ -39,6 +39,10 @@
       <Project>{7e0bdc20-a490-4db0-869b-35576d74332f}</Project>
       <Name>SynoDs.Core.ApiBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SynoDs.Core.Contracts\SynoDs.Core.Contracts.csproj">
+      <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
+      <Name>SynoDs.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
       <Project>{adbfe2ac-59da-4f12-8701-6aed991abe22}</Project>
       <Name>SynoDs.Core.CrossCutting</Name>
@@ -46,10 +50,6 @@
     <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
       <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
       <Name>SynoDs.Core.Dal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SynoDs.Core.Interfaces\SynoDs.Core.Interfaces.csproj">
-      <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
-      <Name>SynoDs.Core.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
