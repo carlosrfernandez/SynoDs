@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using SynoDs.Core.CrossCutting.Common;
 using SynoDs.Core.Dal.HttpBase;
 using SynoDs.Core.Contracts;
 using SynoDs.Core.Contracts.Synology;
@@ -8,9 +10,13 @@ namespace SynoDs.Core.Api
     public class RequestProvider : IRequestProvider
     {
         private readonly IAttributeReader _attributeReader;
+        private readonly IInformationProvider _informationProvider;
 
         public RequestProvider(IAttributeReader attributeReader, IInformationProvider informationProvider)
         {
+            Validate.ArgumentIsNotNullOrEmpty(attributeReader);
+            Validate.ArgumentIsNotNullOrEmpty(informationProvider);
+
             _attributeReader = attributeReader;
             _informationProvider = informationProvider;
         }
