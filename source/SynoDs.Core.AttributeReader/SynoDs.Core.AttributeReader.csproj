@@ -5,20 +5,16 @@
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}</ProjectGuid>
+    <ProjectGuid>{87D1D3D9-3AF2-46F2-9631-8AD02FDAA6C0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SynoDs.Core.Contracts</RootNamespace>
-    <AssemblyName>SynoDs.Core.Contracts</AssemblyName>
+    <RootNamespace>SynoDs.Core.AttributeReader</RootNamespace>
+    <AssemblyName>SynoDs.Core.AttributeReader</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,27 +34,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="IAttributeReader.cs" />
-    <Compile Include="IoC\IBootstrapper.cs" />
-    <Compile Include="Modularity\IApiModule.cs" />
-    <Compile Include="IErrorProvider.cs" />
-    <Compile Include="IFtpClient.cs" />
-    <Compile Include="IHttpClient.cs" />
-    <Compile Include="IJsonParser.cs" />
-    <Compile Include="IoC\IContainer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Synology\IDownloadProvider.cs" />
-    <Compile Include="Synology\IFileProvider.cs" />
-    <Compile Include="Synology\IInformationProvider.cs" />
-    <Compile Include="Synology\IAuthenticationProvider.cs" />
-    <Compile Include="Synology\IOperationProviders.cs" />
-    <Compile Include="Synology\IRequestProvider.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\SynoDs.Core.Contracts\SynoDs.Core.Contracts.csproj">
+      <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
+      <Name>SynoDs.Core.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
+      <Project>{ADBFE2AC-59DA-4F12-8701-6AED991ABE22}</Project>
+      <Name>SynoDs.Core.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
       <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
       <Name>SynoDs.Core.Dal</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttributeReader.cs" />
+    <Compile Include="Module\AttributeReaderModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

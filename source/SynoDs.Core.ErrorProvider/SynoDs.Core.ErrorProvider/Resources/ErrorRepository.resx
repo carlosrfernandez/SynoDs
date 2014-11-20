@@ -117,43 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="_100" xml:space="preserve">
-    <value>Unknown Error</value>
+  <data name="Info100" xml:space="preserve">
+    <value>error 100</value>
+    <comment>Api</comment>
   </data>
-  <data name="_101" xml:space="preserve">
-    <value>Invalid parameter</value>
+  <data name="Info101" xml:space="preserve">
+    <value>error 101</value>
   </data>
-  <data name="_102" xml:space="preserve">
-    <value>The requested API does not exist</value>
-  </data>
-  <data name="_103" xml:space="preserve">
-    <value>The requested method does not exist</value>
-  </data>
-  <data name="_104" xml:space="preserve">
-    <value>The requested version does not support the functionality</value>
-  </data>
-  <data name="_105" xml:space="preserve">
-    <value>The logged in session does not have permission</value>
-  </data>
-  <data name="_106" xml:space="preserve">
-    <value>Session timeout</value>
-  </data>
-  <data name="_107" xml:space="preserve">
-    <value>Session interrupted by duplicate login.</value>
-  </data>
-  <data name="_400" xml:space="preserve">
-    <value>No such account or incorrect password</value>
-  </data>
-  <data name="_401" xml:space="preserve">
-    <value>Guest account disabled</value>
-  </data>
-  <data name="_402" xml:space="preserve">
-    <value>Account disabled</value>
-  </data>
-  <data name="_403" xml:space="preserve">
-    <value>Wrong password</value>
-  </data>
-  <data name="_404" xml:space="preserve">
-    <value>Permission denied</value>
+  <data name="Info102" xml:space="preserve">
+    <value>error 102</value>
   </data>
 </root>

@@ -64,9 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiCoreBootstrapper.cs" />
-    <Compile Include="AttributeReader.cs" />
     <Compile Include="DsClient.cs" />
-    <Compile Include="ErrorHandling\ErrorProvider.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
     <Compile Include="Module\ApiCoreModule.cs" />
     <Compile Include="OperationProvider.cs" />

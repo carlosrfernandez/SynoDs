@@ -36,6 +36,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.FileStation", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.Contracts", "source\SynoDs.Core.Contracts\SynoDs.Core.Contracts.csproj", "{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.ErrorProvider", "source\SynoDs.Core.ErrorProvider\SynoDs.Core.ErrorProvider\SynoDs.Core.ErrorProvider.csproj", "{5A3A5C83-8BC0-4954-A335-0761DCA3C6C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynoDs.Core.AttributeReader", "source\SynoDs.Core.AttributeReader\SynoDs.Core.AttributeReader.csproj", "{87D1D3D9-3AF2-46F2-9631-8AD02FDAA6C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +86,14 @@ Global
 		{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A3A5C83-8BC0-4954-A335-0761DCA3C6C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A3A5C83-8BC0-4954-A335-0761DCA3C6C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A3A5C83-8BC0-4954-A335-0761DCA3C6C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A3A5C83-8BC0-4954-A335-0761DCA3C6C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87D1D3D9-3AF2-46F2-9631-8AD02FDAA6C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D1D3D9-3AF2-46F2-9631-8AD02FDAA6C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87D1D3D9-3AF2-46F2-9631-8AD02FDAA6C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87D1D3D9-3AF2-46F2-9631-8AD02FDAA6C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +110,7 @@ Global
 		{8DC00C72-0107-4774-AAF3-D5CD49B5F66D} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
 		{65DBB4BF-2C0E-4689-867A-0629D05BDCFF} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
 		{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
+		{5A3A5C83-8BC0-4954-A335-0761DCA3C6C4} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
+		{87D1D3D9-3AF2-46F2-9631-8AD02FDAA6C0} = {DC5C5CE8-5C49-4AD0-B23D-001FAE539573}
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,8 @@
 ﻿using System;
-using SynoDs.Core.Exceptions;
 using SynoDs.Core.Contracts;
+using SynoDs.Core.Exceptions;
 
-namespace SynoDs.Core.Api.ErrorHandling
+namespace SynoDs.Core.ErrorProvider
 {
     /// <summary>
     /// Provides the errors for all documented api errors
@@ -21,7 +21,7 @@ namespace SynoDs.Core.Api.ErrorHandling
         {
             // Get API info. 
             var apiName = _attributeReader.ReadApiNameFromT<T>();
-            
+
             // get that error info.
             return ReadErrorCodeFromResource(string.Format("{0}{1}", apiName, errorCode));
         }
@@ -32,9 +32,11 @@ namespace SynoDs.Core.Api.ErrorHandling
             {
                 return Resources.ErrorRepository.ResourceManager.GetString(index);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
-                throw new SynologyException("Could not get error description, unknown error occurred. See inner exception for details", exception);
+                throw new SynologyException(
+                    "Could not get error description, unknown error occurred. See inner exception for details",
+                    exception);
             }
         }
     }

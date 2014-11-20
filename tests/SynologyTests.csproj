@@ -94,6 +94,10 @@
       <Project>{7e0bdc20-a490-4db0-869b-35576d74332f}</Project>
       <Name>SynoDs.Core.ApiBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\SynoDs.Core.AttributeReader\SynoDs.Core.AttributeReader.csproj">
+      <Project>{87d1d3d9-3af2-46f2-9631-8ad02fdaa6c0}</Project>
+      <Name>SynoDs.Core.AttributeReader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\SynoDs.Core.BaseApi.Auth\SynoDs.Core.BaseApi.Auth.csproj">
       <Project>{f075e54f-9f90-470e-9576-96f0fd3b07f7}</Project>
       <Name>SynoDs.Core.BaseApi.Auth</Name>

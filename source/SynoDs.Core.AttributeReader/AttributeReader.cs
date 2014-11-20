@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using System.Reflection;
 using SynoDs.Core.Contracts;
+
+// Todo: remove reference to DAL
 using SynoDs.Core.Dal.Attributes;
 
-namespace SynoDs.Core.Api
+namespace SynoDs.Core.AttributeReader
 {
     /// <summary>
     /// Read the attributes of the Objects defined in the DAL so that we can retrieve the API to which they belong 
@@ -20,7 +22,7 @@ namespace SynoDs.Core.Api
         {
             var info = typeof(T).GetTypeInfo();
             var genericParams = info.BaseType.GenericTypeArguments;
-            
+
             // First level generic type argument check.
             var result = genericParams.Select(type => type.GetTypeInfo().GetCustomAttribute<ApiMethod>())
                                 .Where(methodName => methodName != null)
@@ -29,7 +31,7 @@ namespace SynoDs.Core.Api
 
             if (result != null)
                 return result;
-            
+
             // If we have a second level generic entity (like IEnumerable<MyType>) we need to check IEnumerable's generic type arguments.
             foreach (var secondLevelResult in genericParams.Select(item => item.GetTypeInfo().GenericTypeArguments))
             {
@@ -52,7 +54,7 @@ namespace SynoDs.Core.Api
         /// <returns>A tring with the API name</returns>
         public string ReadApiNameFromT<T>()
         {
-            var info = typeof (T).GetTypeInfo();
+            var info = typeof(T).GetTypeInfo();
             var attribute = info.GetCustomAttribute<Dal.Attributes.Api>();
             return attribute.GetApi();
         }

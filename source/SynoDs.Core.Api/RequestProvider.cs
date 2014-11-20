@@ -32,10 +32,14 @@ namespace SynoDs.Core.Api
             var api = _attributeReader.ReadApiNameFromT<TResult>();
             var method = _attributeReader.ReadMethodAttributeFromT<TResult>();
 
+            var infoResponse = _informationProvider.GetApiInformationAsync(api).Result;
+            
             var requestBase = new RequestBase
             {
                 ApiName = api,
                 Method = method,
+                Path = infoResponse.Path,
+                Version = infoResponse.MaxVersion.ToString()
             };
 
             if (requestParameters != null)

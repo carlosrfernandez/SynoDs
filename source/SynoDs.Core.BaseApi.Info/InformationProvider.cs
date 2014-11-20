@@ -1,4 +1,5 @@
-﻿using SynoDs.Core.Contracts.Synology;
+﻿using SynoDs.Core.Contracts;
+using SynoDs.Core.Contracts.Synology;
 
 namespace SynoDs.Core.BaseApi.Info
 {
@@ -18,13 +19,19 @@ namespace SynoDs.Core.BaseApi.Info
 
         private ApiInfoWrapper ApiInformationCache { get; set; }
 
+        private readonly IHttpClient _httpClient;
+
+        private readonly IJsonParser _jsonParser;
+
         private readonly IOperationProvider _operationProvider;
 
-        public InformationProvider(IOperationProvider operationProvider)
+        public InformationProvider(IOperationProvider operationProvider, IHttpClient httpClient, IJsonParser jsonParser)
         {
             IsCacheEmtpy = true;
             FullyLoadApiInformationCache = true; //add config and read this from it.
             this._operationProvider = operationProvider;
+            _httpClient = httpClient;
+            _jsonParser = jsonParser;
         }
 
         protected string GetSessionName()
