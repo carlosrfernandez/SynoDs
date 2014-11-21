@@ -35,10 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\SynoDs.Core.Api\SynoDs.Core.ApiBase.csproj">
-      <Project>{7e0bdc20-a490-4db0-869b-35576d74332f}</Project>
-      <Name>SynoDs.Core.ApiBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.Contracts\SynoDs.Core.Contracts.csproj">
       <Project>{0a64e79d-5e0f-4e19-8fc8-3a0de0146e5d}</Project>
       <Name>SynoDs.Core.Contracts</Name>

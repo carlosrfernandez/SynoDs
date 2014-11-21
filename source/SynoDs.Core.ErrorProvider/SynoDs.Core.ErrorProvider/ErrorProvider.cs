@@ -2,7 +2,7 @@
 using SynoDs.Core.Contracts;
 using SynoDs.Core.Exceptions;
 
-namespace SynoDs.Core.ErrorProvider
+namespace SynoDs.Core.Error
 {
     /// <summary>
     /// Provides the errors for all documented api errors

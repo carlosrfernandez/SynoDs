@@ -1,30 +1,29 @@
 ﻿using System.Threading.Tasks;
+using SynoDs.Core.Contracts.Synology;
 using SynoDs.Core.CrossCutting.Common;
 using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.Dal.HttpBase;
-using SynoDs.Core.Contracts.Synology;
 
-namespace SynoDs.Core.BaseApi.Auth
+namespace SynoDs.Core.Api.Auth
 {
-    public class Authentication : IAuthenticationProvider
+    public class AuthenticationProvider : IAuthenticationProvider
     {
         public bool IsLoggedIn { get; set; }
 
         public bool IsLoggingIn { get; set; } // to control logging in process.
-        
+
         public string Sid { get; set; }
 
         private readonly IOperationProvider _operationProvider;
 
-        private readonly LoginCredentials _credentials;
+        public LoginCredentials Credentials { get; set; }
 
         private const string SessionName = "DiskStation";
 
-        public Authentication(IOperationProvider operationProvider, LoginCredentials loginCredentials)
+        public AuthenticationProvider(IOperationProvider operationProvider)
         {
             IsLoggedIn = false;
             _operationProvider = operationProvider;
-            _credentials = loginCredentials;
         }
 
         /// <summary>
@@ -33,14 +32,14 @@ namespace SynoDs.Core.BaseApi.Auth
         /// <returns>True if logged in and false if any errors occur.</returns>
         public async Task<bool> LoginAsync()
         {
-            Validate.ArgumentIsNotNullOrEmpty(_credentials.UserName);
-            Validate.ArgumentIsNotNullOrEmpty(_credentials.Password);
+            Validate.ArgumentIsNotNullOrEmpty(Credentials.UserName);
+            Validate.ArgumentIsNotNullOrEmpty(Credentials.Password);
 
             // prepare request
             var parameters = new RequestParameters
             {
-                {"account", _credentials.UserName},
-                {"passwd", _credentials.Password},
+                {"account", Credentials.UserName},
+                {"passwd", Credentials.Password},
                 {"session", SessionName },
                 {"format", "sid" }
             };

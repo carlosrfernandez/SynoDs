@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using SynoDs.Core.Dal.BaseApi;
 
 namespace SynoDs.Core.Contracts.Synology
 {
@@ -7,10 +8,17 @@ namespace SynoDs.Core.Contracts.Synology
     /// </summary>
     public interface IAuthenticationProvider
     {
+        LoginCredentials Credentials { get; set;}
+
         /// <summary>
         /// Will tell us if we're logged in.
         /// </summary>
         bool IsLoggedIn { get; set; }
+        
+        /// <summary>
+        /// Flago to indicate that an Authentication request is in progres.
+        /// </summary>
+        bool IsLoggingIn { get; set; }
 
         /// <summary>
         /// Stores the Session Id for the current session.

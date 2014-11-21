@@ -1,4 +1,4 @@
-﻿using SynoDs.Core.Dal.BaseApi;
+﻿using SynoDs.Core.Contracts.Synology;
 
 namespace SynoDs.Core.DownloadStation
 {
@@ -13,31 +13,17 @@ namespace SynoDs.Core.DownloadStation
     /// <summary>
     /// DownloadStation client class.
     /// </summary>
-    public sealed class DownloadManager
+    public sealed class DownloadManager : IDownloadProvider
     {
+        private readonly IOperationProvider _operationProvider;
         public const string DlSessionName = "DownloadStation";
-
-        private readonly IAuthenticationProvider _loginProvider;
-
-        protected override string GetSessionName()
-        {
-            return DlSessionName;
-        }
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public DownloadManager(LoginCredentials dsCredentials)
+        public DownloadManager(IOperationProvider operationProvider)
         {
-        }   
-
-        /// <summary>
-        /// Injection of IErrorProvider for the DownloadStation api errors.
-        /// </summary>
-        /// <param name="errorProvider">The source of error descriptions.</param>
-        public DownloadManager(IAuthenticationProvider authenticationProvider)
-        {
-            _dlErrorProvider = errorProvider;
+            this._operationProvider = operationProvider;
         }
 
         /// <summary>
@@ -65,9 +51,9 @@ namespace SynoDs.Core.DownloadStation
 
             if (requestParams.Count > 0)
             {
-                return await PerformOperationAsync<TaskListResponse>(requestParams);
+                return await _operationProvider.PerformOperationAsync<TaskListResponse>(requestParams);
             }
-            return await PerformOperationAsync<TaskListResponse>();
+            return await _operationProvider.PerformOperationAsync<TaskListResponse>(null);
         }
 
         /// <summary>
@@ -89,7 +75,7 @@ namespace SynoDs.Core.DownloadStation
             if (additionalInfo != null)
                 requestParams.Add("additional", string.Join(",", additionalInfo).ToLower());
 
-            return await PerformOperationAsync<TaskGetInfoResponse>(requestParams);
+            return await _operationProvider.PerformOperationAsync<TaskGetInfoResponse>(requestParams);
         }
 
         /// <summary>
@@ -122,9 +108,9 @@ namespace SynoDs.Core.DownloadStation
                 requestParams.Add("unzip_password", unzipPass);
 
             if (fileStream != null && fileStream.Length >0)
-                return await PerformOperationWithFileAsync<CreateTaskResponse>(requestParams, fileStream);
+                return await _operationProvider.PerformOperationWithFileAsync<CreateTaskResponse>(requestParams, fileStream);
 
-            return await PerformOperationAsync<CreateTaskResponse>(requestParams);
+            return await _operationProvider.PerformOperationAsync<CreateTaskResponse>(requestParams);
         }
 
         /// <summary>
@@ -144,7 +130,7 @@ namespace SynoDs.Core.DownloadStation
                 {"force_complete", forceComplete ? "true" : "false"}
             };
 
-            return await PerformOperationAsync<DeleteTaskResponse>(requestParams);
+            return await _operationProvider.PerformOperationAsync<DeleteTaskResponse>(requestParams);
         }
         
         /// <summary>
@@ -161,7 +147,7 @@ namespace SynoDs.Core.DownloadStation
                 {"id", string.Join(",", taskList)},
             };
 
-            return await PerformOperationAsync<PauseTaskResponse>(requestParams);
+            return await _operationProvider.PerformOperationAsync<PauseTaskResponse>(requestParams);
         }
 
         /// <summary>
@@ -178,7 +164,7 @@ namespace SynoDs.Core.DownloadStation
                 {"id", string.Join(",", taskList)},
             };
 
-            return await PerformOperationAsync<ResumeTaskResponse>(requestParams);
+            return await _operationProvider.PerformOperationAsync<ResumeTaskResponse>(requestParams);
         }
     }
 }

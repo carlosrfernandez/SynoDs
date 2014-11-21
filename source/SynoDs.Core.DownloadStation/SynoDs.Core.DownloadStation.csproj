@@ -39,6 +39,10 @@
       <Project>{7e0bdc20-a490-4db0-869b-35576d74332f}</Project>
       <Name>SynoDs.Core.ApiBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SynoDs.Core.Contracts\SynoDs.Core.Contracts.csproj">
+      <Project>{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}</Project>
+      <Name>SynoDs.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.CrossCutting\SynoDs.Core.CrossCutting.csproj">
       <Project>{adbfe2ac-59da-4f12-8701-6aed991abe22}</Project>
       <Name>SynoDs.Core.CrossCutting</Name>
@@ -50,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DownloadManager.cs" />
+    <Compile Include="Module\DownloadStationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

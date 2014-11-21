@@ -15,6 +15,6 @@
         /// <summary>
         /// Flag to indicate whether we use SSL or not.
         /// </summary>
-        public bool UseSSL { get; set; }
+        public bool UseSsl { get; set; }
     }
 }

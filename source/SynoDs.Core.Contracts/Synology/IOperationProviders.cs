@@ -1,11 +1,17 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.Dal.HttpBase;
 
 namespace SynoDs.Core.Contracts.Synology
 {
     public interface IOperationProvider
     {
+        /// <summary>
+        /// Our disk station URI.
+        /// </summary>
+        DsStationInfo StationEndpoint { get; set; }
+        
         /// <summary>
         /// This method will be used to upload a file to the DS.
         /// </summary>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Threading.Tasks;
+using SynoDs.Core.Contracts.Synology;
+using SynoDs.Core.CrossCutting;
 using SynoDs.Core.CrossCutting.Common;
 using SynoDs.Core.Dal.BaseApi;
 
@@ -16,11 +18,11 @@ namespace SynoDs.Core.Api
     public class DsClient
     {
         // Api properties
-        protected string DsUsername { get; set; }
-        protected string DsPassword { get; set; }
-        protected Uri DsAddress { get; set; }
+        private readonly DsStationInfo _stationInfo;
         protected string SessionId { get; set; }
         protected const string SessionName = "DsBase";
+
+        private IAuthenticationProvider AuthenticationProvider { get; set; }
 
         /// <summary>
         /// Overridable method to get the session name used to log out.
@@ -38,6 +40,28 @@ namespace SynoDs.Core.Api
         {
             Validate.ArgumentIsNotNullOrEmpty(dsInfo);
             Validate.ArgumentIsNotNullOrEmpty(credentials);
+
+            _stationInfo = dsInfo;
+
+            if (AuthenticationProvider == null)
+            {
+                AuthenticationProvider = IoCFactory.Container.Resolve<IAuthenticationProvider>();
+            }
+            AuthenticationProvider.Credentials = credentials;
+        }
+
+        public async Task<bool> LoginAsync()
+        {
+            if (AuthenticationProvider == null)
+                AuthenticationProvider = IoCFactory.Container.Resolve<IAuthenticationProvider>();
+            return  await AuthenticationProvider.LoginAsync();
+        }
+
+        public async Task<bool> LogoutAsync()
+        {
+            if (AuthenticationProvider == null)
+                AuthenticationProvider = IoCFactory.Container.Resolve<IAuthenticationProvider>();
+            return await AuthenticationProvider.LogoutAsync();
         }
     }
 }

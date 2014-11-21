@@ -20,7 +20,6 @@
         /// <param name="instance">the instance to register</param>
         void RegisterWithInstance<TAbs, TImpl>(TImpl instance) where TImpl : TAbs;
 
-
         /// <summary>
         /// Register an existing instance of an abstraction.
         /// </summary>

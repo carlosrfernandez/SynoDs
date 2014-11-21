@@ -1,17 +1,17 @@
-﻿using SynoDs.Core.Contracts;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using SynoDs.Core.Contracts.Synology;
+using SynoDs.Core.Dal.BaseApi;
+using SynoDs.Core.Dal.HttpBase;
+using SynoDs.Core.Exceptions;
 
-namespace SynoDs.Core.BaseApi.Info
+namespace SynoDs.Core.Api.Info
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Exceptions;
-    using Dal.BaseApi;
-    using Dal.HttpBase;
-
-    public class InformationProvider :  IInformationProvider
+    public class InformationProvider : IInformationProvider
     {
         public bool IsCacheEmtpy { get; set; }
+
+        public bool IsLoadingApiInformationCache { get; set; }
 
         public bool FullyLoadApiInformationCache { get; set; }
 
@@ -19,19 +19,14 @@ namespace SynoDs.Core.BaseApi.Info
 
         private ApiInfoWrapper ApiInformationCache { get; set; }
 
-        private readonly IHttpClient _httpClient;
-
-        private readonly IJsonParser _jsonParser;
-
         private readonly IOperationProvider _operationProvider;
 
-        public InformationProvider(IOperationProvider operationProvider, IHttpClient httpClient, IJsonParser jsonParser)
+        public InformationProvider(IOperationProvider operationProvider)
         {
             IsCacheEmtpy = true;
             FullyLoadApiInformationCache = true; //add config and read this from it.
+            IsLoadingApiInformationCache = false;
             this._operationProvider = operationProvider;
-            _httpClient = httpClient;
-            _jsonParser = jsonParser;
         }
 
         protected string GetSessionName()
@@ -63,9 +58,10 @@ namespace SynoDs.Core.BaseApi.Info
             var result = await _operationProvider.PerformOperationAsync<InfoResponse>(requestParams);
 
             if (result.Success)
-                ApiInformationCache.Add(result.ResponseData.Keys.First(), result.ResponseData.Values.First());//revise this.
+                ApiInformationCache.Add(result.ResponseData.Keys.First(), result.ResponseData.Values.First());
+                    //revise this.
 
-            return ApiInformationCache.FirstOrDefault(n=>n.Key == apiName).Value;
+            return ApiInformationCache.FirstOrDefault(n => n.Key == apiName).Value;
         }
 
         /// <summary>
@@ -73,6 +69,7 @@ namespace SynoDs.Core.BaseApi.Info
         /// </summary>
         private async Task GetApiInformationCacheAsync()
         {
+            this.IsLoadingApiInformationCache = true;
             var infoResponse = await _operationProvider.PerformOperationAsync<InfoResponse>(new RequestParameters
             {
                 {"query", "ALL"}
@@ -83,6 +80,7 @@ namespace SynoDs.Core.BaseApi.Info
                 ApiInformationCache = infoResponse.ResponseData;
                 IsCacheEmtpy = false;
                 FullyLoadApiInformationCache = false; // reset for now. test this.
+                IsLoadingApiInformationCache = false;
             }
             else
             {

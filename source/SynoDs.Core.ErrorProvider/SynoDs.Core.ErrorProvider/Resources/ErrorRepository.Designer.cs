@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SynoDs.Core.ErrorProvider.Resources {
+namespace SynoDs.Core.Error.Resources {
     using System;
     using System.Reflection;
     
@@ -40,7 +40,7 @@ namespace SynoDs.Core.ErrorProvider.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SynoDs.Core.ErrorProvider.Resources.ErrorRepository", typeof(ErrorRepository).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SynoDs.Core.Error.Resources.ErrorRepository", typeof(ErrorRepository).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
