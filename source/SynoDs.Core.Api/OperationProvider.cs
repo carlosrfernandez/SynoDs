@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using SynoDs.Core.Dal.BaseApi;
 using SynoDs.Core.Dal.HttpBase;
 using SynoDs.Core.Exceptions;
 using SynoDs.Core.Contracts;
@@ -14,6 +15,8 @@ namespace SynoDs.Core.Api
         private readonly IJsonParser _jsonParser;
         private readonly IAuthenticationProvider _authenticationProvider;
 
+        public DsStationInfo StationEndpoint { get; set; }
+
         public OperationProvider(IAuthenticationProvider authenticationProvider,
             IHttpClient httpClient, IRequestProvider requestProvider, IJsonParser jsonParser)
         {
@@ -22,15 +25,26 @@ namespace SynoDs.Core.Api
             _jsonParser = jsonParser;
             _authenticationProvider = authenticationProvider;
         }
-        
+
+        /// <summary>
+        /// Performs and http call with the Request parameters and returns the serialized Json object 
+        /// </summary>
+        /// <typeparam name="TResult">The Result of type ResponseWrapper</typeparam>
+        /// <param name="requestParameters">The request parameters.</param>
+        /// <param name="isAuthenticatedRequest">If the request requires the session ID.</param>
+        /// <returns>The serialized Response Object</returns>
         public async Task<TResult> PerformOperationAsync<TResult>(RequestParameters requestParameters = null, bool isAuthenticatedRequest = false)
         {
             if (isAuthenticatedRequest && !_authenticationProvider.IsLoggedIn)
             {
-               var loginResult =  await _authenticationProvider.LoginAsync();
-                if (!loginResult)
+                // If this is the first call to Login. then go in.
+                if (!_authenticationProvider.IsLoggingIn)
                 {
-                    throw new SynologyException("Error loggging in.");
+                    var loginResult = await _authenticationProvider.LoginAsync();
+                    if (!loginResult)
+                    {
+                        throw new SynologyException("Error loggging in.");
+                    }
                 }
             }
 
