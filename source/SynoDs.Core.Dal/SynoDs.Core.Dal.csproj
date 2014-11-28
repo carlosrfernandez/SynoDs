@@ -122,6 +122,7 @@
     <Compile Include="FileStation\List\VolumeStatus.cs" />
     <Compile Include="FileStation\Rename\Rename.cs" />
     <Compile Include="FileStation\Rename\RenameResponse.cs" />
+    <Compile Include="HttpBase\ErrorObject.cs" />
     <Compile Include="HttpBase\RequestBase.cs" />
     <Compile Include="HttpBase\RequestParameters.cs" />
     <Compile Include="HttpBase\ResponseWrapper.cs" />

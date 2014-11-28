@@ -1,14 +1,16 @@
-﻿using SynoDs.Core.Contracts.Synology;
+﻿using SynoDs.Core.Api;
+using SynoDs.Core.Contracts.Synology;
+using SynoDs.Core.Exceptions;
 
 namespace SynoDs.Core.DownloadStation
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Threading.Tasks;
     using CrossCutting.Common;
     using Dal.DownloadStation.Task;
     using Dal.Enums;
     using Dal.HttpBase;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// DownloadStation client class.
@@ -16,14 +18,24 @@ namespace SynoDs.Core.DownloadStation
     public sealed class DownloadManager : IDownloadProvider
     {
         private readonly IOperationProvider _operationProvider;
+        private readonly IAuthenticationProvider _authenticationProvider;
         public const string DlSessionName = "DownloadStation";
+        private string _sessionId = string.Empty;
+
+        private DsClient DsClient { get; set; }
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public DownloadManager(IOperationProvider operationProvider)
+        public DownloadManager(IOperationProvider operationProvider, IAuthenticationProvider authenticationProvider)
         {
+            Validate.ArgumentIsNotNullOrEmpty(operationProvider);
+            Validate.ArgumentIsNotNullOrEmpty(operationProvider);
+
             this._operationProvider = operationProvider;
+            this._authenticationProvider = authenticationProvider;
+
+
         }
 
         /// <summary>
@@ -36,7 +48,12 @@ namespace SynoDs.Core.DownloadStation
         public async Task<TaskListResponse> ListTasksAsync(int offset = 0, int limit = -1,
             TaskAdditionalInfoValues[] additionalInfo = null)
         {
-            var requestParams = new RequestParameters();
+            await PerformLoginIfRequired();
+
+            var requestParams = new RequestParameters
+            {
+                {"_sid", _sessionId}
+            };
 
             if (offset != 0)
                 requestParams.Add("offset", offset.ToString());
@@ -56,6 +73,24 @@ namespace SynoDs.Core.DownloadStation
             return await _operationProvider.PerformOperationAsync<TaskListResponse>(null);
         }
 
+
+        /// <summary>
+        /// Calls the AuthenticationProvider to login if the SessionId is still emtpy. 
+        /// </summary>
+        /// <returns></returns>
+        private async Task PerformLoginIfRequired()
+        {
+            if (_authenticationProvider.Sid == string.Empty)
+            {
+                var loginResult = await _authenticationProvider.LoginAsync();
+                if (loginResult)
+                {
+                    this._sessionId = _authenticationProvider.Sid;
+                }
+                else throw new SynologyException("Error logging in.");
+            }
+        }
+
         /// <summary>
         /// Gets the information on the Task(s) id's supplied. 
         /// </summary>
@@ -67,9 +102,12 @@ namespace SynoDs.Core.DownloadStation
         {
             Validate.ArgumentIsNotNullOrEmpty(taskList);
 
+            await PerformLoginIfRequired();
+
             var requestParams = new RequestParameters
             {
-                {"id", string.Join(",", taskList)}
+                {"id", string.Join(",", taskList)},
+                {"_sid", _sessionId }
             };
 
             if (additionalInfo != null)
@@ -92,11 +130,14 @@ namespace SynoDs.Core.DownloadStation
         {
 
             Validate.ArgumentIsNotNullOrEmpty(taskUrl);
-            
+
+            await PerformLoginIfRequired();
+
             // Todo: refactor parameter parsing
             var requestParams = new RequestParameters
             {
-                { "uri", taskUrl }
+                { "uri", taskUrl },
+                {"_sid", _sessionId }
             };
             if (userName != string.Empty)
                 requestParams.Add("username", userName);
@@ -106,7 +147,7 @@ namespace SynoDs.Core.DownloadStation
 
             if (unzipPass != string.Empty)
                 requestParams.Add("unzip_password", unzipPass);
-
+            
             if (fileStream != null && fileStream.Length >0)
                 return await _operationProvider.PerformOperationWithFileAsync<CreateTaskResponse>(requestParams, fileStream);
 
@@ -123,11 +164,14 @@ namespace SynoDs.Core.DownloadStation
         public async Task<DeleteTaskResponse> DeleteTaskAsync(IList<string> taskList, bool forceComplete)
         {
             Validate.ArgumentIsNotNullOrEmpty(taskList);
+            
+            await PerformLoginIfRequired();
 
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},
-                {"force_complete", forceComplete ? "true" : "false"}
+                {"force_complete", forceComplete ? "true" : "false"},
+                {"_sid", _sessionId }
             };
 
             return await _operationProvider.PerformOperationAsync<DeleteTaskResponse>(requestParams);
@@ -142,9 +186,12 @@ namespace SynoDs.Core.DownloadStation
         {
             Validate.ArgumentIsNotNullOrEmpty(taskList);
 
+            await PerformLoginIfRequired();
+
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},
+                {"_sid", _sessionId }
             };
 
             return await _operationProvider.PerformOperationAsync<PauseTaskResponse>(requestParams);
@@ -158,10 +205,13 @@ namespace SynoDs.Core.DownloadStation
         public async Task<ResumeTaskResponse> ResumeTaskAsync(IList<string> taskList)
         {
             Validate.ArgumentIsNotNullOrEmpty(taskList);
+            
+            await PerformLoginIfRequired();
 
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},
+                {"_sid", _sessionId }
             };
 
             return await _operationProvider.PerformOperationAsync<ResumeTaskResponse>(requestParams);

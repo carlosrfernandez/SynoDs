@@ -8,8 +8,6 @@ namespace SynoDs.Core.Contracts.Synology
     /// </summary>
     public interface IAuthenticationProvider
     {
-        LoginCredentials Credentials { get; set;}
-
         /// <summary>
         /// Will tell us if we're logged in.
         /// </summary>
@@ -28,7 +26,7 @@ namespace SynoDs.Core.Contracts.Synology
         /// <summary>
         /// Asynchronous call to Login
         /// </summary>
-        Task<bool> LoginAsync();
+        Task<bool> LoginAsync(LoginCredentials credentials);
 
         /// <summary>
         /// Asynchronous call to logout.

@@ -30,7 +30,11 @@ namespace SynoDs.Core.Error
         {
             try
             {
-                return Resources.ErrorRepository.ResourceManager.GetString(index);
+                var message = Resources.ErrorRepository.ResourceManager.GetString(index);
+                if (!string.IsNullOrEmpty(message)) return message;
+
+                message = "Unknown error has occurred!";
+                return message;
             }
             catch (Exception exception)
             {

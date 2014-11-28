@@ -31,7 +31,7 @@ namespace SynoDs.Core.Dal.HttpBase
         public override string ToString()
         {
             var requestParametersString = ParseRequestParameters();
-            if (Sid != string.Empty)
+            if (!string.IsNullOrEmpty(Sid))
                 requestParametersString = string.Format("{0}&_sid={1}", requestParametersString, Sid);
             
             return string.Format(@"webapi/{0}?api={1}&version={2}&method={3}{4}", Path, ApiName, Version,

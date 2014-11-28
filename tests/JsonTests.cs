@@ -43,7 +43,7 @@ namespace SynologyTests
         public void TestErrorDataDeserializationWithLogin()
         {
             var errorMock = new Mock<IErrorProvider>();
-            errorMock.Setup(p=>p.GetErrorDescriptionForType<object>(101)).Returns("Some error");
+            errorMock.Setup(p=>p.GetErrorDescriptionForType<object>(402)).Returns("Some error");
 
             var json = new JsonParser(errorMock.Object);
             var res = json.FromJson<LoginResponse>("{\"error\":\"101\", \"success\":\"false\"}");

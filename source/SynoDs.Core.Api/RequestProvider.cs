@@ -1,5 +1,5 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
+using System.Threading.Tasks;
 using SynoDs.Core.CrossCutting.Common;
 using SynoDs.Core.Dal.HttpBase;
 using SynoDs.Core.Contracts;
@@ -11,14 +11,17 @@ namespace SynoDs.Core.Api
     {
         private readonly IAttributeReader _attributeReader;
         private readonly IInformationProvider _informationProvider;
+        private readonly IDiskStationSessionHandler _sessionHandler;
 
-        public RequestProvider(IAttributeReader attributeReader, IInformationProvider informationProvider)
+        public RequestProvider(IDiskStationSessionHandler sessionHandler, IAttributeReader attributeReader, IInformationProvider informationProvider)
         {
             Validate.ArgumentIsNotNullOrEmpty(attributeReader);
             Validate.ArgumentIsNotNullOrEmpty(informationProvider);
+            Validate.ArgumentIsNotNullOrEmpty(sessionHandler);
 
             _attributeReader = attributeReader;
             _informationProvider = informationProvider;
+            _sessionHandler = sessionHandler;
         }
 
         /// <summary>
@@ -27,12 +30,12 @@ namespace SynoDs.Core.Api
         /// <param name="requestParameters">The Request params.</param>
         /// <param name="authenticationToken"></param>
         /// <returns></returns>
-        public string PrepareRequest<TResult>(RequestParameters requestParameters, string authenticationToken = "")
+        public async Task<string> PrepareRequestAsync<TResult>(RequestParameters requestParameters, string authenticationToken = "")
         {
             var api = _attributeReader.ReadApiNameFromT<TResult>();
             var method = _attributeReader.ReadMethodAttributeFromT<TResult>();
 
-            var infoResponse = _informationProvider.GetApiInformationAsync(api).Result;
+            var infoResponse = await _informationProvider.GetApiInformationAsync(api);
             
             var requestBase = new RequestBase
             {
@@ -48,7 +51,9 @@ namespace SynoDs.Core.Api
             if (authenticationToken != string.Empty)
                 requestBase.Sid = authenticationToken;
 
-            return requestBase.ToString();
+            var requestSuffix = requestBase.ToString();
+
+            return string.Format("{0}{1}", _sessionHandler.DiskStation.HostName, requestSuffix);
         }
 
         public RequestParameters CleanRequestParams(RequestParameters dirtyRequestParameters)

@@ -16,8 +16,6 @@ namespace SynoDs.Core.Api.Auth
 
         private readonly IOperationProvider _operationProvider;
 
-        public LoginCredentials Credentials { get; set; }
-
         private const string SessionName = "DiskStation";
 
         public AuthenticationProvider(IOperationProvider operationProvider)
@@ -30,16 +28,16 @@ namespace SynoDs.Core.Api.Auth
         /// Logs into the DiskStation with the supplied credentials.
         /// </summary>
         /// <returns>True if logged in and false if any errors occur.</returns>
-        public async Task<bool> LoginAsync()
+        public async Task<bool> LoginAsync(LoginCredentials credentials)
         {
-            Validate.ArgumentIsNotNullOrEmpty(Credentials.UserName);
-            Validate.ArgumentIsNotNullOrEmpty(Credentials.Password);
+            Validate.ArgumentIsNotNullOrEmpty(credentials.UserName);
+            Validate.ArgumentIsNotNullOrEmpty(credentials.Password);
 
             // prepare request
             var parameters = new RequestParameters
             {
-                {"account", Credentials.UserName},
-                {"passwd", Credentials.Password},
+                {"account", credentials.UserName},
+                {"passwd", credentials.Password},
                 {"session", SessionName },
                 {"format", "sid" }
             };

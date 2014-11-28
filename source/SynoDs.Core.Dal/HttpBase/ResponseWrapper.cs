@@ -20,6 +20,6 @@ namespace SynoDs.Core.Dal.HttpBase
         public bool Success { get; set; }
 
         [DataMember(Name = "error")]
-        public int ErrorCode { get; set; }
+        public ErrorObject ErrorCode { get; set; }
     }
 }
