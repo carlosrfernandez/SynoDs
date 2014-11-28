@@ -9,6 +9,9 @@ namespace SynoDs.Core.Error
     /// </summary>
     public class ErrorProvider : IErrorProvider
     {
+        // TODO: Split API name to get the proper error description.
+        // TODO: Add error information from all api's. 
+        
         private readonly IAttributeReader _attributeReader;
 
         public ErrorProvider(IAttributeReader attributeReader)
@@ -21,7 +24,7 @@ namespace SynoDs.Core.Error
         {
             // Get API info. 
             var apiName = _attributeReader.ReadApiNameFromT<T>();
-
+            
             // get that error info.
             return ReadErrorCodeFromResource(string.Format("{0}{1}", apiName, errorCode));
         }

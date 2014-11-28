@@ -72,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auth\AuthenticationProvider.cs" />
-    <Compile Include="DsClient.cs" />
     <Compile Include="DsSessionHandler.cs" />
     <Compile Include="Http\HttpGetRequestClient.cs" />
     <Compile Include="Info\InformationProvider.cs" />

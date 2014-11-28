@@ -22,8 +22,6 @@ namespace SynoDs.Core.DownloadStation
         public const string DlSessionName = "DownloadStation";
         private string _sessionId = string.Empty;
 
-        private DsClient DsClient { get; set; }
-
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -34,8 +32,6 @@ namespace SynoDs.Core.DownloadStation
 
             this._operationProvider = operationProvider;
             this._authenticationProvider = authenticationProvider;
-
-
         }
 
         /// <summary>
