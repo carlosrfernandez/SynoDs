@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SynoDs.Core.Api;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SynoDs.Core.AttributeReader;
-using SynoDs.Core.Exceptions;
+using SynoDs.Core.Dal.DownloadStation.Task;
 using SynoDs.Core.Dal.BaseApi;
 
 namespace SynologyTests
@@ -30,6 +30,33 @@ namespace SynologyTests
 
             Assert.AreEqual("query", infoMethodName);
             Assert.AreEqual("login", authMethodName);
+        }
+
+        [TestMethod]
+        public void TestAuthenticationAttributeFromLoginModule()
+        {
+            var attributeReader = new AttributeReader();
+            var authRequired = attributeReader.ReadAuthenticationFlagFromT<LoginResponse>();
+
+            Assert.IsFalse(authRequired);
+        }
+
+        [TestMethod]
+        public void TestAuthenticationAttributeFromDownloadModule()
+        {
+            var attributeReader = new AttributeReader();
+            var authRequired = attributeReader.ReadAuthenticationFlagFromT<ResumeTaskResponse>();
+
+            Assert.IsTrue(authRequired);
+        }
+
+        [TestMethod]
+        public void TestNonExistingAuthenticationAttribute()
+        {
+            var attrubuteReader = new AttributeReader();
+            var result = attrubuteReader.ReadAuthenticationFlagFromT<InfoResponse>();
+
+            Assert.IsFalse(result, "This should never be set to true if an exception is thrown");
         }
     }
 }

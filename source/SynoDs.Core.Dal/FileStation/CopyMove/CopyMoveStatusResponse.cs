@@ -7,6 +7,7 @@
 
     [DataContract]
     [Api(RootApi.FileStation, ChildApi.CopyMove)]
+    [AuthenticationRequired(true)]
     public class CopyMoveStatusResponse : ResponseWrapper<CopyMoveStatus>
     {
     }

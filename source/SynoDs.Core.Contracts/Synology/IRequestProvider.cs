@@ -12,9 +12,8 @@ namespace SynoDs.Core.Contracts.Synology
         /// Should return a string with the final request URL
         /// </summary>
         /// <param name="requestParameters">RequestParameters to build the request string.</param>
-        /// <param name="authenticationToken">The SID for authenticated requests</param>
         /// <returns>The final request string after having been cleaned.</returns>
-        Task<string> PrepareRequestAsync<TResult>(RequestParameters requestParameters, string authenticationToken = "");
+        Task<string> PrepareRequestAsync<TResult>(RequestParameters requestParameters);
 
         /// <summary>
         /// This method will call the URL encode to make sure no weird chars get sent in the request. 

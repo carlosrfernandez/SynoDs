@@ -18,5 +18,12 @@
         /// <typeparam name="T">The type to read the API info from.</typeparam>
         /// <returns>The API name to call.</returns>
         string ReadApiNameFromT<T>();
+
+        /// <summary>
+        /// Reads the RequiresAuthentication attribute from the response object to ensure we're logged in. 
+        /// </summary>
+        /// <typeparam name="T">The type to read the attribute from </typeparam>
+        /// <returns>True if it requires authentication, false by default.</returns>
+        bool ReadAuthenticationFlagFromT<T>();
     }
 }

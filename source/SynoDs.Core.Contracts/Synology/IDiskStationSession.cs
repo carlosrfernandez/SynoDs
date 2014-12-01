@@ -26,5 +26,10 @@ namespace SynoDs.Core.Contracts.Synology
         /// <param name="dsStation">The target IP or hostname of our DiskStation</param>
         /// <param name="credentials">The credentials to be used.</param>
         void CreateSession(DsStationInfo dsStation, LoginCredentials credentials);
+
+        /// <summary>
+        /// SessionId of the current session.
+        /// </summary>
+        string SessionId { get; set; }
     }
 }

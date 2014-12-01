@@ -1,16 +1,15 @@
-﻿using SynoDs.Core.Api;
+﻿using System.IO;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using SynoDs.Core.Contracts.Synology;
-using SynoDs.Core.Exceptions;
+using SynoDs.Core.CrossCutting.Common;
+using SynoDs.Core.Dal.DownloadStation.Task;
+using SynoDs.Core.Dal.Enums;
+using SynoDs.Core.Dal.HttpBase;
 
 namespace SynoDs.Core.DownloadStation
 {
-    using CrossCutting.Common;
-    using Dal.DownloadStation.Task;
-    using Dal.Enums;
-    using Dal.HttpBase;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Threading.Tasks;
+
 
     /// <summary>
     /// DownloadStation client class.
@@ -44,8 +43,6 @@ namespace SynoDs.Core.DownloadStation
         public async Task<TaskListResponse> ListTasksAsync(int offset = 0, int limit = -1,
             TaskAdditionalInfoValues[] additionalInfo = null)
         {
-            await PerformLoginIfRequired();
-
             var requestParams = new RequestParameters
             {
                 {"_sid", _sessionId}
@@ -69,24 +66,6 @@ namespace SynoDs.Core.DownloadStation
             return await _operationProvider.PerformOperationAsync<TaskListResponse>(null);
         }
 
-
-        /// <summary>
-        /// Calls the AuthenticationProvider to login if the SessionId is still emtpy. 
-        /// </summary>
-        /// <returns></returns>
-        private async Task PerformLoginIfRequired()
-        {
-            if (_authenticationProvider.Sid == string.Empty)
-            {
-                var loginResult = await _authenticationProvider.LoginAsync();
-                if (loginResult)
-                {
-                    this._sessionId = _authenticationProvider.Sid;
-                }
-                else throw new SynologyException("Error logging in.");
-            }
-        }
-
         /// <summary>
         /// Gets the information on the Task(s) id's supplied. 
         /// </summary>
@@ -97,8 +76,6 @@ namespace SynoDs.Core.DownloadStation
             TaskAdditionalInfoValues[] additionalInfo = null)
         {
             Validate.ArgumentIsNotNullOrEmpty(taskList);
-
-            await PerformLoginIfRequired();
 
             var requestParams = new RequestParameters
             {
@@ -126,8 +103,6 @@ namespace SynoDs.Core.DownloadStation
         {
 
             Validate.ArgumentIsNotNullOrEmpty(taskUrl);
-
-            await PerformLoginIfRequired();
 
             // Todo: refactor parameter parsing
             var requestParams = new RequestParameters
@@ -161,8 +136,6 @@ namespace SynoDs.Core.DownloadStation
         {
             Validate.ArgumentIsNotNullOrEmpty(taskList);
             
-            await PerformLoginIfRequired();
-
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},
@@ -182,8 +155,6 @@ namespace SynoDs.Core.DownloadStation
         {
             Validate.ArgumentIsNotNullOrEmpty(taskList);
 
-            await PerformLoginIfRequired();
-
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},
@@ -202,8 +173,6 @@ namespace SynoDs.Core.DownloadStation
         {
             Validate.ArgumentIsNotNullOrEmpty(taskList);
             
-            await PerformLoginIfRequired();
-
             var requestParams = new RequestParameters
             {
                 {"id", string.Join(",", taskList)},

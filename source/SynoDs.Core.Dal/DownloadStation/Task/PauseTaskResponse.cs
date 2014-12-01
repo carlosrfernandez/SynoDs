@@ -7,7 +7,8 @@
     using Enums;
 
     [DataContract]          
-    [Api(RootApi.DownloadStation, ChildApi.Task)]                                       
+    [Api(RootApi.DownloadStation, ChildApi.Task)]
+    [AuthenticationRequired(true)]                                 
     public class PauseTaskResponse : ResponseWrapper<IEnumerable<PauseTask>>
     {
         

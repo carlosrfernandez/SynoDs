@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Attributes\Api.cs" />
     <Compile Include="Attributes\ApiMethod.cs" />
+    <Compile Include="Attributes\AuthenticationRequired.cs" />
     <Compile Include="BaseApi\ApiInfo.cs" />
     <Compile Include="BaseApi\ApiInfoWrapper.cs" />
     <Compile Include="BaseApi\DsStationInfo.cs" />

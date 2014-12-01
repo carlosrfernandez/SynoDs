@@ -5,6 +5,7 @@
     using HttpBase;
 
     [Api(RootApi.FileStation, ChildApi.List)]
+    [AuthenticationRequired(true)]
     public class FsListResponse : ResponseWrapper<FsList>
     {
     }

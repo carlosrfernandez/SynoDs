@@ -19,11 +19,6 @@ namespace SynoDs.Core.Contracts.Synology
         bool IsLoggingIn { get; set; }
 
         /// <summary>
-        /// Stores the Session Id for the current session.
-        /// </summary>
-        string Sid { get; set; }
-
-        /// <summary>
         /// Asynchronous call to Login
         /// </summary>
         Task<bool> LoginAsync(LoginCredentials credentials);

@@ -4,6 +4,7 @@ using SynoDs.Core.CrossCutting.Common;
 using SynoDs.Core.Dal.HttpBase;
 using SynoDs.Core.Contracts;
 using SynoDs.Core.Contracts.Synology;
+using SynoDs.Core.Exceptions;
 
 namespace SynoDs.Core.Api
 {
@@ -28,12 +29,17 @@ namespace SynoDs.Core.Api
         /// Todo: Implement the missing params.
         /// </summary>
         /// <param name="requestParameters">The Request params.</param>
-        /// <param name="authenticationToken"></param>
         /// <returns></returns>
-        public async Task<string> PrepareRequestAsync<TResult>(RequestParameters requestParameters, string authenticationToken = "")
+        public async Task<string> PrepareRequestAsync<TResult>(RequestParameters requestParameters)
         {
             var api = _attributeReader.ReadApiNameFromT<TResult>();
             var method = _attributeReader.ReadMethodAttributeFromT<TResult>();
+            var requiresLogin = _attributeReader.ReadAuthenticationFlagFromT<TResult>();
+
+            if (requiresLogin && string.IsNullOrEmpty(this._sessionHandler.SessionId))
+            {
+                throw new SynologyException("Unauthorized operation, login before making this request.");
+            }
 
             var infoResponse = await _informationProvider.GetApiInformationAsync(api);
             
@@ -48,8 +54,8 @@ namespace SynoDs.Core.Api
             if (requestParameters != null)
                 requestBase.RequestParameters = CleanRequestParams(requestParameters);
 
-            if (authenticationToken != string.Empty)
-                requestBase.Sid = authenticationToken;
+            if (requiresLogin) // we already checked that SessionId is not empty. So we add it.
+                requestBase.Sid = _sessionHandler.SessionId;
 
             var requestSuffix = requestBase.ToString();
 

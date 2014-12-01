@@ -7,6 +7,7 @@
 
     [DataContract]
     [Api(RootApi.FileStation, ChildApi.Rename)]
+    [AuthenticationRequired(true)]
     public class RenameResponse : ResponseWrapper<Rename>
     {
     }

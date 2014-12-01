@@ -62,29 +62,380 @@ namespace SynoDs.Core.Error.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to error 100.
+        ///   Looks up a localized string similar to Unknown error.
         /// </summary>
-        internal static string Info100 {
+        internal static string Base100 {
             get {
-                return ResourceManager.GetString("Info100", resourceCulture);
+                return ResourceManager.GetString("Base100", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to error 101.
+        ///   Looks up a localized string similar to No parameter of API, method or version.
         /// </summary>
-        internal static string Info101 {
+        internal static string Base101 {
             get {
-                return ResourceManager.GetString("Info101", resourceCulture);
+                return ResourceManager.GetString("Base101", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to error 102.
+        ///   Looks up a localized string similar to The requested API does not exist.
         /// </summary>
-        internal static string Info102 {
+        internal static string Base102 {
             get {
-                return ResourceManager.GetString("Info102", resourceCulture);
+                return ResourceManager.GetString("Base102", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested method does not exist.
+        /// </summary>
+        internal static string Base103 {
+            get {
+                return ResourceManager.GetString("Base103", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested version does not support the functionality.
+        /// </summary>
+        internal static string Base104 {
+            get {
+                return ResourceManager.GetString("Base104", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The logged in session does not have permission.
+        /// </summary>
+        internal static string Base105 {
+            get {
+                return ResourceManager.GetString("Base105", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Session timeout.
+        /// </summary>
+        internal static string Base106 {
+            get {
+                return ResourceManager.GetString("Base106", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Session interrupted by duplicate login.
+        /// </summary>
+        internal static string Base107 {
+            get {
+                return ResourceManager.GetString("Base107", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File upload failed.
+        /// </summary>
+        internal static string DS400 {
+            get {
+                return ResourceManager.GetString("DS400", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max number of tasks reached.
+        /// </summary>
+        internal static string DS401 {
+            get {
+                return ResourceManager.GetString("DS401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Destination denied.
+        /// </summary>
+        internal static string DS402 {
+            get {
+                return ResourceManager.GetString("DS402", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Destination does not exist.
+        /// </summary>
+        internal static string DS403 {
+            get {
+                return ResourceManager.GetString("DS403", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid task id.
+        /// </summary>
+        internal static string DS404 {
+            get {
+                return ResourceManager.GetString("DS404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid task action.
+        /// </summary>
+        internal static string DS405 {
+            get {
+                return ResourceManager.GetString("DS405", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid parameter of file operation.
+        /// </summary>
+        internal static string FS400 {
+            get {
+                return ResourceManager.GetString("FS400", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error of file operation.
+        /// </summary>
+        internal static string FS401 {
+            get {
+                return ResourceManager.GetString("FS401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System is too busy.
+        /// </summary>
+        internal static string FS402 {
+            get {
+                return ResourceManager.GetString("FS402", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid user does this file operation.
+        /// </summary>
+        internal static string FS403 {
+            get {
+                return ResourceManager.GetString("FS403", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid group does this file operation.
+        /// </summary>
+        internal static string FS404 {
+            get {
+                return ResourceManager.GetString("FS404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid user and group does this file operation.
+        /// </summary>
+        internal static string FS405 {
+            get {
+                return ResourceManager.GetString("FS405", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can’t get user/group information from the account server.
+        /// </summary>
+        internal static string FS406 {
+            get {
+                return ResourceManager.GetString("FS406", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation not permitted.
+        /// </summary>
+        internal static string FS407 {
+            get {
+                return ResourceManager.GetString("FS407", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No such file or directory.
+        /// </summary>
+        internal static string FS408 {
+            get {
+                return ResourceManager.GetString("FS408", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Non-supported file system.
+        /// </summary>
+        internal static string FS409 {
+            get {
+                return ResourceManager.GetString("FS409", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to connect internet-based file system (ex: CIFS).
+        /// </summary>
+        internal static string FS410 {
+            get {
+                return ResourceManager.GetString("FS410", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read-only file system.
+        /// </summary>
+        internal static string FS411 {
+            get {
+                return ResourceManager.GetString("FS411", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filename too long in the non-encrypted file system.
+        /// </summary>
+        internal static string FS412 {
+            get {
+                return ResourceManager.GetString("FS412", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filename too long in the encrypted file system.
+        /// </summary>
+        internal static string FS413 {
+            get {
+                return ResourceManager.GetString("FS413", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File already exists.
+        /// </summary>
+        internal static string FS414 {
+            get {
+                return ResourceManager.GetString("FS414", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk quota exceeded.
+        /// </summary>
+        internal static string FS415 {
+            get {
+                return ResourceManager.GetString("FS415", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No space left on device.
+        /// </summary>
+        internal static string FS416 {
+            get {
+                return ResourceManager.GetString("FS416", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input/output error.
+        /// </summary>
+        internal static string FS417 {
+            get {
+                return ResourceManager.GetString("FS417", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Illegal name or path.
+        /// </summary>
+        internal static string FS418 {
+            get {
+                return ResourceManager.GetString("FS418", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Illegal file name.
+        /// </summary>
+        internal static string FS419 {
+            get {
+                return ResourceManager.GetString("FS419", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Illegal file name on FAT file system.
+        /// </summary>
+        internal static string FS420 {
+            get {
+                return ResourceManager.GetString("FS420", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device or resource busy.
+        /// </summary>
+        internal static string FS421 {
+            get {
+                return ResourceManager.GetString("FS421", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No such task of the file operation.
+        /// </summary>
+        internal static string FS599 {
+            get {
+                return ResourceManager.GetString("FS599", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No such account or incorrect password.
+        /// </summary>
+        internal static string Login400 {
+            get {
+                return ResourceManager.GetString("Login400", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guest account disabled.
+        /// </summary>
+        internal static string Login401 {
+            get {
+                return ResourceManager.GetString("Login401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account disabled.
+        /// </summary>
+        internal static string Login402 {
+            get {
+                return ResourceManager.GetString("Login402", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong password.
+        /// </summary>
+        internal static string Login403 {
+            get {
+                return ResourceManager.GetString("Login403", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permission denied.
+        /// </summary>
+        internal static string Login404 {
+            get {
+                return ResourceManager.GetString("Login404", resourceCulture);
             }
         }
     }

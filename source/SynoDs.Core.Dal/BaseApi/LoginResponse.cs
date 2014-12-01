@@ -8,8 +8,10 @@ namespace SynoDs.Core.Dal.BaseApi
     /// <summary>
     /// Represents the login result. Which comes with the SID for the session. And the True / False flag.
     /// </summary>
-    [Api(RootApi.API, ChildApi.Auth)]
+    
     [DataContract]
+    [Api(RootApi.API, ChildApi.Auth)]
+    [AuthenticationRequired(false)]
     public class LoginResponse
          : ResponseWrapper<Login>
     {

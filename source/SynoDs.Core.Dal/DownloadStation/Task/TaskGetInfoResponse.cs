@@ -7,6 +7,7 @@
 
     [DataContract]
     [Api(RootApi.DownloadStation, ChildApi.Task)]
+    [AuthenticationRequired(true)]
     public class TaskGetInfoResponse : ResponseWrapper<TaskGetInfo>
     {
 

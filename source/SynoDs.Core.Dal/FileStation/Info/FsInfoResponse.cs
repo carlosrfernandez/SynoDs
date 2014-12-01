@@ -7,6 +7,7 @@
 
     [DataContract]
     [Api(RootApi.FileStation, ChildApi.Info)]
+    [AuthenticationRequired(true)]
     public class FsInfoResponse : ResponseWrapper<FsInfo>
     {
     }

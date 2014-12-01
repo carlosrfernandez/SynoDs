@@ -1,8 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using SynoDs.Core.Contracts;
-
-// Todo: remove reference to DAL
 using SynoDs.Core.Dal.Attributes;
 
 namespace SynoDs.Core.AttributeReader
@@ -55,8 +54,28 @@ namespace SynoDs.Core.AttributeReader
         public string ReadApiNameFromT<T>()
         {
             var info = typeof(T).GetTypeInfo();
-            var attribute = info.GetCustomAttribute<Dal.Attributes.Api>();
+            var attribute = info.GetCustomAttribute<Api>();
             return attribute.GetApi();
+        }
+
+        /// <summary>
+        /// TODO: Test this method. 
+        /// Checks if the requesting Type has the Authentication attribute set to true.
+        /// </summary>
+        /// <typeparam name="T">The type to check the attribute of.</typeparam>
+        /// <returns>True if it set to true</returns>
+        public bool ReadAuthenticationFlagFromT<T>()
+        {
+            try
+            {
+                var info = typeof (T).GetTypeInfo();
+                var authAttribute = info.GetCustomAttribute<AuthenticationRequired>();
+                return authAttribute.GetAuthenticationRequirements();
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
         }
     }
 }

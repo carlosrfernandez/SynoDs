@@ -117,14 +117,130 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Info100" xml:space="preserve">
-    <value>error 100</value>
-    <comment>Api</comment>
+  <data name="Base100" xml:space="preserve">
+    <value>Unknown error</value>
   </data>
-  <data name="Info101" xml:space="preserve">
-    <value>error 101</value>
+  <data name="Base101" xml:space="preserve">
+    <value>No parameter of API, method or version</value>
   </data>
-  <data name="Info102" xml:space="preserve">
-    <value>error 102</value>
+  <data name="Base102" xml:space="preserve">
+    <value>The requested API does not exist</value>
+  </data>
+  <data name="Base103" xml:space="preserve">
+    <value>The requested method does not exist</value>
+  </data>
+  <data name="Base104" xml:space="preserve">
+    <value>The requested version does not support the functionality</value>
+  </data>
+  <data name="Base105" xml:space="preserve">
+    <value>The logged in session does not have permission</value>
+  </data>
+  <data name="Base106" xml:space="preserve">
+    <value>Session timeout</value>
+  </data>
+  <data name="Base107" xml:space="preserve">
+    <value>Session interrupted by duplicate login</value>
+  </data>
+  <data name="DS400" xml:space="preserve">
+    <value>File upload failed</value>
+  </data>
+  <data name="DS401" xml:space="preserve">
+    <value>Max number of tasks reached</value>
+  </data>
+  <data name="DS402" xml:space="preserve">
+    <value>Destination denied</value>
+  </data>
+  <data name="DS403" xml:space="preserve">
+    <value>Destination does not exist</value>
+  </data>
+  <data name="DS404" xml:space="preserve">
+    <value>Invalid task id</value>
+  </data>
+  <data name="DS405" xml:space="preserve">
+    <value>Invalid task action</value>
+  </data>
+  <data name="FS400" xml:space="preserve">
+    <value>Invalid parameter of file operation</value>
+  </data>
+  <data name="FS401" xml:space="preserve">
+    <value>Unknown error of file operation</value>
+  </data>
+  <data name="FS402" xml:space="preserve">
+    <value>System is too busy</value>
+  </data>
+  <data name="FS403" xml:space="preserve">
+    <value>Invalid user does this file operation</value>
+  </data>
+  <data name="FS404" xml:space="preserve">
+    <value>Invalid group does this file operation</value>
+  </data>
+  <data name="FS405" xml:space="preserve">
+    <value>Invalid user and group does this file operation</value>
+  </data>
+  <data name="FS406" xml:space="preserve">
+    <value>Can’t get user/group information from the account server</value>
+  </data>
+  <data name="FS407" xml:space="preserve">
+    <value>Operation not permitted</value>
+  </data>
+  <data name="FS408" xml:space="preserve">
+    <value>No such file or directory</value>
+  </data>
+  <data name="FS409" xml:space="preserve">
+    <value>Non-supported file system</value>
+  </data>
+  <data name="FS410" xml:space="preserve">
+    <value>Failed to connect internet-based file system (ex: CIFS)</value>
+  </data>
+  <data name="FS411" xml:space="preserve">
+    <value>Read-only file system</value>
+  </data>
+  <data name="FS412" xml:space="preserve">
+    <value>Filename too long in the non-encrypted file system</value>
+  </data>
+  <data name="FS413" xml:space="preserve">
+    <value>Filename too long in the encrypted file system</value>
+  </data>
+  <data name="FS414" xml:space="preserve">
+    <value>File already exists</value>
+  </data>
+  <data name="FS415" xml:space="preserve">
+    <value>Disk quota exceeded</value>
+  </data>
+  <data name="FS416" xml:space="preserve">
+    <value>No space left on device</value>
+  </data>
+  <data name="FS417" xml:space="preserve">
+    <value>Input/output error</value>
+  </data>
+  <data name="FS418" xml:space="preserve">
+    <value>Illegal name or path</value>
+  </data>
+  <data name="FS419" xml:space="preserve">
+    <value>Illegal file name</value>
+  </data>
+  <data name="FS420" xml:space="preserve">
+    <value>Illegal file name on FAT file system</value>
+  </data>
+  <data name="FS421" xml:space="preserve">
+    <value>Device or resource busy</value>
+  </data>
+  <data name="FS599" xml:space="preserve">
+    <value>No such task of the file operation</value>
+  </data>
+  <data name="Login400" xml:space="preserve">
+    <value>No such account or incorrect password</value>
+  </data>
+  <data name="Login401" xml:space="preserve">
+    <value>Guest account disabled</value>
+  </data>
+  <data name="Login402" xml:space="preserve">
+    <value>Account disabled</value>
+  </data>
+  <data name="Login403" xml:space="preserve">
+    <value>Wrong password</value>
+  </data>
+  <data name="Login404" xml:space="preserve">
+    <value>Permission denied</value>
   </data>
 </root>

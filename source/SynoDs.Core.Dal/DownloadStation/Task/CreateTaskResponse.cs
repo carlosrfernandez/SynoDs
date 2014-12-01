@@ -5,6 +5,7 @@
     using HttpBase;
 
     [Api(RootApi.DownloadStation, ChildApi.Task)]
+    [AuthenticationRequired(true)]
     public class CreateTaskResponse : ResponseWrapper<CreateTask>
     {
         

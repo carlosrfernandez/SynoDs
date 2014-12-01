@@ -12,16 +12,17 @@ namespace SynoDs.Core.Api.Auth
 
         public bool IsLoggingIn { get; set; } // to control logging in process.
 
-        public string Sid { get; set; }
-
         private readonly IOperationProvider _operationProvider;
+
+        private readonly IDiskStationSessionHandler _sessionHandler;
 
         private const string SessionName = "DiskStation";
 
-        public AuthenticationProvider(IOperationProvider operationProvider)
+        public AuthenticationProvider(IOperationProvider operationProvider, IDiskStationSessionHandler sessionHandler)
         {
             IsLoggedIn = false;
             _operationProvider = operationProvider;
+            this._sessionHandler = sessionHandler;
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace SynoDs.Core.Api.Auth
             };
             this.IsLoggingIn = true;
             var loginResult = await _operationProvider.PerformOperationAsync<LoginResponse>(parameters);
-            Sid = loginResult.ResponseData.Sid;
+            this._sessionHandler.SessionId = loginResult.ResponseData.Sid;
             IsLoggedIn = true;
             IsLoggingIn = false;
             return loginResult.Success;
@@ -61,7 +62,7 @@ namespace SynoDs.Core.Api.Auth
             };
 
             var logoutRequestResult = await _operationProvider.PerformOperationAsync<LogoutResponse>(logoutParams);
-            Sid = string.Empty; // erase the sid.
+            this._sessionHandler.SessionId = string.Empty;
             IsLoggedIn = false;
             return logoutRequestResult.Success;
         }

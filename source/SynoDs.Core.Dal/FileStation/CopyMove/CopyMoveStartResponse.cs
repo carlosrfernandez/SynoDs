@@ -8,6 +8,7 @@ namespace SynoDs.Core.Dal.FileStation.CopyMove
 
     [DataContract]
     [Api(RootApi.FileStation,ChildApi.CopyMove)]
+    [AuthenticationRequired(true)]
     public class CopyMoveStartResponse : ResponseWrapper<CopyMoveStart>
     {
     }

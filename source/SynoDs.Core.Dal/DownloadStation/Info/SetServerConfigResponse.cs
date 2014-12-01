@@ -7,6 +7,7 @@ namespace SynoDs.Core.Dal.DownloadStation.Info
 {
     [DataContract]
     [Api(RootApi.DownloadStation, ChildApi.Info)]
+    [AuthenticationRequired(true)]
     public class SetServerConfigResponse : ResponseWrapper<object>
     {
     }

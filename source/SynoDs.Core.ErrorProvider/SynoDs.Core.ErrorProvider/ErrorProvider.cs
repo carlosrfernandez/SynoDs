@@ -19,14 +19,29 @@ namespace SynoDs.Core.Error
             _attributeReader = attributeReader;
         }
 
-        //Todo add error info to resource file.
         public string GetErrorDescriptionForType<T>(int errorCode)
         {
             // Get API info. 
             var apiName = _attributeReader.ReadApiNameFromT<T>();
+            var rootApi = apiName.Split('.')[1];
+            string indexPrefix;
+            switch (rootApi)
+            {
+                case "DownloadStation":
+                    indexPrefix = "DS";
+                    break;
+                case "FileStation":
+                    indexPrefix = "FS";
+                    break;
+                case "API":
+                    indexPrefix = "Base";
+                    break;
+                default:
+                    throw new NotSupportedException("Unknown error.");
+            }
             
             // get that error info.
-            return ReadErrorCodeFromResource(string.Format("{0}{1}", apiName, errorCode));
+            return ReadErrorCodeFromResource(string.Format("{0}{1}", indexPrefix, errorCode));
         }
 
         private string ReadErrorCodeFromResource(string index)

@@ -7,6 +7,7 @@ namespace SynoDs.Core.Api
     {
         public DsStationInfo DiskStation { get; private set; }
         public LoginCredentials Credentials { get; private set; }
+        public string SessionId { get; set; }
 
         /// <summary>
         /// Will load all required dependencies. 

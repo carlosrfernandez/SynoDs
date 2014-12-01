@@ -9,6 +9,7 @@ namespace SynoDs.Core.Dal.FileStation.CreateFolder
 
     [DataContract]
     [Api(RootApi.FileStation, ChildApi.CreateFolder)]
+    [AuthenticationRequired(true)]
     public class CreateFolderResponse : ResponseWrapper<FsFolders>
     {
 
