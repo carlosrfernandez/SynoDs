@@ -12,13 +12,8 @@ namespace SynoDs.Core.Api.Module
 {
     public class ApiCoreModule : IApiModule
     {
-        public bool RequiresAuthenticatedRequests { get; private set; }
-
         public void Configure()
         {
-            // todo: verify usage of this variable across modules.
-            RequiresAuthenticatedRequests = false; // initially this doesn't require authentication.
-
             // Register session handler. 
             IoCFactory.Container.RegisterWithInstance<IDiskStationSessionHandler, DsSessionHandler>(
                 new DsSessionHandler());

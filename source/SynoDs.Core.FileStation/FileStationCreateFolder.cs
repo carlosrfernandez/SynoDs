@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SynoDs.Core.Api;
+using SynoDs.Core.Contracts.Synology;
 using SynoDs.Core.Dal.Enums;
 using SynoDs.Core.Dal.FileStation.CreateFolder;
 using SynoDs.Core.Dal.FileStation.Rename;
@@ -17,9 +17,11 @@ namespace SynoDs.Core.FileStation
     {
         private const string FsSessionName = "FileStation";
 
-        public FileStation()
-        {
+        private readonly IOperationProvider _operationProvider;
 
+        public FileStation(IOperationProvider operationProvider)
+        {
+            this._operationProvider = operationProvider;
         }
 
         //protected override sealed string SessionName
@@ -58,7 +60,7 @@ namespace SynoDs.Core.FileStation
                 requestParams.Add("additional", string.Join(",", additional).ToLower());
             }
 
-            return await PerformOperationAsync<CreateFolderResponse>(requestParams);
+            return await _operationProvider.PerformOperationAsync<CreateFolderResponse>(requestParams);
         }
 
         public async Task<RenameResponse> RenameAsync(IList<string> pathList, IList<string> nameList, CreateFolderAdditionalValues[] additional = null)
@@ -77,7 +79,7 @@ namespace SynoDs.Core.FileStation
                 requestParams.Add("additional", string.Join(",", additional).ToLower());
             }
 
-            return await PerformOperationAsync<RenameResponse>(requestParams);
+            return await _operationProvider.PerformOperationAsync<RenameResponse>(requestParams);
         }
     }
 }

@@ -6,7 +6,7 @@ using SynoDs.Core.Dal.Enums;
 
 namespace SynoDs.Core.Contracts.Synology
 {
-    public interface IDownloadProvider
+    public interface IDownloadStation
     {
         Task<TaskListResponse> ListTasksAsync(int offset = 0, int limit = -1,
             TaskAdditionalInfoValues[] additionalInfo = null);

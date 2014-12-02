@@ -1,16 +1,17 @@
-﻿using SynoDs.Core.Contracts.Modularity;
+﻿using System.Composition;
+using SynoDs.Core.Contracts.Modularity;
 using SynoDs.Core.Contracts.Synology;
 using SynoDs.Core.CrossCutting;
+using SynoDs.Core.CrossCutting.Modularity;
 
 namespace SynoDs.Core.DownloadStation.Module
 {
+    [ApiModule("DownloadStation")]
     public class DownloadStationModule : IApiModule
     {
-        public bool RequiresAuthenticatedRequests { get; private set; }
         public void Configure()
         {
-            RequiresAuthenticatedRequests = true;
-            IoCFactory.Container.Register<IDownloadProvider, DownloadManager>();
+            IoCFactory.Container.Register<IDownloadStation, DownloadManager>();
         }
     }
 }

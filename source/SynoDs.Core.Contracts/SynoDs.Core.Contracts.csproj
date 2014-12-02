@@ -48,8 +48,8 @@
     <Compile Include="IoC\IContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Synology\IDiskStationSession.cs" />
-    <Compile Include="Synology\IDownloadProvider.cs" />
-    <Compile Include="Synology\IFileProvider.cs" />
+    <Compile Include="Synology\IDownloadStation.cs" />
+    <Compile Include="Synology\IFileStation.cs" />
     <Compile Include="Synology\IInformationRepository.cs" />
     <Compile Include="Synology\IInformationProvider.cs" />
     <Compile Include="Synology\IAuthenticationProvider.cs" />

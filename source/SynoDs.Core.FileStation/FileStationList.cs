@@ -53,8 +53,8 @@
             
             if (additionalInfo!= null)
                 requestParameters.Add("additional", string.Join(",",additionalInfo).ToLower());
-            
-            return await PerformOperationAsync<FsListResponse>(requestParameters);
+
+            return await _operationProvider.PerformOperationAsync<FsListResponse>(requestParameters);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@
             if (additionalInfo != null && additionalInfo.Length > 0)
                 requestParameters.Add("additional", string.Join(",", additionalInfo).ToLower());
 
-            return await PerformOperationAsync<FsListInfoResponse>(requestParameters);
+            return await _operationProvider.PerformOperationAsync<FsListInfoResponse>(requestParameters);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@
                 requestParams.Add("additional", string.Join(",", additionalInfo).ToLower());
             }
 
-            return await PerformOperationAsync<FsListShareResponse>(requestParams);
+            return await _operationProvider.PerformOperationAsync<FsListShareResponse>(requestParams);
         }
     }
 }

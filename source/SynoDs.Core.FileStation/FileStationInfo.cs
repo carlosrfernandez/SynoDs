@@ -1,7 +1,6 @@
 ﻿namespace SynoDs.Core.FileStation
 {
     using System.Threading.Tasks;
-    using Interfaces;
     using Dal.FileStation.Info;
 
     /// <summary>

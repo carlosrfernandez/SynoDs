@@ -39,6 +39,10 @@
       <Project>{7E0BDC20-A490-4DB0-869B-35576D74332F}</Project>
       <Name>SynoDs.Core.ApiBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SynoDs.Core.Contracts\SynoDs.Core.Contracts.csproj">
+      <Project>{0A64E79D-5E0F-4E19-8FC8-3A0DE0146E5D}</Project>
+      <Name>SynoDs.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynoDs.Core.Dal\SynoDs.Core.Dal.csproj">
       <Project>{08dcb704-8ff6-4bf5-b852-2f8eecb8c6f6}</Project>
       <Name>SynoDs.Core.Dal</Name>
@@ -48,11 +52,10 @@
     <Compile Include="FileStationCreateFolder.cs" />
     <Compile Include="FileStationInfo.cs" />
     <Compile Include="FileStationList.cs" />
+    <Compile Include="Module\FileStationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Module\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

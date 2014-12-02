@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SynoDs.Core.Contracts.Synology
 {
-    public interface IFileProvider
+    public interface IFileStation
     {
     }
 }
