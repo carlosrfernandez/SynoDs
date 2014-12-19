@@ -12,7 +12,7 @@ namespace SynoDs.Core.DownloadStation
     /// <summary>
     /// DownloadStation client class.
     /// </summary>
-    public sealed class DownloadManager : IDownloadStation
+    public class DownloadManager : IDownloadStation
     {
         private readonly IOperationProvider _operationProvider;
         private readonly IAuthenticationProvider _authenticationProvider;

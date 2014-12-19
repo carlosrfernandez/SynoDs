@@ -10,6 +10,7 @@ using SynoDs.Core.Dal.HttpBase;
 namespace SynologyTests
 {
     [TestClass]
+    // todo: add tests
     public class InformationTests
     {
         private IInformationProvider InfoProvider { get; set; }
