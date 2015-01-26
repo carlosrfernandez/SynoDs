@@ -25,11 +25,17 @@ namespace SynoDs.Core.Contracts.Synology
         /// </summary>
         /// <param name="dsStation">The target IP or hostname of our DiskStation</param>
         /// <param name="credentials">The credentials to be used.</param>
-        void CreateSession(DsStationInfo dsStation, LoginCredentials credentials);
+        /// <param name="useSsl">Flag to determine if the requests will go through ssl</param>
+        void CreateSession(DsStationInfo dsStation, LoginCredentials credentials, bool useSsl = false);
 
         /// <summary>
         /// SessionId of the current session.
         /// </summary>
         string SessionId { get; set; }
+
+        /// <summary>
+        /// Use SSL
+        /// </summary>
+        bool UseSsl { get; set; }
     }
 }

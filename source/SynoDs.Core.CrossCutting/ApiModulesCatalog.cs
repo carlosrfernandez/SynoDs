@@ -1,18 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Composition;
-using System.Composition.Hosting;
-using System.Composition.Hosting.Core;
-using System.ComponentModel;
-using System.IO;
-using System.Resources;
-using SynoDs.Core.Contracts.Modularity;
-using System.Reflection;
+﻿using SynoDs.Core.Contracts.IoC;
 
 namespace SynoDs.Core.CrossCutting
 {
     // TODO: this has to be implemented by 
-    public abstract class ApiModulesCatalog
+    public abstract class ApiModulesCatalog : IApiModuleCatalog
     {
+        // This will be implemented on a per platform project
         public abstract void InitCatalog();
     }
 }

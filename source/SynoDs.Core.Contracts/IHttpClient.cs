@@ -6,5 +6,6 @@ namespace SynoDs.Core.Contracts
     {
         System.Threading.Tasks.Task<string> SendRequestAsync();
         void CreateRequestSession(string requestUrl);
+
     }
 }

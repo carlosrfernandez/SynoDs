@@ -1,5 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using SynoDs.Core.Contracts.IoC;
+using SynoDs.Core.CrossCutting;
 using SynoDs.Core.Dal.BaseApi;
 
 namespace SynologyTests.Abstract
@@ -16,6 +19,12 @@ namespace SynologyTests.Abstract
         public static DsStationInfo StationInfo { get; set; }
 
         public TestContext TestContext { get; set; }
+
+        public Mock<NinjectContainer> _container;
+
+        public Mock<IoCFactory> _factory;
+
+        public MockRepository _mockRepo; 
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)

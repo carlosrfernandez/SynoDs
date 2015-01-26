@@ -13,7 +13,7 @@ namespace SynoDs.Core.FileStation
     /// Contains the File and Folder related operations
     /// Like Create, Rename, CopyMove.
     /// </summary>
-    public partial class FileStation
+    public partial class FileStation : IFileStation
     {
         private const string FsSessionName = "FileStation";
 
@@ -63,6 +63,13 @@ namespace SynoDs.Core.FileStation
             return await _operationProvider.PerformOperationAsync<CreateFolderResponse>(requestParams);
         }
 
+        /// <summary>
+        /// Renames a folder or a list of folders.
+        /// </summary>
+        /// <param name="pathList">List of folders to rename</param>
+        /// <param name="nameList">List of new names.</param>
+        /// <param name="additional">Additional Attributes</param>
+        /// <returns>RenameResponse object</returns>
         public async Task<RenameResponse> RenameAsync(IList<string> pathList, IList<string> nameList, CreateFolderAdditionalValues[] additional = null)
         {
             if (pathList.Count != nameList.Count)

@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IAttributeReader.cs" />
+    <Compile Include="IoC\IApiModuleCatalog.cs" />
     <Compile Include="IoC\IBootstrapper.cs" />
     <Compile Include="Modularity\IApiModule.cs" />
     <Compile Include="IErrorProvider.cs" />

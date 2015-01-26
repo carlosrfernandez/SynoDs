@@ -51,7 +51,7 @@ namespace SynologyTests
         [TestMethod]
         public void SidParameterFilledTest()
         {
-            var sid = "IGIU7868JHGKUTY";
+            const string sid = "IGIU7868JHGKUTY";
             var apiRequestBase = new RequestBase
             {
                 ApiName = "SYNO.API.Info",

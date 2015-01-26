@@ -44,7 +44,7 @@ namespace SynoDs.Core.Error
             return ReadErrorCodeFromResource(string.Format("{0}{1}", indexPrefix, errorCode));
         }
 
-        private string ReadErrorCodeFromResource(string index)
+        private static string ReadErrorCodeFromResource(string index)
         {
             try
             {

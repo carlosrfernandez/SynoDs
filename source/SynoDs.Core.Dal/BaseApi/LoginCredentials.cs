@@ -14,7 +14,5 @@
         /// Password
         /// </summary>
         public string Password { get; set; }
-
-        
     }
 }

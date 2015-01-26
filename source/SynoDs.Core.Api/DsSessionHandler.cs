@@ -12,17 +12,20 @@ namespace SynoDs.Core.Api
         private IAuthenticationProvider _authenticationProvider;
 
         public string SessionId { get; set; }
+        public bool UseSsl { get; set; }
 
         /// <summary>
         /// Will load all required dependencies. 
         /// </summary>
         /// <param name="dsStation"></param>
         /// <param name="credentials"></param>
-        public void CreateSession(DsStationInfo dsStation, LoginCredentials credentials)
+        /// <param name="useSsl">Flag to determine if the requests will go through ssl</param>
+        public void CreateSession(DsStationInfo dsStation, LoginCredentials credentials, bool useSsl = false)
         {
             this.DiskStation = dsStation;
             this.Credentials = credentials;
             this.SessionId = string.Empty;
+            this.UseSsl = useSsl;
 
             _authenticationProvider = IoCFactory.Container.Resolve<IAuthenticationProvider>();
             if (!_authenticationProvider.LoginAsync(Credentials).Result)
