@@ -51,6 +51,7 @@ namespace SynoDs.Universal
             this.Suspending += this.OnSuspending;
             
 #if WINDOWS_PHONE_APP
+            moduleInitializer = new WindowsPhoneCatalogManager();
             modulesCatalog = new WPhoneAppModuleCatalog(moduleInitializer.GetApplicationModules());
             bootstrapper = new WindowsPhoneBootstrapper(modulesCatalog);
 #endif
