@@ -36,13 +36,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ApiModulesCatalog.cs" />
-    <Compile Include="Modularity\ApiModuleAttribute.cs" />
+    <Compile Include="AppModulesCatalog.cs" />
     <Compile Include="NinjectContainer.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Common\Validate.cs" />
     <Compile Include="IoCFactory.cs" />
-    <Compile Include="Modularity\ModuleBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

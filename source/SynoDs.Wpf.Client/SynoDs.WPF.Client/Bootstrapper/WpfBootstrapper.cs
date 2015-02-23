@@ -8,6 +8,9 @@ namespace SynoDs.WPF.Client.Bootstrapper
 {
     public class WpfBootstrapper : BootstrapperBase
     {
+        public WpfBootstrapper(AppModulesCatalog modules) : base(modules)
+        {
+        }
 
         public override void Startup()
         {
@@ -16,6 +19,11 @@ namespace SynoDs.WPF.Client.Bootstrapper
 
         public override void Shutdown()
         {
+        }
+
+        public override void Run()
+        {
+            throw new NotImplementedException();
         }
     }
 }

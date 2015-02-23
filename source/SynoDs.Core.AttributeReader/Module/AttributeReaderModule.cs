@@ -1,4 +1,5 @@
 ﻿using SynoDs.Core.Contracts;
+using SynoDs.Core.Contracts.IoC;
 using SynoDs.Core.Contracts.Modularity;
 using SynoDs.Core.CrossCutting;
 
