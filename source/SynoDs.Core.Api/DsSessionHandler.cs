@@ -1,37 +1,87 @@
-﻿using System;
-using SynoDs.Core.Contracts.Synology;
-using SynoDs.Core.CrossCutting;
-using SynoDs.Core.Dal.BaseApi;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DsSessionHandler.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The ds session handler.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace SynoDs.Core.Api
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using SynoDs.Core.Contracts.Synology;
+    using SynoDs.Core.CrossCutting;
+    using SynoDs.Core.Dal.BaseApi;
+
+    /// <summary>
+    /// The ds session handler.
+    /// </summary>
     public class DsSessionHandler : IDiskStationSessionHandler
     {
-        public DsStationInfo DiskStation { get; private set; }
-        public LoginCredentials Credentials { get; private set; }
-        private IAuthenticationProvider _authenticationProvider;
+        /// <summary>
+        /// The _authentication provider.
+        /// </summary>
+        private readonly IAuthenticationProvider authenticationProvider;
 
-        public string SessionId { get; set; }
+        /// <summary>
+        /// Gets the disk station.
+        /// </summary>
+        public DiskStation DiskStation { get; private set; }
+
+        /// <summary>
+        /// Gets the credentials.
+        /// </summary>
+        public LoginCredentials Credentials { get; private set; }
+
+        /// <summary>
+        /// Gets the session id.
+        /// </summary>
+        public string SessionId { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether use SSL.
+        /// </summary>
         public bool UseSsl { get; set; }
 
         /// <summary>
-        /// Will load all required dependencies. 
+        /// Initializes a new instance of the <see cref="DsSessionHandler"/> class.
         /// </summary>
-        /// <param name="dsStation"></param>
-        /// <param name="credentials"></param>
-        /// <param name="useSsl">Flag to determine if the requests will go through ssl</param>
-        public void CreateSession(DsStationInfo dsStation, LoginCredentials credentials, bool useSsl = false)
+        /// <param name="authenticationProvider">
+        /// The authentication provider.
+        /// </param>
+        public DsSessionHandler(IAuthenticationProvider authenticationProvider)
         {
-            this.DiskStation = dsStation;
+            if (authenticationProvider == null)
+            {
+                throw new ArgumentNullException(nameof(authenticationProvider));
+            }
+
+            this.authenticationProvider = authenticationProvider;
+        }
+
+        /// <summary>
+        /// Will load all required dependencies.
+        /// </summary>
+        /// <param name="diskStation">
+        /// </param>
+        /// <param name="credentials">
+        /// </param>
+        /// <param name="useSsl">
+        /// Flag to determine if the requests will go through ssl
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task CreateSessionAsync(DiskStation diskStation, LoginCredentials credentials, bool useSsl = false)
+        {
+            this.DiskStation = diskStation;
             this.Credentials = credentials;
             this.SessionId = string.Empty;
             this.UseSsl = useSsl;
-
-            _authenticationProvider = IoCFactory.Container.Resolve<IAuthenticationProvider>();
-            if (!_authenticationProvider.LoginAsync(Credentials).Result)
-            {
-                throw new Exception("Error while establishing connection to the DS");
-            }
+            this.SessionId = await this.authenticationProvider.LoginAsync(this.Credentials);
         }
     }
 }

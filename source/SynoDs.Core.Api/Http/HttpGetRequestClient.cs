@@ -1,77 +1,172 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using SynoDs.Core.Exceptions;
-using SynoDs.Core.Contracts;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HttpGetRequestClient.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The http get request client.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace SynoDs.Core.Api.Http
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using SynoDs.Core.Contracts;
+    using SynoDs.Core.Exceptions;
+
     // TODO: Refactor this class 
     // Bug: This class implementation can't handle SSL.
     // TODO: Remove from main API project and let the client handle the HTTP communication. 
     // Until PCL's support SSL .
     // Change all HTTP objects to use "using" statements.
     // Add exception handling. 
+    /// <summary>
+    /// The http get request client.
+    /// </summary>
     public class HttpGetRequestClient : IHttpClient
     {
-        private string Url { get; set; }
-/*
-        private byte[] FileStream { get; set; }
-*/
-        private string FileName { get; set; }
-        private string FileParam { get; set; }
-        private HttpClientHandler Handler { get; set; }
-        private HttpClient Client { get; set; }
-        private StreamContent FileStreamContent { get; set; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpGetRequestClient"/> class.
+        /// </summary>
         public HttpGetRequestClient()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HttpGetRequestClient"/> class.
+        /// </summary>
+        /// <param name="url">
+        /// The url.
+        /// </param>
         public HttpGetRequestClient(string url)
         {
-           CreateRequestSession(url);
+            this.CreateRequestSession(url);
         }
 
-        public HttpGetRequestClient(string url, Stream file, string fileName, string fileParam) : this(url)
+        /// <summary>
+        /// Initializes a new instance of the <see>
+        ///         <cref>HttpGetRequestClient</cref>
+        ///     </see>
+        ///     class.
+        /// </summary>
+        /// <param name="url">
+        /// The URL.
+        /// </param>
+        /// <param name="file">
+        /// The file.
+        /// </param>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <param name="fileParam">
+        /// The file param.
+        /// </param>
+        public HttpGetRequestClient(string url, Stream file, string fileName, string fileParam)
+            : this(url)
         {
-            FileStreamContent = new StreamContent(file);
-            FileName = fileName;
-            FileParam = fileParam;
+            this.FileStreamContent = new StreamContent(file);
+            this.FileName = fileName;
+            this.FileParam = fileParam;
         }
 
+        /// <summary>
+        /// Gets or sets the url.
+        /// </summary>
+        private string Url { get; set; }
+
+        /*
+        private byte[] FileStream { get; set; }
+*/
+
+        /// <summary>
+        /// Gets the file name.
+        /// </summary>
+        private string FileName { get; }
+
+        /// <summary>
+        /// Gets the file param.
+        /// </summary>
+        private string FileParam { get; }
+
+        /// <summary>
+        /// Gets or sets the handler.
+        /// </summary>
+        private HttpClientHandler Handler { get; set; }
+
+        /// <summary>
+        /// Gets or sets the client.
+        /// </summary>
+        private HttpClient Client { get; set; }
+
+        /// <summary>
+        /// Gets the file stream content.
+        /// </summary>
+        private StreamContent FileStreamContent { get; }
+
+        /// <summary>
+        /// The send request async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
         public async Task<string> SendRequestAsync()
         {
-            if (FileStreamContent != null)
+            if (this.FileStreamContent != null)
             {
                 // Perform file upload request
-                return await UploadFileAndGetResponseAsync();
+                return await this.UploadFileAndGetResponseAsync();
             }
+
             // Perform normal request. 
-            return await PerformRequestAsync();
+            return await this.PerformRequestAsync();
         }
 
+        /// <summary>
+        /// The create request session.
+        /// </summary>
+        /// <param name="requestUrl">
+        /// The request url.
+        /// </param>
         public void CreateRequestSession(string requestUrl)
         {
-            Url = requestUrl;
-            Handler = new HttpClientHandler();
-            Client = new HttpClient(Handler);
+            this.Url = requestUrl;
+            this.Handler = new HttpClientHandler();
+            this.Client = new HttpClient(this.Handler);
         }
 
+        /// <summary>
+        ///     For now.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// The perform request async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        /// <exception cref="SynologyException">
+        /// </exception>
         private async Task<string> PerformRequestAsync()
         {
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, Url);
-                if (Handler.SupportsTransferEncodingChunked())
+                var request = new HttpRequestMessage(HttpMethod.Get, this.Url);
+                if (this.Handler.SupportsTransferEncodingChunked())
                 {
                     request.Headers.TransferEncodingChunked = true;
                 }
 
-                var response = await Client.SendAsync(request);
+                var response = await this.Client.SendAsync(request);
                 var responseAsByteArray = await response.Content.ReadAsByteArrayAsync();
                 var responseString = Encoding.UTF8.GetString(responseAsByteArray, 0, responseAsByteArray.Length);
                 return responseString;
@@ -82,25 +177,39 @@ namespace SynoDs.Core.Api.Http
             }
         }
 
+        /// <summary>
+        /// The upload file and get response async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        /// <exception cref="WebException">
+        /// </exception>
+        /// <exception cref="SynologyException">
+        /// </exception>
         private async Task<string> UploadFileAndGetResponseAsync()
         {
             try
             {
-                var message = new HttpRequestMessage(HttpMethod.Post, new Uri(Url));
-                if (Handler.SupportsTransferEncodingChunked())
+                var message = new HttpRequestMessage(HttpMethod.Post, new Uri(this.Url));
+                if (this.Handler.SupportsTransferEncodingChunked())
                 {
                     message.Headers.TransferEncodingChunked = true;
                 }
 
                 using (var formData = new MultipartFormDataContent())
                 {
-                    formData.Add(FileStreamContent, FileParam, FileName);
+                    formData.Add(this.FileStreamContent, this.FileParam, this.FileName);
                     message.Content = formData;
-                    var result = await Client.SendAsync(message);
+                    var result = await this.Client.SendAsync(message);
                     if (!result.IsSuccessStatusCode)
+                    {
                         throw new WebException(
-                            string.Format("Error while receiving the response from the server, got status code: {0}",
+                            string.Format(
+                                "Error while receiving the response from the server, got status code: {0}", 
                                 result.StatusCode));
+                    }
+
                     var resultContent = await result.Content.ReadAsByteArrayAsync();
                     var resultString = Encoding.UTF8.GetString(resultContent, 0, resultContent.Length);
                     return resultString;
@@ -117,22 +226,27 @@ namespace SynoDs.Core.Api.Http
         }
 
         /// <summary>
-        ///  For now.
+        /// The dispose.
         /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
+        /// <param name="disposing">
+        /// The disposing.
+        /// </param>
         private void Dispose(bool disposing)
         {
-            if (!disposing) return;
-            if (Client != null)
-                Client.Dispose();
+            if (!disposing)
+            {
+                return;
+            }
 
-            if (Handler != null)
-                Handler.Dispose();
+            if (this.Client != null)
+            {
+                this.Client.Dispose();
+            }
+
+            if (this.Handler != null)
+            {
+                this.Handler.Dispose();
+            }
         }
     }
 }

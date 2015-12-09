@@ -11,9 +11,19 @@ namespace SynoDs.Core.Contracts.Synology
         /// <summary>
         /// Should return a string with the final request URL
         /// </summary>
-        /// <param name="requestParameters">RequestParameters to build the request string.</param>
-        /// <returns>The final request string after having been cleaned.</returns>
-        Task<string> PrepareRequestAsync<TResult>(RequestParameters requestParameters);
+        /// <param name="diskStationHostAddress">
+        /// The disk Station Host Address.
+        /// </param>
+        /// <param name="requestParameters">
+        /// RequestParameters to build the request string.
+        /// </param>
+        /// <param name="sessionId">
+        /// The session Id.
+        /// </param>
+        /// <returns>
+        /// The final request string after having been cleaned.
+        /// </returns>
+        Task<string> PrepareRequestAsync<TResult>(string diskStationHostAddress, RequestParameters requestParameters, string sessionId = "");
 
         /// <summary>
         /// This method will call the URL encode to make sure no weird chars get sent in the request. 

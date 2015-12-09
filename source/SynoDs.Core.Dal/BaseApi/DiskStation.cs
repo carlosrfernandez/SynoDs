@@ -5,7 +5,7 @@
     /// <summary>
     /// Stores the Host URI for the Synology DiskStation 
     /// </summary>
-    public class DsStationInfo
+    public class DiskStation
     {
         /// <summary>
         /// The URI (ip or hostname with port). 

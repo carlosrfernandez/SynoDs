@@ -1,5 +1,17 @@
-﻿namespace SynoDs.Core.Contracts.IoC
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IContainer.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Provides an abstraction to an inversion of control Container. It is up to the client to use which ever one they like.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace SynoDs.Core.Contracts.IoC
 {
+    using System;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Provides an abstraction to an inversion of control Container. It is up to the client to use which ever one they like. 
     /// </summary>
@@ -10,7 +22,18 @@
         /// </summary>
         /// <typeparam name="T">Type to resolve</typeparam>
         /// <returns>The implementation of the requested type.</returns>
-        T Resolve<T>();
+        object Resolve<T>();
+
+        /// <summary>
+        /// The resolve.
+        /// </summary>
+        /// <param name="abs">
+        /// The abs.
+        /// </param>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        object Resolve(Type type);
 
         /// <summary>
         /// Registers an abstraction to it's implementation in the container. 

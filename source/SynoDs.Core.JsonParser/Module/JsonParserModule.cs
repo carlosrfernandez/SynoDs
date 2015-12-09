@@ -1,21 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SynoDs.Core.CrossCutting;
-using SynoDs.Core.Contracts;
-using SynoDs.Core.Contracts.Modularity;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="JsonParserModule.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The json parser module.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace SynoDs.Core.JsonParser.Module
 {
+    using SynoDs.Core.Contracts;
+    using SynoDs.Core.Contracts.Modularity;
+    using SynoDs.Core.CrossCutting;
+
+    /// <summary>
+    /// The json parser module.
+    /// </summary>
     public class JsonParserModule : IApiModule
     {
-        public bool RequiresAuthenticatedRequests { get; private set; }
+        /// <summary>
+        /// Gets a value indicating whether requires authenticated requests.
+        /// </summary>
+        public bool RequiresAuthenticatedRequests => false;
 
+        /// <summary>
+        /// The configure.
+        /// </summary>
         public void Configure()
         {
-            RequiresAuthenticatedRequests = false;
             IoCFactory.Container.Register<IJsonParser, JsonParser>();
         }
     }

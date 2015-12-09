@@ -10,7 +10,7 @@ namespace SynoDs.Core.Contracts.Synology
         /// <summary>
         /// Our disk station URI.
         /// </summary>
-        DsStationInfo StationEndpoint { get; set; }
+        DiskStation DiskStation { get; set; }
         
         /// <summary>
         /// This method will be used to upload a file to the DS.

@@ -1,5 +1,4 @@
-﻿using System.Composition;
-using SynoDs.Core.Contracts.Modularity;
+﻿using SynoDs.Core.Contracts.Modularity;
 using SynoDs.Core.Contracts.Synology;
 using SynoDs.Core.CrossCutting;
 

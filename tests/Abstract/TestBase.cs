@@ -16,7 +16,7 @@ namespace SynologyTests.Abstract
     {
         public static LoginCredentials Credentials { get; set; }
 
-        public static DsStationInfo StationInfo { get; set; }
+        public static DiskStation Station { get; set; }
 
         public TestContext TestContext { get; set; }
 
@@ -39,7 +39,7 @@ namespace SynologyTests.Abstract
             if (string.IsNullOrEmpty(Credentials.Password))
                 throw new ArgumentException("Password is emtpy, tests can't run.");
 
-            if (string.IsNullOrEmpty(StationInfo.HostName.ToString()))
+            if (string.IsNullOrEmpty(Station.HostName.ToString()))
                 throw new ArgumentException("Uri is empty, tests can't run.");
         }
     }

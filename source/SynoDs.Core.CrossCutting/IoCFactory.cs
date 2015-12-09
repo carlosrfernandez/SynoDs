@@ -1,14 +1,34 @@
-﻿using SynoDs.Core.Contracts.IoC;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IoCFactory.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The io c factory.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace SynoDs.Core.CrossCutting
 {
+    using SynoDs.Core.Contracts.IoC;
+
+    /// <summary>
+    /// The io c factory.
+    /// </summary>
     public class IoCFactory
     {
-        private static IContainer _container;
+        /// <summary>
+        /// The _container.
+        /// </summary>
+        private static IContainer container;
 
-        public static IContainer Container
+        public IoCFactory(IContainer container)
         {
-            get { return _container ?? (_container = new NinjectContainer()); }
+            IoCFactory.container = container;
         }
+
+        /// <summary>
+        /// Gets the container.
+        /// </summary>
+        public static IContainer Container => container ?? (container = new NinjectContainer());
     }
 }

@@ -12,16 +12,11 @@ namespace SynoDs.Core.Contracts.Synology
         /// Will tell us if we're logged in.
         /// </summary>
         bool IsLoggedIn { get; set; }
-        
-        /// <summary>
-        /// Flago to indicate that an Authentication request is in progres.
-        /// </summary>
-        bool IsLoggingIn { get; set; }
 
         /// <summary>
         /// Asynchronous call to Login
         /// </summary>
-        Task<bool> LoginAsync(LoginCredentials credentials);
+        Task<string> LoginAsync(LoginCredentials credentials);
 
         /// <summary>
         /// Asynchronous call to logout.

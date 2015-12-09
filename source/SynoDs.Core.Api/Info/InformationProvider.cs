@@ -1,51 +1,92 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using SynoDs.Core.Contracts.Synology;
-using SynoDs.Core.Dal.BaseApi;
-using SynoDs.Core.Exceptions;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="InformationProvider.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The information provider.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace SynoDs.Core.Api.Info
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using SynoDs.Core.Contracts.Synology;
+    using SynoDs.Core.Dal.BaseApi;
+    using SynoDs.Core.Exceptions;
+
+    /// <summary>
+    /// The information provider.
+    /// </summary>
     public class InformationProvider : IInformationProvider
     {
-        public bool IsLoadingApiInformationCache { get; set; }
-
-        public bool FullyLoadApiInformationCache { get; set; }
-
+        /// <summary>
+        /// The info session name.
+        /// </summary>
         private const string InfoSessionName = "InfoSession";
 
+        /// <summary>
+        /// The _info repository.
+        /// </summary>
         private readonly IInformationRepository _infoRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InformationProvider"/> class.
+        /// </summary>
+        /// <param name="infoRepository">
+        /// The info repository.
+        /// </param>
         public InformationProvider(IInformationRepository infoRepository)
         {
             this._infoRepository = infoRepository;
         }
 
-        protected string GetSessionName()
-        {
-            return InfoSessionName;
-        }
+        /// <summary>
+        /// Gets or sets a value indicating whether is loading api information cache.
+        /// </summary>
+        public bool IsLoadingApiInformationCache { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether fully load api information cache.
+        /// </summary>
+        public bool FullyLoadApiInformationCache { get; set; }
 
         /// <summary>
         /// Gets the Api information for the requested API Name
         /// </summary>
-        /// <param name="apiName">Api name to get information on. </param>
-        /// <returns>The InformationResponse for the supplied API.</returns>
+        /// <param name="apiName">
+        /// Api name to get information on. 
+        /// </param>
+        /// <returns>
+        /// The InformationResponse for the supplied API.
+        /// </returns>
         public async Task<ApiInfo> GetApiInformationAsync(string apiName)
         {
-            if (_infoRepository.IsCacheEmtpy)
+            if (this._infoRepository.IsCacheEmtpy)
             {
-                await _infoRepository.LoadInformationCacheAsync();
+                await this._infoRepository.LoadInformationCacheAsync();
             }
 
-            var apiInfo = _infoRepository.InformationCache.FirstOrDefault(n => n.Key == apiName).Value;
-            
+            var apiInfo = this._infoRepository.InformationCache.FirstOrDefault(n => n.Key == apiName).Value;
+
             if (apiInfo != null)
             {
                 return apiInfo;
             }
 
             throw new SynologyException("Error while getting the API information.");
+        }
+
+        /// <summary>
+        /// The get session name.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        protected string GetSessionName()
+        {
+            return InfoSessionName;
         }
     }
 }
