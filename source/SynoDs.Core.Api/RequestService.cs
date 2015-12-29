@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RequestProvider.cs" company="">
+// <copyright file="requestService.cs" company="">
 //   
 // </copyright>
 // <summary>
@@ -9,20 +9,31 @@
 
 namespace SynoDs.Core.Api
 {
+    using System;
+    using System.IO;
     using System.Net;
     using System.Threading.Tasks;
 
     using SynoDs.Core.Contracts;
     using SynoDs.Core.Contracts.Synology;
-    using SynoDs.Core.CrossCutting.Common;
     using SynoDs.Core.Dal.HttpBase;
     using SynoDs.Core.Exceptions;
 
     /// <summary>
     /// The request provider.
     /// </summary>
-    public class RequestProvider : IRequestProvider
+    public class RequestService : IRequestService
     {
+        /// <summary>
+        /// The http client.
+        /// </summary>
+        private readonly IHttpClient httpClient;
+
+        /// <summary>
+        /// The json parser.
+        /// </summary>
+        private readonly IJsonParser jsonParser;
+
         /// <summary>
         /// The _attribute reader.
         /// </summary>
@@ -34,10 +45,13 @@ namespace SynoDs.Core.Api
         private readonly IInformationProvider informationProvider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RequestProvider"/> class.
+        /// Initializes a new instance of the <see cref="RequestService"/> class.
         /// </summary>
-        /// <param name="sessionHandler">
-        /// The session handler.
+        /// <param name="httpClient">
+        /// The HTTP client
+        /// </param>
+        /// <param name="jsonParser">
+        /// The json parser
         /// </param>
         /// <param name="attributeReader">
         /// The attribute reader.
@@ -45,29 +59,53 @@ namespace SynoDs.Core.Api
         /// <param name="informationProvider">
         /// The information provider.
         /// </param>
-        public RequestProvider(
+        public RequestService(
+            IHttpClient httpClient,
+            IJsonParser jsonParser,
             IAttributeReader attributeReader, 
             IInformationProvider informationProvider)
         {
-            Validate.ArgumentIsNotNullOrEmpty(attributeReader);
-            Validate.ArgumentIsNotNullOrEmpty(informationProvider);
-            
+            if (httpClient == null)
+            {
+                throw new ArgumentNullException(nameof(httpClient));
+            }
+
+            if (jsonParser == null)
+            {
+                throw new ArgumentNullException(nameof(jsonParser));
+            }
+
+            if (attributeReader == null)
+            {
+                throw new ArgumentNullException(nameof(attributeReader));
+            }
+
+            if (informationProvider == null)
+            {
+                throw new ArgumentNullException(nameof(informationProvider));
+            }
+
+            this.httpClient = httpClient;
+            this.jsonParser = jsonParser;
             this.attributeReader = attributeReader;
             this.informationProvider = informationProvider;
         }
 
         /// <summary>
-        /// Todo: Implement the missing params.
+        /// The prepare request async.
         /// </summary>
-        /// <typeparam name="TResult">
-        /// </typeparam>
-        /// <param name="requestParameters">
-        /// The Request params.
-        /// </param>
         /// <param name="diskStationHostName">
+        /// The disk station host name.
+        /// </param>
+        /// <param name="requestParameters">
+        /// The request parameters.
         /// </param>
         /// <param name="sessionId">
+        /// The session id.
         /// </param>
+        /// <typeparam name="TResult">
+        /// The result object type
+        /// </typeparam>
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
@@ -82,7 +120,7 @@ namespace SynoDs.Core.Api
                 throw new SynologyException("Unauthorized operation, login before making this request.");
             }
 
-            var infoResponse = await this.informationProvider.GetApiInformationAsync(api);
+            var infoResponse = await this.informationProvider.GetApiInformationAsync(api, diskStationHostName);
 
             var requestBase = new RequestBase
                                   {
@@ -132,6 +170,55 @@ namespace SynoDs.Core.Api
             }
 
             return cleanParams;
+        }
+
+        /// <summary>
+        /// The perform operation async.
+        /// </summary>
+        /// <param name="diskStationEndpoint">
+        /// The disk station endpoint.
+        /// </param>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <param name="sessionId">
+        /// The session id.
+        /// </param>
+        /// <typeparam name="T">
+        /// The response object type.
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<T> PerformOperationAsync<T>(string diskStationEndpoint, RequestParameters parameters = null, string sessionId = "")
+        {
+            var queryString = await this.PrepareRequestAsync<T>(diskStationEndpoint, parameters);
+            this.httpClient.CreateRequestSession(queryString);
+            var jsonResult = await this.httpClient.SendRequestAsync();
+            var resultObject = this.jsonParser.FromJson<T>(jsonResult);
+            return resultObject;
+        }
+
+        /// <summary>
+        /// Performs the operation with file asynchronous.
+        /// </summary>
+        /// <typeparam name="T">
+        /// </typeparam>
+        /// <param name="diskStationEndpoint">
+        /// The disk station endpoint.
+        /// </param>
+        /// <param name="requestParams">
+        /// The request parameters.
+        /// </param>
+        /// <param name="fileStream">
+        /// The file stream.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public Task<T> PerformOperationWithFileAsync<T>(string diskStationEndpoint, RequestParameters requestParams, Stream fileStream)
+        {
+            throw new NotImplementedException();
         }
     }
 }

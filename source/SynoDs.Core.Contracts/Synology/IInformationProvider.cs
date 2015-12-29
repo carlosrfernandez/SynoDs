@@ -12,7 +12,8 @@ namespace SynoDs.Core.Contracts.Synology
         /// Gets the Information on the given Api name.
         /// </summary>
         /// <param name="apiName">API to get information on</param>
+        /// <param name="endpointDiskStation"></param>
         /// <returns>An object storing all of the Info</returns>
-        Task<ApiInfo> GetApiInformationAsync(string apiName);
+        Task<ApiInfo> GetApiInformationAsync(string apiName, string endpointDiskStation);
     }
 }

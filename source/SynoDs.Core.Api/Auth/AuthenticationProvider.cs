@@ -9,10 +9,10 @@
 
 namespace SynoDs.Core.Api.Auth
 {
+    using System;
     using System.Threading.Tasks;
 
     using SynoDs.Core.Contracts.Synology;
-    using SynoDs.Core.CrossCutting.Common;
     using SynoDs.Core.Dal.BaseApi;
     using SynoDs.Core.Dal.HttpBase;
 
@@ -27,20 +27,32 @@ namespace SynoDs.Core.Api.Auth
         private const string SessionName = "DiskStation";
 
         /// <summary>
+        /// The disk station.
+        /// </summary>
+        private readonly DiskStationDto diskStation;
+
+        /// <summary>
         /// The _operation provider.
         /// </summary>
-        private readonly IOperationProvider operationProvider;
+        private readonly IRequestService requestService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthenticationProvider"/> class.
         /// </summary>
-        /// <param name="operationProvider">
+        /// <param name="diskStation">The diskstation</param>
+        /// <param name="requestService">
         /// The operation provider.
         /// </param>
-        public AuthenticationProvider(IOperationProvider operationProvider)
+        public AuthenticationProvider(DiskStationDto diskStation, IRequestService requestService)
         {
+            if (diskStation == null)
+            {
+                throw new ArgumentNullException(nameof(diskStation));
+            }
+
             this.IsLoggedIn = false;
-            this.operationProvider = operationProvider;
+            this.diskStation = diskStation;
+            this.requestService = requestService;
         }
 
         /// <summary>
@@ -61,9 +73,6 @@ namespace SynoDs.Core.Api.Auth
         /// </returns>
         public async Task<string> LoginAsync(LoginCredentials credentials)
         {
-            Validate.ArgumentIsNotNullOrEmpty(credentials.UserName);
-            Validate.ArgumentIsNotNullOrEmpty(credentials.Password);
-
             // prepare request
             var parameters = new RequestParameters
                                  {
@@ -73,7 +82,7 @@ namespace SynoDs.Core.Api.Auth
                                      { "format", "sid" }
                                  };
 
-            var loginResult = await this.operationProvider.PerformOperationAsync<LoginResponse>(parameters);
+            var loginResult = await this.requestService.PerformOperationAsync<LoginResponse>(this.diskStation.DiskStation.HostName.ToString(), parameters);
 
             this.IsLoggedIn = loginResult.Success;
 
@@ -87,7 +96,7 @@ namespace SynoDs.Core.Api.Auth
         public async Task<bool> LogoutAsync()
         {
             var logoutParams = new RequestParameters { { "session", SessionName } };
-            var logoutRequestResult = await this.operationProvider.PerformOperationAsync<LogoutResponse>(logoutParams);
+            var logoutRequestResult = await this.requestService.PerformOperationAsync<LogoutResponse>(this.diskStation.DiskStation.HostName.ToString(), logoutParams);
             this.IsLoggedIn = false;
             return logoutRequestResult.Success;
         }

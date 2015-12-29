@@ -56,16 +56,17 @@ namespace SynoDs.Core.Api.Info
         /// Gets the Api information for the requested API Name
         /// </summary>
         /// <param name="apiName">
-        /// Api name to get information on. 
+        ///     Api name to get information on. 
         /// </param>
+        /// <param name="endpointDiskStation"></param>
         /// <returns>
         /// The InformationResponse for the supplied API.
         /// </returns>
-        public async Task<ApiInfo> GetApiInformationAsync(string apiName)
+        public async Task<ApiInfo> GetApiInformationAsync(string apiName, string endpointDiskStation)
         {
             if (this._infoRepository.IsCacheEmtpy)
             {
-                await this._infoRepository.LoadInformationCacheAsync();
+                await this._infoRepository.LoadInformationCacheAsync(endpointDiskStation);
             }
 
             var apiInfo = this._infoRepository.InformationCache.FirstOrDefault(n => n.Key == apiName).Value;

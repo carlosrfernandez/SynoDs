@@ -40,7 +40,6 @@
     <Compile Include="AppModulesCatalog.cs" />
     <Compile Include="NinjectContainer.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Common\Validate.cs" />
     <Compile Include="IoCFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

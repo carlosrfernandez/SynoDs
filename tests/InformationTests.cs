@@ -14,8 +14,6 @@ namespace SynologyTests
     public class InformationTests
     {
         private IInformationProvider InfoProvider { get; set; }
-        private IOperationProvider OpProvider { get; set; }
-        private IRequestProvider RequestProvider { get; set; }
         private IJsonParser JsonParser { get; set; }
 
         [ClassInitialize]

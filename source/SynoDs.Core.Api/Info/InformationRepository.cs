@@ -9,11 +9,11 @@
 
 namespace SynoDs.Core.Api.Info
 {
+    using System;
     using System.Threading.Tasks;
 
     using SynoDs.Core.Contracts;
     using SynoDs.Core.Contracts.Synology;
-    using SynoDs.Core.CrossCutting.Common;
     using SynoDs.Core.Dal.BaseApi;
     using SynoDs.Core.Exceptions;
 
@@ -25,24 +25,16 @@ namespace SynoDs.Core.Api.Info
         /// <summary>
         /// The _http client.
         /// </summary>
-        private readonly IHttpClient _httpClient;
+        private readonly IHttpClient httpClient;
 
         /// <summary>
         /// The _json parser.
         /// </summary>
-        private readonly IJsonParser _jsonParser;
-
-        /// <summary>
-        /// The _session handler.
-        /// </summary>
-        private readonly IDiskStationSessionHandler _sessionHandler;
-
+        private readonly IJsonParser jsonParser;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="InformationRepository"/> class.
         /// </summary>
-        /// <param name="sessionHandler">
-        /// The session handler.
-        /// </param>
         /// <param name="httpClient">
         /// The http client.
         /// </param>
@@ -50,22 +42,30 @@ namespace SynoDs.Core.Api.Info
         /// The json parser.
         /// </param>
         public InformationRepository(
-            IDiskStationSessionHandler sessionHandler, 
-            IHttpClient httpClient, 
+            IHttpClient httpClient,
             IJsonParser jsonParser)
         {
+            if (httpClient == null)
+            {
+                throw new ArgumentNullException(nameof(httpClient));
+            }
+
+            if (jsonParser == null)
+            {
+                throw new ArgumentNullException(nameof(jsonParser));
+            }
+
             this.IsCacheEmtpy = true;
             this.IsLoadingApiInformationCache = false;
 
-            this._httpClient = httpClient;
-            this._jsonParser = jsonParser;
-            this._sessionHandler = sessionHandler;
+            this.httpClient = httpClient;
+            this.jsonParser = jsonParser;
         }
 
         /// <summary>
         /// Gets or sets a value indicating whether is loading api information cache.
         /// </summary>
-        public bool IsLoadingApiInformationCache { get; set; }
+        public bool IsLoadingApiInformationCache { get; set; } 
 
         /// <summary>
         /// Gets or sets the information cache.
@@ -81,27 +81,31 @@ namespace SynoDs.Core.Api.Info
         /// Performs a RAW request using the standard API information url's and paramters to load all of the API information
         ///     data into a local cache. This will make subsequent calls for information faster.
         /// </summary>
+        /// <param name="endpointDiskStation">The diskstation</param>
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public async Task LoadInformationCacheAsync()
+        public async Task LoadInformationCacheAsync(string endpointDiskStation)
         {
-            Validate.ArgumentIsNotNullOrEmpty(this._sessionHandler.DiskStation);
+            if (endpointDiskStation == null)
+            {
+                throw new ArgumentNullException(nameof(endpointDiskStation));
+            }
 
             var getRequestUrl = string.Format(
                 "{0}webapi/query.cgi?api=SYNO.API.Info&version=1&method=query&query=ALL", 
-                this._sessionHandler.DiskStation.HostName);
+                endpointDiskStation);
 
-            this._httpClient.CreateRequestSession(getRequestUrl);
+            this.httpClient.CreateRequestSession(getRequestUrl);
 
-            var requestResult = await this._httpClient.SendRequestAsync();
+            var requestResult = await this.httpClient.SendRequestAsync();
 
             if (string.IsNullOrEmpty(requestResult))
             {
                 throw new SynologyException("Error loading API information cache!");
             }
 
-            var infoResult = this._jsonParser.FromJson<InfoResponse>(requestResult);
+            var infoResult = this.jsonParser.FromJson<InfoResponse>(requestResult);
 
             if (infoResult.Success)
             {

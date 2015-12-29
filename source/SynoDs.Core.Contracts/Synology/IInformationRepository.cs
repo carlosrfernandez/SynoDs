@@ -19,7 +19,8 @@ namespace SynoDs.Core.Contracts.Synology
         /// <summary>
         /// Fills the cache, by making a request to the DS.
         /// </summary>
+        /// <param name="endpointDiskStation"></param>
         /// <returns>Void</returns>
-        Task LoadInformationCacheAsync();
+        Task LoadInformationCacheAsync(string endpointDiskStation);
     }
 }
