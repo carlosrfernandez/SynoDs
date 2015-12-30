@@ -29,7 +29,7 @@ namespace SynoDs.Core.Api.Info
         /// <summary>
         /// The _info repository.
         /// </summary>
-        private readonly IInformationRepository _infoRepository;
+        private readonly IInformationRepository infoRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InformationProvider"/> class.
@@ -39,7 +39,7 @@ namespace SynoDs.Core.Api.Info
         /// </param>
         public InformationProvider(IInformationRepository infoRepository)
         {
-            this._infoRepository = infoRepository;
+            this.infoRepository = infoRepository;
         }
 
         /// <summary>
@@ -64,12 +64,12 @@ namespace SynoDs.Core.Api.Info
         /// </returns>
         public async Task<ApiInfo> GetApiInformationAsync(string apiName, string endpointDiskStation)
         {
-            if (this._infoRepository.IsCacheEmtpy)
+            if (this.infoRepository.IsCacheEmtpy)
             {
-                await this._infoRepository.LoadInformationCacheAsync(endpointDiskStation);
+                await this.infoRepository.LoadInformationCacheAsync(endpointDiskStation);
             }
 
-            var apiInfo = this._infoRepository.InformationCache.FirstOrDefault(n => n.Key == apiName).Value;
+            var apiInfo = this.infoRepository.InformationCache.FirstOrDefault(n => n.Key == apiName).Value;
 
             if (apiInfo != null)
             {
