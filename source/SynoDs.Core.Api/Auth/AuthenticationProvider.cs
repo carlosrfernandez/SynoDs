@@ -27,11 +27,6 @@ namespace SynoDs.Core.Api.Auth
         private const string SessionName = "DiskStation";
 
         /// <summary>
-        /// The disk station.
-        /// </summary>
-        private readonly DiskStationDto diskStation;
-
-        /// <summary>
         /// The _operation provider.
         /// </summary>
         private readonly IRequestService requestService;
@@ -43,15 +38,9 @@ namespace SynoDs.Core.Api.Auth
         /// <param name="requestService">
         /// The operation provider.
         /// </param>
-        public AuthenticationProvider(DiskStationDto diskStation, IRequestService requestService)
+        public AuthenticationProvider(IRequestService requestService)
         {
-            if (diskStation == null)
-            {
-                throw new ArgumentNullException(nameof(diskStation));
-            }
-
             this.IsLoggedIn = false;
-            this.diskStation = diskStation;
             this.requestService = requestService;
         }
 
@@ -60,43 +49,51 @@ namespace SynoDs.Core.Api.Auth
         /// </summary>
         public bool IsLoggedIn { get; set; }
 
-        // to control logging in process.
-
         /// <summary>
-        /// Logs into the DiskStation with the supplied credentials.
+        /// The login async.
         /// </summary>
-        /// <param name="credentials">
-        /// The credentials.
+        /// <param name="host">
+        /// The host.
+        /// </param>
+        /// <param name="username">
+        /// The username.
+        /// </param>
+        /// <param name="password">
+        /// The password.
         /// </param>
         /// <returns>
-        /// True if logged in and false if any errors occur.
+        /// The <see cref="Task"/>.
         /// </returns>
-        public async Task<string> LoginAsync(LoginCredentials credentials)
+        public async Task<IDiskStationSession> LoginAsync(Uri host, string username, string password)
         {
+            var diskStationSession = new DiskStation(new LoginCredentials { UserName = username, Password = password }, host.ToString());
+            
             // prepare request
             var parameters = new RequestParameters
                                  {
-                                     { "account", credentials.UserName }, 
-                                     { "passwd", credentials.Password }, 
+                                     { "account", username }, 
+                                     { "passwd", password }, 
                                      { "session", SessionName }, 
                                      { "format", "sid" }
                                  };
 
-            var loginResult = await this.requestService.PerformOperationAsync<LoginResponse>(this.diskStation.DiskStation.HostName.ToString(), parameters);
+            var loginResult = await this.requestService.PerformOperationAsync<LoginResponse>(host.ToString(), parameters);
 
             this.IsLoggedIn = loginResult.Success;
 
-            return loginResult.ResponseData.Sid;
+            diskStationSession.SessionId = loginResult.ResponseData.Sid;
+
+            return diskStationSession;
         }
 
         /// <summary>
         ///     Logs out of the DiskStation.
         /// </summary>
         /// <returns>True if logged in, false in case of errors.</returns>
-        public async Task<bool> LogoutAsync()
+        public async Task<bool> LogoutAsync(IDiskStationSession diskStation)
         {
             var logoutParams = new RequestParameters { { "session", SessionName } };
-            var logoutRequestResult = await this.requestService.PerformOperationAsync<LogoutResponse>(this.diskStation.DiskStation.HostName.ToString(), logoutParams);
+            var logoutRequestResult = await this.requestService.PerformOperationAsync<LogoutResponse>(diskStation.Host.ToString(), logoutParams);
             this.IsLoggedIn = false;
             return logoutRequestResult.Success;
         }

@@ -50,7 +50,6 @@
     <Compile Include="Attributes\AuthenticationRequired.cs" />
     <Compile Include="BaseApi\ApiInfo.cs" />
     <Compile Include="BaseApi\ApiInfoWrapper.cs" />
-    <Compile Include="BaseApi\DiskStation.cs" />
     <Compile Include="BaseApi\Login.cs" />
     <Compile Include="BaseApi\LoginCredentials.cs" />
     <Compile Include="BaseApi\LoginResponse.cs" />

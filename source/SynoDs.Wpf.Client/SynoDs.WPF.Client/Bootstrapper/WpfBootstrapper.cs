@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
-using SynoDs.Core.Contracts.Synology;
 using SynoDs.Core.CrossCutting;
-using SynoDs.Core.Contracts;
 
 namespace SynoDs.WPF.Client.Bootstrapper
 {
@@ -10,6 +7,7 @@ namespace SynoDs.WPF.Client.Bootstrapper
     {
         public WpfBootstrapper(AppModulesCatalog modules) : base(modules)
         {
+
         }
 
         public override void Startup()

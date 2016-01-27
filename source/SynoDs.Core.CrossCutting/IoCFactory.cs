@@ -12,7 +12,7 @@ namespace SynoDs.Core.CrossCutting
     using SynoDs.Core.Contracts.IoC;
 
     /// <summary>
-    /// The io c factory.
+    /// The IOC factory.
     /// </summary>
     public class IoCFactory
     {

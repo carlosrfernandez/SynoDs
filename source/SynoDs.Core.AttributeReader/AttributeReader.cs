@@ -1,11 +1,22 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using SynoDs.Core.Contracts;
-using SynoDs.Core.Dal.Attributes;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AttributeReader.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Read the attributes of the Objects defined in the DAL so that we can retrieve the API to which they belong
+//   and the methods that we need to use.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace SynoDs.Core.AttributeReader
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
+    using SynoDs.Core.Contracts;
+    using SynoDs.Core.Dal.Attributes;
+
     /// <summary>
     /// Read the attributes of the Objects defined in the DAL so that we can retrieve the API to which they belong 
     /// and the methods that we need to use. 
@@ -29,7 +40,9 @@ namespace SynoDs.Core.AttributeReader
                                 .FirstOrDefault();
 
             if (result != null)
+            {
                 return result;
+            }
 
             // If we have a second level generic entity (like IEnumerable<MyType>) we need to check IEnumerable's generic type arguments.
             foreach (var secondLevelResult in genericParams.Select(item => item.GetTypeInfo().GenericTypeArguments))
@@ -40,7 +53,9 @@ namespace SynoDs.Core.AttributeReader
                     .FirstOrDefault();
 
                 if (result != null)
+                {
                     break;
+                }
             }
 
             return result;
@@ -68,7 +83,7 @@ namespace SynoDs.Core.AttributeReader
         {
             try
             {
-                var info = typeof (T).GetTypeInfo();
+                var info = typeof(T).GetTypeInfo();
                 var authAttribute = info.GetCustomAttribute<AuthenticationRequired>();
                 return authAttribute.GetAuthenticationRequirements();
             }

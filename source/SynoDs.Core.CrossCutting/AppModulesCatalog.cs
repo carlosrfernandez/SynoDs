@@ -14,7 +14,6 @@ namespace SynoDs.Core.CrossCutting
     using SynoDs.Core.Contracts.IoC;
     using SynoDs.Core.Contracts.Modularity;
 
-    // TODO: this has to be implemented by 
     /// <summary>
     /// The app modules catalog.
     /// </summary>
@@ -23,18 +22,18 @@ namespace SynoDs.Core.CrossCutting
         /// <summary>
         /// The _application modules.
         /// </summary>
-        private readonly IEnumerable<IApiModule> _applicationModules;
-
-        // This will be implemented on a per platform project
+        private readonly IEnumerable<IApiModule> applicationModules;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="AppModulesCatalog"/> class.
+        /// This will be implemented on a per platform project
         /// </summary>
         /// <param name="appModules">
         /// The app modules.
         /// </param>
         public AppModulesCatalog(IEnumerable<IApiModule> appModules)
         {
-            this._applicationModules = appModules;
+            this.applicationModules = appModules;
         }
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace SynoDs.Core.CrossCutting
         /// </summary>
         public void InitCatalog()
         {
-            foreach (var module in this._applicationModules)
+            foreach (var module in this.applicationModules)
             {
                 module.Configure();
             }
