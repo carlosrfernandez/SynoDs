@@ -39,9 +39,15 @@ namespace SynoDs.Core.Contracts.IoC
         /// Registers an abstraction to it's implementation in the container. 
         /// </summary>
         /// <typeparam name="TAbs">Abstract class or interface</typeparam>
-        /// <typeparam name="TImpl">Implementation of TAbs</typeparam>
         /// <param name="instance">the instance to register</param>
-        void RegisterWithInstance<TAbs, TImpl>(TImpl instance) where TImpl : TAbs;
+        void RegisterWithInstance<TAbs>(object instance);
+
+        /// <summary>
+        /// Registers an abstraction to it's implementation in the container. 
+        /// </summary>
+        /// <typeparam name="TAbs">Abstract class or interface</typeparam>
+        /// <param name="instance">the instance to register</param>
+        void RegisterWithInstance<TAbs>(object instance, bool singleton);
 
         /// <summary>
         /// Register an existing instance of an abstraction.

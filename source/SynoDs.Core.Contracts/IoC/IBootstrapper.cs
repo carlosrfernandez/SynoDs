@@ -5,7 +5,5 @@
         void Startup();
 
         void Shutdown();
-
-        void Run();
     }
 }

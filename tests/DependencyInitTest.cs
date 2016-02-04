@@ -63,7 +63,7 @@ namespace SynologyTests
         /// <summary>
         /// The test api base init.
         /// </summary>
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestSetup()
         {
             this.Container = new NinjectContainer();

@@ -9,18 +9,18 @@
 
 namespace SynoDs.Core.Api.Module
 {
-    using SynoDs.Core.Api.Auth;
-    using SynoDs.Core.Api.Http;
-    using SynoDs.Core.Api.Info;
-    using SynoDs.Core.AttributeReader;
-    using SynoDs.Core.Contracts;
-    using SynoDs.Core.Contracts.Modularity;
-    using SynoDs.Core.Contracts.Synology;
-    using SynoDs.Core.CrossCutting;
-    using SynoDs.Core.Error;
-    using SynoDs.Core.JsonParser;
-
-  /// <summary>
+    using Auth;
+    using Http;
+    using Info;
+    using AttributeReader;
+    using Contracts;
+    using Contracts.Modularity;
+    using Contracts.Synology;
+    using CrossCutting;
+    using Error;
+    using JsonParser;
+    using Microsoft.Practices.Unity;
+    /// <summary>
     ///     The API core module.
     /// </summary>
     public class ApiCoreModule : IApiModule
@@ -31,29 +31,29 @@ namespace SynoDs.Core.Api.Module
         public void Configure()
         {
             // Register Attribute reader.
-            IoCFactory.Container.Register<IAttributeReader, AttributeReader>();
+            IoCFactory.Container.RegisterType<IAttributeReader, AttributeReader>();
 
             // Register Error data source.
-            IoCFactory.Container.Register<IErrorProvider, ErrorProvider>();
+            IoCFactory.Container.RegisterType<IErrorProvider, ErrorProvider>();
 
             // Register JSON parser.
-            IoCFactory.Container.Register<IJsonParser, JsonParser>();
+            IoCFactory.Container.RegisterType<IJsonParser, JsonParser>();
 
             // Register HttpClient
-            IoCFactory.Container.Register<IHttpClient, HttpGetRequestClient>();
+            IoCFactory.Container.RegisterType<IHttpClient, HttpGetRequestClient>();
 
             // Register Information repo. 
             // This one needs a DiskStation Session to go to. 
-            IoCFactory.Container.Register<IInformationRepository, InformationRepository>();
+            IoCFactory.Container.RegisterType<IInformationRepository, InformationRepository>();
 
             // Register Information provider.
-            IoCFactory.Container.Register<IInformationProvider, InformationProvider>();
+            IoCFactory.Container.RegisterType<IInformationProvider, InformationProvider>();
 
             // Register the requestService 
-            IoCFactory.Container.Register<IRequestService, RequestService>();
+            IoCFactory.Container.RegisterType<IRequestService, RequestService>();
 
             // Create
-            IoCFactory.Container.Register<IAuthenticationProvider, AuthenticationProvider>();
+            IoCFactory.Container.RegisterType<IAuthenticationProvider, AuthenticationProvider>();
         }
     }
 }

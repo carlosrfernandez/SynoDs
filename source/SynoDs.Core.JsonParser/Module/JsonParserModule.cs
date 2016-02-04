@@ -9,10 +9,10 @@
 
 namespace SynoDs.Core.JsonParser.Module
 {
-    using SynoDs.Core.Contracts;
-    using SynoDs.Core.Contracts.Modularity;
-    using SynoDs.Core.CrossCutting;
-
+    using Contracts;
+    using Contracts.Modularity;
+    using CrossCutting;
+    using Microsoft.Practices.Unity;
     /// <summary>
     /// The json parser module.
     /// </summary>
@@ -28,7 +28,7 @@ namespace SynoDs.Core.JsonParser.Module
         /// </summary>
         public void Configure()
         {
-            IoCFactory.Container.Register<IJsonParser, JsonParser>();
+            IoCFactory.Container.RegisterType<IJsonParser, JsonParser>();
         }
     }
 }

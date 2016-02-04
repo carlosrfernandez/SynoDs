@@ -1,6 +1,7 @@
 ﻿using SynoDs.Core.Contracts.Modularity;
 using SynoDs.Core.Contracts.Synology;
 using SynoDs.Core.CrossCutting;
+using Microsoft.Practices.Unity;
 
 namespace SynoDs.Core.DownloadStation.Module
 {
@@ -8,7 +9,7 @@ namespace SynoDs.Core.DownloadStation.Module
     {
         public void Configure()
         {
-            IoCFactory.Container.Register<IDownloadStation, DownloadManager>();
+            IoCFactory.Container.RegisterType<IDownloadStation, DownloadManager>();
         }
     }
 }

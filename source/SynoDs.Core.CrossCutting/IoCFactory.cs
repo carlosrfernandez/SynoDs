@@ -9,7 +9,7 @@
 
 namespace SynoDs.Core.CrossCutting
 {
-    using SynoDs.Core.Contracts.IoC;
+    using Microsoft.Practices.Unity;
 
     /// <summary>
     /// The IOC factory.
@@ -19,9 +19,9 @@ namespace SynoDs.Core.CrossCutting
         /// <summary>
         /// The _container.
         /// </summary>
-        private static IContainer container;
+        private static IUnityContainer container;
 
-        public IoCFactory(IContainer container)
+        public IoCFactory(IUnityContainer container)
         {
             IoCFactory.container = container;
         }
@@ -29,6 +29,6 @@ namespace SynoDs.Core.CrossCutting
         /// <summary>
         /// Gets the container.
         /// </summary>
-        public static IContainer Container => container ?? (container = new NinjectContainer());
+        public static IUnityContainer Container => container ?? (container = new UnityContainer());
     }
 }

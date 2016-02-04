@@ -6,5 +6,4 @@ namespace SynoDs.Core.Contracts.Modularity
     {
         IEnumerable<IApiModule> GetApplicationModules();
     }
-
 }
