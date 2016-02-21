@@ -3,8 +3,11 @@ using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using SynoDs.UWP.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using SynoDs.Core.Contracts.IoC;
+using Template10.Utils;
+using SynoDs.Core.CrossCutting;
 
 namespace SynoDs.UWP
 {
@@ -13,8 +16,15 @@ namespace SynoDs.UWP
 
     sealed partial class App : Template10.Common.BootStrapper
     {
-        private readonly IUnityContainer container;
-        private readonly IBootstrapper bootstrapper;
+        /// <summary>
+        /// The container
+        /// </summary>
+        private IUnityContainer container = new UnityContainer();
+
+        /// <summary>
+        /// The bootstrapper.
+        /// </summary>
+        private IBootstrapper bootstrapper;
 
         public App()
         {
@@ -24,25 +34,26 @@ namespace SynoDs.UWP
             InitializeComponent();
             SplashFactory = (e) => new Views.Splash(e);
 
+            var locator = new UnityServiceLocator(container);
+            ServiceLocator.SetLocatorProvider(() => locator);
+
             #region App settings
 
             var _settings = SettingsService.Instance;
             RequestedTheme = _settings.AppTheme;
             CacheMaxDuration = _settings.CacheMaxDuration;
             ShowShellBackButton = _settings.UseShellBackButton;
-
-            this.container = new UnityContainer();
-
-            // load app modules.
-            var bootstrapper = new Bootstrapper(container);
-            bootstrapper.Startup();
-
             #endregion
         }
 
         // runs even if restored from state
         public override Task OnInitializeAsync(IActivatedEventArgs args)
         {
+            // load app modules.
+            this.bootstrapper = new Bootstrapper(container);
+            bootstrapper.Startup();
+
+
             // content may already be shell when resuming
             if ((Window.Current.Content as Views.Shell) == null)
             {
@@ -50,6 +61,7 @@ namespace SynoDs.UWP
                 var nav = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
                 Window.Current.Content = new Views.Shell(nav);
             }
+
             return Task.CompletedTask;
         }
 

@@ -76,7 +76,7 @@ namespace SynoDs.Core.Contracts.Synology
         /// </returns>
         public bool IsLoggedIn()
         {
-            return string.IsNullOrEmpty(this.SessionId);
+            return !string.IsNullOrEmpty(this.SessionId);
         }
     }
 }

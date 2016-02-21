@@ -38,43 +38,6 @@ namespace SynoDs.Core.Api.Http
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpGetRequestClient"/> class.
-        /// </summary>
-        /// <param name="url">
-        /// The url.
-        /// </param>
-        public HttpGetRequestClient(string url)
-        {
-            this.CreateRequestSession(url);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see>
-        ///         <cref>HttpGetRequestClient</cref>
-        ///     </see>
-        ///     class.
-        /// </summary>
-        /// <param name="url">
-        /// The URL.
-        /// </param>
-        /// <param name="file">
-        /// The file.
-        /// </param>
-        /// <param name="fileName">
-        /// The file name.
-        /// </param>
-        /// <param name="fileParam">
-        /// The file param.
-        /// </param>
-        public HttpGetRequestClient(string url, Stream file, string fileName, string fileParam)
-            : this(url)
-        {
-            this.FileStreamContent = new StreamContent(file);
-            this.FileName = fileName;
-            this.FileParam = fileParam;
-        }
-
-        /// <summary>
         /// Gets or sets the url.
         /// </summary>
         private string Url { get; set; }
@@ -161,11 +124,6 @@ namespace SynoDs.Core.Api.Http
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, this.Url);
-                if (this.Handler.SupportsTransferEncodingChunked())
-                {
-                    request.Headers.TransferEncodingChunked = true;
-                }
-
                 var response = await this.Client.SendAsync(request);
                 var responseAsByteArray = await response.Content.ReadAsByteArrayAsync();
                 var responseString = Encoding.UTF8.GetString(responseAsByteArray, 0, responseAsByteArray.Length);

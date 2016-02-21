@@ -25,35 +25,42 @@ namespace SynoDs.Core.Api.Module
     /// </summary>
     public class ApiCoreModule : IApiModule
     {
+        private readonly IUnityContainer container;
+
+        public ApiCoreModule(IUnityContainer container)
+        {
+            this.container = container;
+        }
+
         /// <summary>
         /// The configure.
         /// </summary>
         public void Configure()
         {
             // Register Attribute reader.
-            IoCFactory.Container.RegisterType<IAttributeReader, AttributeReader>();
+            this.container.RegisterType<IAttributeReader, AttributeReader>();
 
             // Register Error data source.
-            IoCFactory.Container.RegisterType<IErrorProvider, ErrorProvider>();
+            this.container.RegisterType<IErrorProvider, ErrorProvider>();
 
             // Register JSON parser.
-            IoCFactory.Container.RegisterType<IJsonParser, JsonParser>();
+            this.container.RegisterType<IJsonParser, JsonParser>();
 
             // Register HttpClient
-            IoCFactory.Container.RegisterType<IHttpClient, HttpGetRequestClient>();
+            this.container.RegisterType<IHttpClient, HttpGetRequestClient>();
 
             // Register Information repo. 
             // This one needs a DiskStation Session to go to. 
-            IoCFactory.Container.RegisterType<IInformationRepository, InformationRepository>();
+            this.container.RegisterType<IInformationRepository, InformationRepository>();
 
             // Register Information provider.
-            IoCFactory.Container.RegisterType<IInformationProvider, InformationProvider>();
+            this.container.RegisterType<IInformationProvider, InformationProvider>();
 
             // Register the requestService 
-            IoCFactory.Container.RegisterType<IRequestService, RequestService>();
+            this.container.RegisterType<IRequestService, RequestService>();
 
             // Create
-            IoCFactory.Container.RegisterType<IAuthenticationProvider, AuthenticationProvider>();
+            this.container.RegisterType<IAuthenticationProvider, AuthenticationProvider>();
         }
     }
 }

@@ -8,11 +8,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:SynoDs.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:SynoDs.UWP.ViewModels" mc:Ignorable="d">
+      xmlns:vm="using:SynoDs.UWP.ViewModels" mc:Ignorable="d"
+      DataContext="{Binding MainPage, Source={StaticResource ViewModelLocator}}">
 
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <vm:MainPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+    </Page.DataContext>-->
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -53,9 +54,9 @@
         <!--  page header  -->
         <controls:PageHeader Content="Main Page">
             <controls:PageHeader.SecondaryCommands>
-                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" Label="Settings" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacy" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="About" />
+                <!--<AppBarButton Click="{x:Bind ViewModel.GotoSettings}" Label="Settings" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacy" />-->
+                <!--<AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="About" />-->
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 
@@ -79,8 +80,8 @@
                 </TextBox>
             </controls:Resizer>
 
-            <Button Margin="12,0" VerticalAlignment="Bottom"
-                    Click="{x:Bind ViewModel.GotoDetailsPage}" Content="Submit" />
+            <!--<Button Margin="12,0" VerticalAlignment="Bottom"
+                    Click="{x:Bind ViewModel.GotoDetailsPage}" Content="Submit" />-->
 
         </StackPanel>
 

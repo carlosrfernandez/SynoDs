@@ -59,6 +59,13 @@
 
         <!--  content  -->
         <Pivot x:Name="MyPivot" Grid.Row="1">
+            <PivotItem DataContext="{Binding SettingsPartViewModel}" Header="Connections">
+                <Button x:Name="AddConnectionButton" Margin="306,10,0,522"></Button>
+                <!--<ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left"
+                              VerticalScrollBarVisibility="Auto">
+                    <Button x:Name="addConnectionButton" />
+                </ScrollViewer>-->
+            </PivotItem>
             <PivotItem DataContext="{Binding SettingsPartViewModel}" Header="Settings">
                 <ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left"
                               VerticalScrollBarVisibility="Auto">
