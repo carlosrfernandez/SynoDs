@@ -50,5 +50,41 @@
         </controls:PageHeader>
         <Button Margin="15,15" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                     Command="{Binding LoginCommand}" Content="Login" />
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="ValuesColumn" Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="AddressRow"  Height="50" />
+                <!--<RowDefinition x:Name="PortRow"  Height="50" />-->
+                <RowDefinition x:Name="UserRow"  Height="50" />
+                <RowDefinition x:Name="PasswordRow"  Height="50" />
+                <RowDefinition x:Name="StoreCredRow"  Height="*" />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="AddressField" 
+                     TextAlignment="Left" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center"  
+                     Width="150" 
+                     PlaceholderText="IP or host" Grid.Row="0" 
+                     Text="{Binding Host, Mode=TwoWay}"
+                     />
+            <TextBox x:Name="UserField" 
+                     TextAlignment="Left" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center"  
+                     Width="150" 
+                     PlaceholderText="Username" Grid.Row="1"
+                     Text="{Binding UserName, Mode=TwoWay}"/>
+            <PasswordBox x:Name="PasswordField" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center"  
+                     Width="150" 
+                     PlaceholderText="Password" Grid.Row="2" 
+                     />
+            <ToggleSwitch x:Name="StoreCredSwitch" Grid.Row="3"
+                          IsOn="{Binding StoreCredentials, Mode=TwoWay}"
+                          HorizontalAlignment="Left" VerticalAlignment="Top" Header="Save Credentials" />
+        </Grid>
     </Grid>
 </Page>

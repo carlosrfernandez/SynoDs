@@ -38,29 +38,29 @@ namespace SynoDs.Core.Api.Module
         public void Configure()
         {
             // Register Attribute reader.
-            this.container.RegisterType<IAttributeReader, AttributeReader>();
+            this.container.RegisterType<IAttributeReader, AttributeReader>(new ContainerControlledLifetimeManager());
 
             // Register Error data source.
-            this.container.RegisterType<IErrorProvider, ErrorProvider>();
+            this.container.RegisterType<IErrorProvider, ErrorProvider>(new ContainerControlledLifetimeManager());
 
             // Register JSON parser.
-            this.container.RegisterType<IJsonParser, JsonParser>();
+            this.container.RegisterType<IJsonParser, JsonParser>(new ContainerControlledLifetimeManager());
 
             // Register HttpClient
-            this.container.RegisterType<IHttpClient, HttpGetRequestClient>();
+            this.container.RegisterType<IHttpClient, HttpGetRequestClient>(new ContainerControlledLifetimeManager());
 
             // Register Information repo. 
             // This one needs a DiskStation Session to go to. 
-            this.container.RegisterType<IInformationRepository, InformationRepository>();
+            this.container.RegisterType<IInformationRepository, InformationRepository>(new ContainerControlledLifetimeManager());
 
             // Register Information provider.
-            this.container.RegisterType<IInformationProvider, InformationProvider>();
+            this.container.RegisterType<IInformationProvider, InformationProvider>(new ContainerControlledLifetimeManager());
 
             // Register the requestService 
-            this.container.RegisterType<IRequestService, RequestService>();
+            this.container.RegisterType<IRequestService, RequestService>(new ContainerControlledLifetimeManager());
 
             // Create
-            this.container.RegisterType<IAuthenticationProvider, AuthenticationProvider>();
+            this.container.RegisterType<IAuthenticationProvider, AuthenticationProvider>(new ContainerControlledLifetimeManager());
         }
     }
 }

@@ -8,6 +8,7 @@ using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Practices.Unity;
 using System.Windows.Input;
+using Windows.UI.ViewManagement;
 using GalaSoft.MvvmLight.Command;
 
 namespace SynoDs.UWP.ViewModels
@@ -19,9 +20,9 @@ namespace SynoDs.UWP.ViewModels
         /// </summary>
         private readonly IAuthenticationProvider authenticationProvider;
 
-        private string host { get; set; }
+        public string Host { get; set; }
 
-        private string userName { get; set; }
+        public string UserName { get; set; }
 
         private string password { get; set; }
 
@@ -29,7 +30,7 @@ namespace SynoDs.UWP.ViewModels
 
         private bool useSsl { get; set; }
 
-        private bool storeCredentials { get; set; }
+        public bool StoreCredentials { get; set; }
 
         public ICommand LoginCommand { get; private set; }
 
@@ -47,18 +48,30 @@ namespace SynoDs.UWP.ViewModels
             this.authenticationProvider = authenticationProvider;
         }
 
-        public async Task<bool> LoginAsync()
+        public async Task LoginAsync()
         {
 #if DEBUG
-            
+           
 #endif
-            var fullUrl = new Uri($"{host}:{port}");
-            var loginResult = await this.authenticationProvider.LoginAsync(fullUrl, this.userName, this.password);
+            Views.Shell.SetBusy(true, "Loading...");
 
+            if (!Host.StartsWith("http://") || !Host.StartsWith("https://"))
+            {
+                Host = $"http://{Host}";
+            }
+                
+            var fullUrl = new Uri($"{Host}:{port}");
+            var loginResult = await this.authenticationProvider.LoginAsync(fullUrl, this.UserName, this.password);
+            
+            Views.Shell.SetBusy(false);
             //TODO: control error messages here.
-            if (!loginResult.IsLoggedIn()) return false;
+            if (!loginResult.IsLoggedIn())
+            {
+                // do something with this
+                return;
+            }
 
-            return true;
+            NavigationService.Navigate(typeof (Views.MainPage));
         }
 
         private void NavigateToMainView()
@@ -68,11 +81,20 @@ namespace SynoDs.UWP.ViewModels
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
+            if (this.authenticationProvider.IsLoggedIn)
+            {
+                // do summin', we left.
+            }
+
             return base.OnNavigatedFromAsync(state, suspending);
         }
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
+            if (this.authenticationProvider.IsLoggedIn)
+            {
+                // do summin' we're leaving
+            }
             return base.OnNavigatingFromAsync(args);
         }
 
