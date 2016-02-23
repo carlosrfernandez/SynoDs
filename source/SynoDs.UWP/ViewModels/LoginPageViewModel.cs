@@ -54,11 +54,6 @@ namespace SynoDs.UWP.ViewModels
            
 #endif
             Views.Shell.SetBusy(true, "Loading...");
-
-            if (!Host.StartsWith("http://") || !Host.StartsWith("https://"))
-            {
-                Host = $"http://{Host}";
-            }
                 
             var fullUrl = new Uri($"{Host}:{port}");
             var loginResult = await this.authenticationProvider.LoginAsync(fullUrl, this.UserName, this.password);
