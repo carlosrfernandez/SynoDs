@@ -10,7 +10,6 @@
 namespace SynoDs.Core.Api.Module
 {
     using Auth;
-    using Http;
     using Info;
     using AttributeReader;
     using Contracts;
@@ -47,7 +46,7 @@ namespace SynoDs.Core.Api.Module
             this.container.RegisterType<IJsonParser, JsonParser>(new ContainerControlledLifetimeManager());
 
             // Register HttpClient
-            this.container.RegisterType<IHttpClient, HttpGetRequestClient>(new ContainerControlledLifetimeManager());
+            // this.container.RegisterType<IHttpClient, HttpGetRequestClient>(new ContainerControlledLifetimeManager());
 
             // Register Information repo. 
             // This one needs a DiskStation Session to go to. 

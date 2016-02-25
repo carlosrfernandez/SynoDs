@@ -2,6 +2,8 @@
 using Microsoft.Practices.Unity;
 using SynoDs.Core.Contracts.IoC;
 using SynoDs.Core.Api.Module;
+using SynoDs.Core.Contracts;
+using SynoDs.UWP.HttpClient;
 
 namespace SynoDs.UWP
 {
@@ -21,6 +23,7 @@ namespace SynoDs.UWP
 
         public void Startup()
         {
+            container.RegisterType<IHttpClient, SynologyHttpClient>(new ContainerControlledLifetimeManager());
             var coreModule = new ApiCoreModule(container);
             coreModule.Configure();
         }

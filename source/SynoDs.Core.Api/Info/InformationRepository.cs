@@ -96,9 +96,9 @@ namespace SynoDs.Core.Api.Info
                 "{0}webapi/query.cgi?api=SYNO.API.Info&version=1&method=query&query=ALL", 
                 endpointDiskStation);
 
-            this.httpClient.CreateRequestSession(getRequestUrl);
+            // this.httpClient.CreateRequestSession(getRequestUrl);
 
-            var requestResult = await this.httpClient.SendRequestAsync();
+            var requestResult = await this.httpClient.SendGetRequestAsync(getRequestUrl);
 
             if (string.IsNullOrEmpty(requestResult))
             {

@@ -193,8 +193,8 @@ namespace SynoDs.Core.Api
         public async Task<T> PerformOperationAsync<T>(string diskStationEndpoint, RequestParameters parameters = null, string sessionId = "")
         {
             var queryString = await this.PrepareRequestAsync<T>(diskStationEndpoint, parameters);
-            this.httpClient.CreateRequestSession(queryString);
-            var jsonResult = await this.httpClient.SendRequestAsync();
+            //this.httpClient.CreateRequestSession(queryString);
+            var jsonResult = await this.httpClient.SendGetRequestAsync(queryString);
             var resultObject = this.jsonParser.FromJson<T>(jsonResult);
             return resultObject;
         }

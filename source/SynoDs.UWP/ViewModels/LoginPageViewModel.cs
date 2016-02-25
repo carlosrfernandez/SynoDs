@@ -26,7 +26,7 @@ namespace SynoDs.UWP.ViewModels
 
         private string password { get; set; }
 
-        private int port => 5000;
+        private int port => 5001;
 
         private bool useSsl { get; set; }
 
@@ -51,7 +51,7 @@ namespace SynoDs.UWP.ViewModels
         public async Task LoginAsync()
         {
 #if DEBUG
-           
+           // for debugging
 #endif
             Views.Shell.SetBusy(true, "Loading...");
                 

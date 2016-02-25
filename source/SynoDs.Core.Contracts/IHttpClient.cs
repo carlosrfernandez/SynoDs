@@ -15,7 +15,7 @@ namespace SynoDs.Core.Contracts
     /// <summary>
     /// The HttpClient interface.
     /// </summary>
-    public interface IHttpClient : IDisposable
+    public interface IHttpClient
     {
         /// <summary>
         /// The send request async.
@@ -23,14 +23,6 @@ namespace SynoDs.Core.Contracts
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<string> SendRequestAsync();
-
-        /// <summary>
-        /// The create request session.
-        /// </summary>
-        /// <param name="requestUrl">
-        /// The request url.
-        /// </param>
-        void CreateRequestSession(string requestUrl);
+        Task<string> SendGetRequestAsync(string url);
     }
 }
