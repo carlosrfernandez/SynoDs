@@ -48,18 +48,34 @@
                 <Behaviors:EllipsisBehavior Visibility="Auto" />
             </Interactivity:Interaction.Behaviors>
         </controls:PageHeader>
+        <!--<ListView x:Name="ConnectionsList" 
+                  HorizontalAlignment="Left" 
+                  Height="100" VerticalAlignment="Top" 
+                  SelectionMode="None"
+                  ItemsSource="{Binding ConnectionsList, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+
+
+
         <Button Margin="15,15" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                     Command="{Binding LoginCommand}" Content="Login" />
+        
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="ValuesColumn" Width="150"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="AddressRow"  Height="50" />
-                <!--<RowDefinition x:Name="PortRow"  Height="50" />-->
+                <RowDefinition x:Name="PortRow"  Height="50" />
                 <RowDefinition x:Name="UserRow"  Height="50" />
                 <RowDefinition x:Name="PasswordRow"  Height="50" />
                 <RowDefinition x:Name="StoreCredRow"  Height="*" />
+                <RowDefinition x:Name="UseSslRow"  Height="*" />
             </Grid.RowDefinitions>
             <TextBox x:Name="AddressField" 
                      TextAlignment="Left" 
@@ -76,15 +92,19 @@
                      Width="150" 
                      PlaceholderText="Username" Grid.Row="1"
                      Text="{Binding UserName, Mode=TwoWay}"/>
-            <PasswordBox x:Name="PasswordField" 
+            <TextBox x:Name="PasswordField" 
                      HorizontalAlignment="Center" 
                      VerticalAlignment="Center"  
                      Width="150" 
                      PlaceholderText="Password" Grid.Row="2" 
+                     
                      />
             <ToggleSwitch x:Name="StoreCredSwitch" Grid.Row="3"
                           IsOn="{Binding StoreCredentials, Mode=TwoWay}"
                           HorizontalAlignment="Left" VerticalAlignment="Top" Header="Save Credentials" />
+            <ToggleSwitch x:Name="UseSslSwitch" Grid.Row="4"
+                          IsOn="{Binding UseSsl, Mode=TwoWay}"
+                          HorizontalAlignment="Left" VerticalAlignment="Top" Header="Use Ssl" />
         </Grid>
     </Grid>
 </Page>
