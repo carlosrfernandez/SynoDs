@@ -40,17 +40,41 @@ namespace SynoDs.UWP.ViewModels
 
         public bool StoreCredentials { get; set; }
 
-        public ICommand LoginCommand { get; private set; }
+        private bool IsLoggingIn { get; set; }
+
+        public RelayCommand<string> LoginCommand
+        {
+            get
+            {
+                return _loginCommand
+                    ?? (_loginCommand =
+                        new RelayCommand<string>(
+                            async (password) =>
+                            {
+                                if (this.IsLoggingIn)
+                                {
+                                    return;
+                                }
+
+                                this.IsLoggingIn = true;
+                                LoginCommand.RaiseCanExecuteChanged();
+                                await LoginAsync(password);
+
+                                this.IsLoggingIn = false;
+
+                                LoginCommand.RaiseCanExecuteChanged();
+                            }, (pw) => !this.IsLoggingIn));
+            }
+        }
+         
+
+        private RelayCommand<string> _loginCommand;
 
         private const string VaultResource = @"SynoDsCredStore";
 
         private const string ConnectionContainerName = @"ConnectionsContainer";
 
-        private bool CredentialsRecovered
-        {
-            get; set;
-        }
-
+        private bool CredentialsRecovered { get; set; }
 
         /// <summary>
         /// The empty constructor for mocking data.
@@ -62,18 +86,20 @@ namespace SynoDs.UWP.ViewModels
 
         public LoginPageViewModel(IAuthenticationProvider authenticationProvider)
         {
-            this.LoginCommand = new RelayCommand(async () => await LoginAsync(), () => true);
+            // this.LoginCommand = new RelayCommand(async () => await LoginAsync(), () => true);
             this.authenticationProvider = authenticationProvider;
             this.CredentialsRecovered = false;
             this.RecoverCredentials();
         }
 
-        public async Task LoginAsync()
+        public async Task LoginAsync(string password)
         {
+            this.Password = password;
 #if DEBUG
            // for debugging
 #endif
             Views.Shell.SetBusy(true, "Loading...");
+            this.IsLoggingIn = true;
                 
             var fullUrl = new Uri($"{Host}:{Port}");
             var loginResult = await this.authenticationProvider.LoginAsync(fullUrl, this.UserName, this.Password);
@@ -93,6 +119,8 @@ namespace SynoDs.UWP.ViewModels
 
             Views.Shell.SetBusy(false);
 
+            this.IsLoggingIn = false;
+
             NavigationService.Navigate(typeof (Views.MainPage));
         }
 
@@ -110,8 +138,6 @@ namespace SynoDs.UWP.ViewModels
                 Username = this.UserName
             };
 
-            // var dictionary = new Dictionary<string, Connection>();
-            // dictionary.Add(this.Host, new Connection { Host = this.Host, RememberMe = this.StoreCredentials, UseSsl = this.UseSsl });
             var jsonStringConnection = JsonConvert.SerializeObject(connection);
 
             container.Values.Add(this.Host, jsonStringConnection); 

@@ -26,5 +26,14 @@ namespace SynoDs.UWP.Views
         {
             this.InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // var command = 
+            if (LoginButton.Command.CanExecute(string.Empty))
+            {
+                LoginButton.Command.Execute(PasswordField.Password);
+            }
+        }
     }
 }

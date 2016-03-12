@@ -62,8 +62,8 @@
 
 
 
-        <Button Margin="15,15" VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                    Command="{Binding LoginCommand}" Content="Login" />
+        <Button x:Name="LoginButton" Margin="15,15" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    Command="{Binding LoginCommand}" Content="Login" Click="Button_Click" />
         
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
@@ -92,13 +92,11 @@
                      Width="150" 
                      PlaceholderText="Username" Grid.Row="1"
                      Text="{Binding UserName, Mode=TwoWay}"/>
-            <TextBox x:Name="PasswordField" 
+            <PasswordBox x:Name="PasswordField" 
                      HorizontalAlignment="Center" 
                      VerticalAlignment="Center"  
                      Width="150" 
-                     PlaceholderText="Password" Grid.Row="2" 
-                     
-                     />
+                     PlaceholderText="Password" Grid.Row="2" />
             <ToggleSwitch x:Name="StoreCredSwitch" Grid.Row="3"
                           IsOn="{Binding StoreCredentials, Mode=TwoWay}"
                           HorizontalAlignment="Left" VerticalAlignment="Top" Header="Save Credentials" />
