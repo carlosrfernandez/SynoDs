@@ -34,7 +34,7 @@ namespace SynoDs.UWP.ViewModels
 
         public string Password { get; set; }
 
-        private int Port => 5001;
+        private int Port { get { return this.UseSsl ? 5001 : 5000; } }
 
         public bool UseSsl { get; set; }
 
