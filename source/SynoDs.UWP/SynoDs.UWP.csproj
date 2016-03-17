@@ -94,9 +94,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <PRIResource Include="Resources\ErrorRepository.resw" />
     <None Include="SynoDs.UWP_TemporaryKey.pfx" />
     <None Include="project.json" />
-    <Content Include="SynoDsCert.zip" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

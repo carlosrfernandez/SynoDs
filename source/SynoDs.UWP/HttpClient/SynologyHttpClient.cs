@@ -22,6 +22,7 @@ namespace SynoDs.UWP.HttpClient
                 throw new ArgumentNullException(nameof(url));
             }
             var uri = new Uri(url);
+            
             var filter = new HttpBaseProtocolFilter();
 
             filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);

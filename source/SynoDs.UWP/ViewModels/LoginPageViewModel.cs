@@ -94,7 +94,10 @@ namespace SynoDs.UWP.ViewModels
 
         public async Task LoginAsync(string password)
         {
-            this.Password = password;
+            if (!string.IsNullOrEmpty(password))
+            {
+                this.Password = password;
+            }
 #if DEBUG
            // for debugging
 #endif
