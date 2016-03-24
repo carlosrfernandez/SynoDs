@@ -11,6 +11,7 @@ using Microsoft.Practices.Unity;
 using System.Windows.Input;
 using Windows.Security.Credentials;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
@@ -111,6 +112,14 @@ namespace SynoDs.UWP.ViewModels
             //TODO: control error messages here.
             if (!loginResult.IsLoggedIn())
             {
+                var dialog = new MessageDialog("Error Logging in, please verify your credentials / connection information", "Error");
+                dialog.Commands.Add(new UICommand("Retry", new UICommandInvokedHandler(CommandHandler)));
+                dialog.Commands.Add(new UICommand("Cancel", new UICommandInvokedHandler(CommandHandler)));
+
+                dialog.DefaultCommandIndex = 1;
+                dialog.CancelCommandIndex = 2;
+
+                await dialog.ShowAsync();
                 // do something with this
                 return;
             }
@@ -127,6 +136,21 @@ namespace SynoDs.UWP.ViewModels
             NavigationService.Navigate(typeof (Views.MainPage));
         }
 
+        private async void CommandHandler(IUICommand command)
+        {
+            var commandLabel = command.Label;
+
+            switch (commandLabel)
+            {
+                case "Retry":
+                    await LoginAsync(this.Password);
+                    break;
+                case "Cancel":
+                    NavigationService.Navigate(typeof (Views.LoginPage));
+                    break;
+
+            }
+        }
         private void StoreCredentialsInVault()
         {
             var roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;

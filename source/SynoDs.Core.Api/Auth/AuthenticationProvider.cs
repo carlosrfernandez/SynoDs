@@ -81,7 +81,7 @@ namespace SynoDs.Core.Api.Auth
 
             this.IsLoggedIn = loginResult.Success;
 
-            diskStationSession.SessionId = loginResult.ResponseData.Sid;
+            diskStationSession.SessionId = IsLoggedIn == true ? loginResult.ResponseData.Sid : null;
 
             return diskStationSession;
         }

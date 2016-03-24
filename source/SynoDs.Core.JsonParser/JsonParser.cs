@@ -74,7 +74,10 @@ namespace SynoDs.Core.JsonParser
             {
                 return JsonConvert.DeserializeObject<T>(json);
             }
-
+            if (error.Code == 400)
+            {
+                return JsonConvert.DeserializeObject<T>(json);
+            }
             var errorMessage = this.errorProvider.GetErrorDescriptionForType<T>(error.Code);
             throw new SynologyException(error.Code, errorMessage);
         }
